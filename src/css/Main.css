@@ -1,0 +1,56 @@
+.banner {
+  width: 100%;
+  height: 200px;
+  background-color: #d9d9d9;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.categoryBox,
+.cityBox,
+.bookMarkBox,
+.locationBox,
+.logo {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.locationBox {
+  align-items: center;
+}
+
+.subTitle {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+.category,
+.city {
+  height: 66px;
+  width: 66px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  margin: 10px;
+}
+
+.bookMark {
+  display: flex;
+  flex-direction: column;
+  background-color: #d9d9d9;
+  padding: 5px;
+  width: 100px;
+  text-align: center;
+  margin: 10px;
+}
+
+.bookMark img {
+  width: 100%;
+  margin-bottom: 3px;
+}
