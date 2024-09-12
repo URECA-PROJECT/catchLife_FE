@@ -18,3 +18,4 @@ origin  https://github.com/URECA-PROJECT/catchLife_FE.git (push)
 1. 변경사항 생기면 `git add .`  으로 스테이징하고 ( `.` : 모든 변경사항 스테이징, 파일만 할 수도 있긴 해)
 2. `git commit -m ‘Feat: 00 기능 추가’` : 깃에 남길 메세지 작성 (변경된 코드 간략히 설명)
 3. `git push origin [branch]` : `[branch]`는 현재 작업 중인 브랜치 이름
+hello
