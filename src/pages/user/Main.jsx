@@ -4,6 +4,7 @@ import { images } from "../../utils/images";
 import "../../css/Main.css";
 import { Link } from "react-router-dom";
 import mainCategory from "../../utils/mockData/mainCategory.json";
+import Signup from "./Signup";
 
 const Main = () => {
   return (
@@ -23,6 +24,12 @@ const Main = () => {
               fill="white"
             />
           </svg>
+        </div>
+        <div>
+          <Link to="/signup">회원가입 페이지(상희)</Link>
+        </div>
+        <div>
+          <Link to="/userMyPage">마이페이지(예원)</Link>
         </div>
       </Link>
 
