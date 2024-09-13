@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "케이크",
+    "name": "cake"
+  },
+  {
+    "id": 2,
+    "title": "네일",
+    "name": "nail"
+  },
+  {
+    "id": 3,
+    "title": "왁싱",
+    "name": "waxing"
+  },
+  {
+    "id": 4,
+    "title": "속눈썹",
+    "name": "eyelashes"
+  },
+  {
+    "id": 5,
+    "title": "꽃",
+    "name": "flower"
+  }
+]

@@ -3,6 +3,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { images } from "../../utils/images";
 import "../../css/Main.css";
 import { Link } from "react-router-dom";
+import mainCategory from "../../utils/mockData/mainCategory.json";
 
 const Main = () => {
   return (
@@ -38,24 +39,11 @@ const Main = () => {
       <div className="banner">임시배너공간</div>
 
       <div className="categoryBox">
-        <Link to={`/category/${"CAKE"}`}>
-          <div className="category">케이크</div>
-        </Link>
-        <Link to={`/category/${"NAIL"}`}>
-          <div className="category">네일</div>
-        </Link>
-        <Link to={`/category/${"WAXING"}`}>
-          <div className="category">왁싱/제모</div>
-        </Link>
-        <Link to={`/category/${"속눈썹"}`}>
-          <div className="category">속눈썹</div>
-        </Link>
-        <Link to={`/category/${"미용실"}`}>
-          <div className="category">미용실</div>
-        </Link>
-        <Link to={`/category/${"미요실"}`}>
-          <div className="category">미용실</div>
-        </Link>
+        {mainCategory.map((category) => (
+          <Link to={`/category/${category.name}`} key={category.id}>
+            <div className="category">{category.title}</div>
+          </Link>
+        ))}
       </div>
 
       <div>

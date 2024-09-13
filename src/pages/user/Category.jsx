@@ -3,46 +3,35 @@ import { Link, useLocation } from "react-router-dom";
 import { images } from "../../utils/images";
 import "../../css/Main.css";
 import UserMainHeader from "../../components/UserMainHeader";
+import categoryData from "../../utils/mockData/Category.json";
 
 const Category = () => {
   const location = useLocation();
 
   const pathSegments = location.pathname.split("/");
-  const category = pathSegments[pathSegments.length - 1];
+  const categoryTitle = pathSegments[pathSegments.length - 1];
+
+  // const filteredStores = categoryData
+  //   .filter((category) => category.name === categoryTitle)
+  //   .map((category) => category.stores);
+
+  // console.log(filteredStores);
 
   return (
     <div>
-      <UserMainHeader title={category} />
+      <UserMainHeader title={categoryTitle} />
       <div className="CategoryListBox">
-        <Link to="pococake">
-          <div className="CategoryStore" key="pococake">
-            <img src={images.cakeStore} alt="케이크" />
-            <div className="storeContent">
-              <div>가게명</div>
-              <div>가게 설명</div>
+        {categoryData[0].stores.map((store) => (
+          <Link to="pococake">
+            <div className="CategoryStore" key="pococake">
+              <img src={images.cakeStore} alt="케이크" />
+              <div className="storeContent">
+                <div>{store.name}</div>
+                <div>{store.address}</div>
+              </div>
             </div>
-          </div>
-        </Link>
-
-        <Link to="seungheeCake">
-          <div className="CategoryStore" key="pococake">
-            <img src={images.cakeStore} alt="케이크" />
-            <div className="storeContent">
-              <div>가게명</div>
-              <div>가게 설명</div>
-            </div>
-          </div>
-        </Link>
-
-        <Link to="urecaCake">
-          <div className="CategoryStore" key="pococake">
-            <img src={images.cakeStore} alt="케이크" />
-            <div className="storeContent">
-              <div>가게명</div>
-              <div>가게 설명</div>
-            </div>
-          </div>
-        </Link>
+          </Link>
+        ))}
       </div>
     </div>
   );
