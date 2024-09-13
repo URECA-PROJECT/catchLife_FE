@@ -88,3 +88,66 @@
   height: 100%;
   justify-content: flex-end;
 }
+
+/* Store */
+.gridBox {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.gridItem {
+  width: 45%;
+  padding: 10px;
+}
+
+.gridItem img {
+  width: 100%;
+  margin-bottom: 3px;
+}
+
+.customBtn {
+  text-align: right;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.orderTitle {
+  text-align: center;
+}
+/* Order */
+.orderLabel {
+  width: 80%;
+  margin: 0 auto;
+  color: #888888;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.orderLabel div {
+  width: 20%;
+}
+
+.orderInput {
+  flex-grow: 1;
+  margin-left: 10px;
+  height: 23px;
+}
+
+.orderBtn {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.orderBtn button {
+  width: 70%;
+}
+
+.orderContent {
+  text-align: center;
+}

@@ -1,20 +1,20 @@
 import React from "react";
 import "../css/Main.css";
 import { useNavigate } from "react-router-dom";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 const UserMainHeader = ({ title }) => {
   const navigate = useNavigate();
 
   return (
     <div className="headerTitle">
-      <button
+      <FaArrowLeftLong
+        size={18}
         className="backBtn"
         onClick={() => {
           navigate(-1);
         }}
-      >
-        뒤로가기
-      </button>
+      />
       <div>{title}</div>
     </div>
   );
