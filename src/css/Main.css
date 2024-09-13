@@ -1,3 +1,4 @@
+/* 메인페이지 */
 .banner {
   width: 100%;
   height: 200px;
@@ -53,4 +54,37 @@
 .bookMark img {
   width: 100%;
   margin-bottom: 3px;
+}
+
+/* 카테고리 목록 페이지 */
+.headerTitle {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  position: relative;
+}
+.backBtn {
+  position: absolute;
+  left: 5px;
+}
+.CategoryStore {
+  width: 95%;
+  height: 200px;
+  margin: 20px auto;
+  position: relative;
+}
+
+.CategoryStore img {
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  opacity: 0.5;
+  height: 200px;
+}
+
+.storeContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-end;
 }

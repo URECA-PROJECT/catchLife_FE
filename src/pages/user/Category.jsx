@@ -1,30 +1,48 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { images } from "../../utils/images";
+import "../../css/Main.css";
+import UserMainHeader from "../../components/UserMainHeader";
 
 const Category = () => {
-  const navigate = useNavigate();
+  const location = useLocation();
+
+  const pathSegments = location.pathname.split("/");
+  const category = pathSegments[pathSegments.length - 1];
 
   return (
     <div>
-      <div>
-        <button
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          뒤로가기
-        </button>
-        <div>카테고리명</div>
-      </div>
-
+      <UserMainHeader title={category} />
       <div className="CategoryListBox">
-        <div className="CategoryStore">
-          <img src="" alt="" />
-          <div>
-            <div>가게명</div>
-            <div>가게 설명</div>
+        <Link to="pococake">
+          <div className="CategoryStore" key="pococake">
+            <img src={images.cakeStore} alt="케이크" />
+            <div className="storeContent">
+              <div>가게명</div>
+              <div>가게 설명</div>
+            </div>
           </div>
-        </div>
+        </Link>
+
+        <Link to="seungheeCake">
+          <div className="CategoryStore" key="pococake">
+            <img src={images.cakeStore} alt="케이크" />
+            <div className="storeContent">
+              <div>가게명</div>
+              <div>가게 설명</div>
+            </div>
+          </div>
+        </Link>
+
+        <Link to="urecaCake">
+          <div className="CategoryStore" key="pococake">
+            <img src={images.cakeStore} alt="케이크" />
+            <div className="storeContent">
+              <div>가게명</div>
+              <div>가게 설명</div>
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   );
