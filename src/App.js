@@ -6,7 +6,7 @@ import Login from "./pages/user/Login";
 
 function App() {
   return <div className="App">
-  <Signup />
+    <Signup />
   </div>;
 }
 
