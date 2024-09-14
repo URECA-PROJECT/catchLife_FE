@@ -4,7 +4,6 @@ import { images } from "../../utils/images";
 import "../../css/Main.css";
 import { Link } from "react-router-dom";
 import mainCategory from "../../utils/mockData/mainCategory.json";
-import Signup from "./Signup";
 
 const Main = () => {
   return (

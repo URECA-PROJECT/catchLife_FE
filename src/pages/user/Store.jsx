@@ -5,6 +5,9 @@ import { images } from "../../utils/images";
 
 const Store = () => {
   const location = useLocation();
+  const { storeId } = location.state || {}; // state가 없으면 빈 객체로 대처
+
+  console.log(storeId, "id"); // 여기서 storeId가 제대로 나오는지 확인
   const pathSegments = location.pathname.split("/");
   const store = pathSegments[pathSegments.length - 1];
 

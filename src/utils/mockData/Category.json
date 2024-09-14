@@ -4,25 +4,29 @@
     "stores": [
       {
         "id": 1,
-        "name": "케이크 샵 1",
+        "name": "cakeshop1",
+        "storeName": "케이크 샵 1",
         "address": "서울 강남구...",
         "rating": 4.5
       },
       {
         "id": 2,
-        "name": "케이크 샵 2",
+        "name": "cakeshop2",
+        "storeName": "케이크 샵 2",
         "address": "서울 마포구...",
         "rating": 4.3
       },
       {
         "id": 3,
-        "name": "케이크 샵 3",
+        "name": "cakeshop3",
+        "storeName": "케이크 샵 3",
         "address": "서울 강서구...",
         "rating": 4.3
       },
       {
         "id": 4,
-        "name": "케이크 샵 4",
+        "name": "cakeshop4",
+        "storeName": "케이크 샵 4",
         "address": "서울 도봉구...",
         "rating": 4.3
       }
@@ -33,26 +37,30 @@
     "stores": [
       {
         "id": 5,
-        "name": "네일 샵 1",
+        "name": "nail1",
+        "storeName": "네일 샵 1",
         "address": "서울 강남구...",
         "rating": 4.7
       },
       {
         "id": 6,
-        "name": "네일 샵 2",
-        "address": "서울 서초구...",
+        "name": "nail2",
+        "storeName": "네일 샵 2",
+        "address": "서울 강동구...",
         "rating": 4.6
       },
       {
         "id": 7,
-        "name": "네일 샵 3",
-        "address": "서울 송파구...",
+        "name": "nail3",
+        "storeName": "네일 샵 3",
+        "address": "서울 강서구...",
         "rating": 4.5
       },
       {
         "id": 8,
-        "name": "네일 샵 4",
-        "address": "서울 종로구...",
+        "name": "nail4",
+        "storeName": "네일 샵 4",
+        "address": "서울 강북구...",
         "rating": 4.8
       }
     ]
@@ -62,25 +70,29 @@
     "stores": [
       {
         "id": 9,
-        "name": "왁싱 샵 1",
+        "name": "waxing1",
+        "storeName": "왁싱 샵 1",
         "address": "서울 동대문구...",
         "rating": 4.6
       },
       {
         "id": 10,
-        "name": "왁싱 샵 2",
+        "name": "waxing2",
+        "storeName": "왁싱 샵 2",
         "address": "서울 영등포구...",
         "rating": 4.4
       },
       {
         "id": 11,
-        "name": "왁싱 샵 3",
+        "name": "waxing3",
+        "storeName": "왁싱 샵 3",
         "address": "서울 강동구...",
         "rating": 4.5
       },
       {
         "id": 12,
-        "name": "왁싱 샵 4",
+        "name": "waxing4",
+        "storeName": "왁싱 샵 4",
         "address": "서울 구로구...",
         "rating": 4.7
       }
@@ -91,25 +103,29 @@
     "stores": [
       {
         "id": 13,
-        "name": "속눈썹 샵 1",
+        "name": "eyelashes1",
+        "storeName": "속눈썹 샵 1",
         "address": "서울 강서구...",
         "rating": 4.8
       },
       {
         "id": 14,
-        "name": "속눈썹 샵 2",
+        "name": "eyelashes2",
+        "storeName": "속눈썹 샵 2",
         "address": "서울 마포구...",
         "rating": 4.6
       },
       {
         "id": 15,
-        "name": "속눈썹 샵 3",
+        "name": "eyelashes3",
+        "storeName": "속눈썹 샵 3",
         "address": "서울 은평구...",
         "rating": 4.7
       },
       {
         "id": 16,
-        "name": "속눈썹 샵 4",
+        "name": "eyelashes4",
+        "storeName": "속눈썹 샵 4",
         "address": "서울 노원구...",
         "rating": 4.5
       }
@@ -120,25 +136,29 @@
     "stores": [
       {
         "id": 17,
-        "name": "꽃집 1",
+        "name": "flower1",
+        "storeName": "꽃 집 1",
         "address": "서울 중구...",
         "rating": 4.9
       },
       {
         "id": 18,
-        "name": "꽃집 2",
+        "name": "flower2",
+        "storeName": "꽃 집 2",
         "address": "서울 강북구...",
         "rating": 4.7
       },
       {
         "id": 19,
-        "name": "꽃집 3",
+        "name": "flower3",
+        "storeName": "꽃 집 3",
         "address": "서울 서대문구...",
         "rating": 4.6
       },
       {
         "id": 20,
-        "name": "꽃집 4",
+        "name": "flower4",
+        "storeName": "꽃집 4",
         "address": "서울 관악구...",
         "rating": 4.8
       }
