@@ -1,27 +1,22 @@
 [
   {
     "id": 1,
-    "title": "케이크",
-    "name": "cake"
+    "title": "뷰티",
+    "name": "beauty"
   },
   {
     "id": 2,
-    "title": "네일",
-    "name": "nail"
-  },
-  {
-    "id": 3,
-    "title": "왁싱",
-    "name": "waxing"
+    "title": "베이커리",
+    "name": "bakery"
   },
   {
     "id": 4,
-    "title": "속눈썹",
-    "name": "eyelashes"
+    "title": "원데이클래스",
+    "name": "oneday"
   },
   {
     "id": 5,
-    "title": "꽃",
-    "name": "flower"
+    "title": "선물",
+    "name": "gift"
   }
 ]

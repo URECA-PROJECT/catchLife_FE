@@ -9,6 +9,7 @@ import Order from "./pages/user/Order";
 import OrderCustom from "./pages/user/OrderCustom";
 import Signup from "./pages/user/Signup";
 import UserMyPage from "./pages/user/UserMyPage";
+// import YongdomCrud01 from "./pages/YongdomCrud01";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
 
         <Route path="/signup" element={<Signup />} />
         <Route path="/userMyPage" element={<UserMyPage />} />
+        {/* <Route path="/test" element={<YongdomCrud01 />} /> */}
       </Routes>
     </div>
   );
