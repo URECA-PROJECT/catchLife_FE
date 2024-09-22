@@ -5,15 +5,14 @@ import "../../css/Main.css";
 import { Link } from "react-router-dom";
 import mainCategory from "../../utils/mockData/mainCategory.json";
 import detailCategory from "../../utils/mockData/mainDetailCategory.json";
-import API from "../../utils/axios";
+import { useRegion } from "../../context/RegionContext";
+import Region from "../../components/Region";
 
 const Main = () => {
+  const { handleZone } = useRegion();
+
   const [detail, setDetail] = useState(false);
   const [categoryName, setCategoryName] = useState("");
-  const [zone, setZone] = useState([]);
-  const [city, setCity] = useState([]);
-  const [district, setDistrict] = useState([]);
-  const [neighborhood, setNeighborhood] = useState([]);
 
   const filteredStores = detailCategory
     .filter((category) => category.name === categoryName)
@@ -25,61 +24,9 @@ const Main = () => {
   };
 
   useEffect(() => {
-    localStorage.setItem(
-      "region",
-      JSON.stringify("경기도 성남시 중원구 은행동")
-    ); // test code
     setDetail(false);
     handleZone();
   }, []);
-
-  const handleZone = (response) => {
-    API.get("region/zone")
-      .then((response) => {
-        const data = response.data;
-        setZone(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching stores:", error);
-      });
-  };
-
-  const handleCities = (zone) => {
-    API.get(`region/cities?zone=${zone}`)
-      .then((response) => {
-        const data = response.data;
-        setCity(data);
-        console.log(data);
-        const empty = data.length === 1 ? true : false;
-        console.log("비었나?? ", empty);
-      })
-      .catch((error) => {
-        console.error("Error fetching stores:", error);
-      });
-  };
-
-  const handleDistrict = (city) => {
-    console.log(city);
-    API.get(`region/district?city=${city}`)
-      .then((response) => {
-        const data = response.data;
-        setDistrict(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching stores:", error);
-      });
-  };
-
-  const handletNeighbolhood = (district) => {
-    API.get(`region/neighborhood?district=${district}`)
-      .then((response) => {
-        const data = response.data;
-        setNeighborhood(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching stores:", error);
-      });
-  };
 
   return (
     <div>
@@ -112,49 +59,7 @@ const Main = () => {
 
       <div className="locationBox">
         <CiLocationOn />
-        {/* zone */}
-        <select
-          name="location"
-          id="zone"
-          onChange={(e) => handleCities(e.target.value)}
-        >
-          {zone.map((item, index) => (
-            <option key={item}>{item}</option>
-          ))}
-        </select>
-
-        {/* city */}
-        <select
-          name="location"
-          id="city"
-          onChange={(e) => handleDistrict(e.target.value)}
-        >
-          {city.map((item, index) => (
-            <option key={item}>{item}</option>
-          ))}
-        </select>
-
-        {/* district */}
-        <select
-          name="location"
-          id="select"
-          onChange={(e) => handletNeighbolhood(e.target.value)}
-        >
-          {district.map((item, index) => (
-            <option key={item}>{item}</option>
-          ))}
-        </select>
-
-        {/* neighborhood */}
-        <select
-          name="location"
-          id="neighborhood"
-          onChange={(e) => console.log(e.target.value)}
-        >
-          {neighborhood.map((item, index) => (
-            <option key={item}>{item}</option>
-          ))}
-        </select>
+        <Region />
       </div>
 
       <div className="banner">임시배너공간</div>
