@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import '../App.css';
+// import '../App.css';
+import "../css/Signup.css";
 
 function SignupUser(props) {
     const navigate = useNavigate();
@@ -12,7 +13,7 @@ function SignupUser(props) {
     return (
         <>
         <div className="login-container">
-            <h1>CATCH LIFE</h1>
+            <h1 className='signup-h1'>CATCH LIFE</h1>
             <div className="user-type">
                 <Link 
                     to="/signupUser"
@@ -26,37 +27,39 @@ function SignupUser(props) {
             </div>
 
             <form>
-            <div>
-                    <label>이름</label>
-                    <input name="name" type="text" placeholder="이름" />
+            <div className='signup-div'>
+                    <label className='signup-label'>이름</label>
+                    <input className='signup-input' name="name" type="text" placeholder="이름" />
                 </div>
-                <div>
-                    <label>아이디</label>
-                    <input name="id" type="text" placeholder="아이디" />
+                <div className='signup-div'>
+                    <label className='signup-label'>아이디</label>
+                    <input className='signup-input' name="id" type="text" placeholder="아이디" />
                 </div>
-                <div>
-                    <label>비밀번호</label>
-                    <input name="pw" type="password" placeholder="비밀번호" />
+                <div className='signup-div'>
+                    <label className='signup-label'>비밀번호</label>
+                    <input className='signup-input' name="pw" type="password" placeholder="비밀번호" />
                 </div>
-                <div>
-                    <label>전화번호</label>
-                    <input name="pn" type="text" placeholder="전화번호" />
+                <div className='signup-div'>
+                    <label className='signup-label'>전화번호</label>
+                    <input className='signup-input' name="pn" type="text" placeholder="전화번호" />
                 </div>
-                <div>
-                    <label>생년월일</label>
-                    <input type="date" name="dt" />
+                <div className='signup-div'>
+                    <label className='signup-label'>생년월일</label>
+                    <input className='signup-input' type="date" name="dt" />
                 </div>
 
                 <div className="gender-selection">
-                    <label>
+                    <label className='signup-label'>
                         <input
+                            className='signup-input'
                             type="radio"
                             name="gender"
                             value="남"
                         /> 남
                     </label>
-                    <label style={{ marginLeft: '20px' }}>
+                    <label className='signup-label' style={{ marginLeft: '20px' }}>
                         <input
+                            className='signup-input'
                             type="radio"
                             name="gender"
                             value="여"

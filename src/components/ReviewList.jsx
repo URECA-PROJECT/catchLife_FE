@@ -1,10 +1,11 @@
 import React from 'react';
-import '../App.css'
+import '../css/yewon.css'
+import visitedStores from '../utils/mockData/visitedStores.json';
 
 function ReviewList(props) {
 
     // props로 받아올 것
-    const prevCnt = 4; // 방문했던 매장 개수
+    const prevCnt = visitedStores.length; // 방문했던 매장 개수
 
     return (
         <div>
@@ -13,7 +14,14 @@ function ReviewList(props) {
                 <span style={{color: "#00000036", fontSize: "15px"}}>방문했던 매장</span>
             </div>
             <div className='review-list'>
-                작성할 수 있는 리뷰 목록
+                {visitedStores.map((st, index) => {
+                    return (
+                        // 클릭하면 리뷰 작성 페이지로 이동
+                        <div className='review-items'>
+                            <a href='#'><li key={index}>{st.name_kor} / {st.name_eng} / {st.date} / {st.rating} <br /> {st.order} / {st.price}</li></a>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     );

@@ -1,0 +1,20 @@
+[
+    {
+        "id":1,
+        "name_kor": "유레카 베이커리",
+        "name_eng" : "UREKA Bakery",
+        "date" : "2024.09.16.(월)",
+        "rating" : 4.8,
+        "order" : "원형케이크",
+        "price" : 30000
+    },
+    {
+        "id":2,
+        "name_kor": "유네일",
+        "name_eng" : "U-Nail",
+        "date" : "2024.09.18.(수)",
+        "rating" : 4.5,
+        "order" : "젤네일",
+        "price" : 80000
+    }
+]
