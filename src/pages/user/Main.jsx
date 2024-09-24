@@ -9,7 +9,6 @@ import Region from "../../components/Region";
 
 const Main = () => {
   const { handleZone } = useRegion();
-
   const [detail, setDetail] = useState(false);
   const [categoryName, setCategoryName] = useState("");
 
