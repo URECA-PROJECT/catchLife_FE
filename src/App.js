@@ -33,6 +33,7 @@ function App() {
           path="/category/:id/:store/:sort/custom"
           element={<OrderCustom />}
         />
+        <Route path="/signup" element={<Signup />} />
 
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
