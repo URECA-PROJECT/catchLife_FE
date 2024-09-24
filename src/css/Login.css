@@ -49,7 +49,7 @@
     font-family: 'Noto Sans KR', sans-serif;
   }
   
-  h1 {
+  .login-h1 {
     font-size: 3rem;
     font-weight: bold;
     text-align: center;
@@ -86,20 +86,27 @@
   }
   
   /* 입력 필드 스타일 */
-  form div {
+  .login-div {
     margin-bottom: 15px;
     width: 100%;
     max-width: 400px;
   }
+
+  .login-bottom-div{
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
   
-  form label {
+  .login-label {
     display: block;
     margin-bottom: 5px;
     font-size: 1rem;
     color: #333;
   }
   
-  form input {
+  .login-input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;

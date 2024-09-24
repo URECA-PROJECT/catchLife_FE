@@ -20,7 +20,7 @@ function LoginUser(props) {
     return (
         <> 
     <div className="login-container">
-        <h1>CATCH LIFE</h1>
+        <h1 className='login-h1'>CATCH LIFE</h1>
         <div className="user-type">
             <Link 
                 to="/loginUser" 
@@ -36,18 +36,20 @@ function LoginUser(props) {
         </div>
 
         <form onSubmit={handleSubmit}>
-            <div>
-                <label>아이디</label>
+            <div className='login-div'>
+                <label className='login-label'>아이디</label>
                 <input
+                    className='login-input'
                     type="text"
                     value={id}
                     onChange={(e) => setId(e.target.value)}
                     placeholder="아이디를 입력하세요"
                 />
             </div>
-            <div>
-                <label>비밀번호</label>
+            <div className='login-div'>
+                <label className='login-label'>비밀번호</label>
                 <input
+                    className='login-input'
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -57,7 +59,7 @@ function LoginUser(props) {
                 <button type="submit" className="submit-button">로그인</button>
         </form>
 
-        <div>
+        <div className='login-bottom-div'>
             <Link to={"/signupUser"}
                 className="signup-link"
                 >회원가입</Link>

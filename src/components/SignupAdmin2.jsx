@@ -12,7 +12,7 @@ function SignupAdmin2(props) {
 
     return (
         <div className="login-container">
-            <h1>CATCH LIFE</h1>
+            <h1 className='signup-h1'>CATCH LIFE</h1>
             <div className="user-type">
                 <Link 
                     to="/signupUser"
@@ -26,41 +26,41 @@ function SignupAdmin2(props) {
             </div>
 
             <form>
-                <div>
-                    <label>매장명(한글)</label>
-                    <input name="storeNameKor" type="text" placeholder="매장명(한글)" />
+                <div className='signup-div'>
+                    <label className='signup-label'>매장명(한글)</label>
+                    <input className='signup-input' name="storeNameKor" type="text" placeholder="매장명(한글)" />
                 </div>
-                <div>
-                    <label>매장명(영문)</label>
-                    <input name="storeNameEng" type="text" placeholder="매장명(영문)" />
+                <div className='signup-div'>
+                    <label className='signup-label'>매장명(영문)</label>
+                    <input className='signup-input' name="storeNameEng" type="text" placeholder="매장명(영문)" />
                 </div>
-                <div>
-                    <label>매장 전화번호</label>
-                    <input name="storePhone" type="tel" placeholder="매장 전화번호" />
+                <div className='signup-div'>
+                    <label className='signup-label'>매장 전화번호</label>
+                    <input className='signup-input' name="storePhone" type="tel" placeholder="매장 전화번호" />
                 </div>
-                <div>
-                    <label>업종</label>
-                    <select name="businessType">
+                <div className='signup-div'>
+                    <label className='signup-label'>업종</label>
+                    <select className='signup-select' name="businessType">
                         <option value="">선택하세요</option>
                         <option value="restaurant">음식점</option>
                         <option value="retail">소매업</option>
                     </select>
                 </div>
-                <div>
-                    <label>지역</label>
-                    <select name="region">
+                <div className='signup-div'>
+                    <label className='signup-label'>지역</label>
+                    <select className='signup-select' name="region">
                         <option value="">선택하세요</option>
                         <option value="seoul">서울</option>
                         <option value="busan">부산</option>
                     </select>
                 </div>
-                <div>
-                    <label>오픈시간</label>
-                    <input name="openTime" type="time" />
+                <div className='signup-div'>
+                    <label className='signup-label'>오픈시간</label>
+                    <input className='signup-input' name="openTime" type="time" />
                 </div>
-                <div>
-                    <label>마감시간</label>
-                    <input name="closeTime" type="time" />
+                <div className='signup-div'>
+                    <label className='signup-label'>마감시간</label>
+                    <input className='signup-input' name="closeTime" type="time" />
                 </div>
 
                 <button type="submit" className="submit-button">회원가입</button>

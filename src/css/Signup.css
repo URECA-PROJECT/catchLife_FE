@@ -8,7 +8,7 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-h1 {
+.signup-h1 {
     font-size: 3rem;
     font-weight: bold;
     text-align: center;
@@ -37,20 +37,20 @@ h1 {
 }
 
   /* 입력 필드 스타일 */
-form div {
+.signup-div {
     margin-bottom: 15px;
     width: 100%;
     max-width: 400px;
 }
 
-form label {
+.signup-label {
     display: block;
     margin-bottom: 5px;
     font-size: 1rem;
     color: #333;
 }
 
-form input {
+.signup-input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -68,7 +68,7 @@ form input {
     background-color: #f0f0f0;
 }
 
-form select {
+.signup-select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -76,8 +76,8 @@ form select {
     font-size: 1rem;
     margin-bottom: 15px;
     background-color: white;
-    appearance: none; /* 기본 화살표 스타일 제거 */
-    -webkit-appearance: none; /* 사파리에서의 기본 화살표 제거 */
+    appearance: none; 
+    -webkit-appearance: none; 
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray"><path d="M7 10l5 5 5-5z"/></svg>');
     background-repeat: no-repeat;
     background-position: right 10px center;
