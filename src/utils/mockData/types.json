@@ -1,0 +1,226 @@
+[
+  {
+    "id": 1,
+    "name": "cakeshop1",
+    "storeName": "케이크 샵 1",
+    "address": "서울 강남구...",
+    "rating": 4.5,
+    "phoneNumber": "010-1234-5678",
+    "openingHours": {
+      "monday": "09:00 - 18:00",
+      "tuesday": "09:00 - 18:00",
+      "wednesday": "09:00 - 18:00",
+      "thursday": "09:00 - 18:00",
+      "friday": "09:00 - 18:00",
+      "saturday": "10:00 - 16:00",
+      "sunday": "Closed"
+    },
+    "services": [
+      {
+        "category": "케이크 주문 제작",
+        "types": [
+          {
+            "type": "생일케이크",
+            "price": "50,000원 ~ 100,000원"
+          },
+          {
+            "type": "기념일케이크",
+            "price": "60,000원 ~ 120,000원"
+          },
+          {
+            "type": "퇴사케이크",
+            "price": "40,000원 ~ 90,000원"
+          },
+          {
+            "type": "군인케이크",
+            "price": "45,000원 ~ 95,000원"
+          }
+        ]
+      },
+      {
+        "category": "케이크 장식 서비스",
+        "price": "10,000원 ~ 30,000원"
+      }
+    ],
+    "reviews": [
+      {
+        "user": "홍길동",
+        "rating": 5,
+        "comment": "정말 맛있고 디자인도 예뻐요!"
+      },
+      {
+        "user": "김영희",
+        "rating": 4,
+        "comment": "조금 비싸지만, 품질은 최고!"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "cakeshop2",
+    "storeName": "케이크 샵 2",
+    "address": "서울 마포구...",
+    "rating": 4.3,
+    "phoneNumber": "010-2345-6789",
+    "openingHours": {
+      "monday": "09:00 - 18:00",
+      "tuesday": "09:00 - 18:00",
+      "wednesday": "09:00 - 18:00",
+      "thursday": "09:00 - 18:00",
+      "friday": "09:00 - 18:00",
+      "saturday": "10:00 - 16:00",
+      "sunday": "Closed"
+    },
+    "services": [
+      {
+        "category": "케이크 주문 제작",
+        "types": [
+          {
+            "type": "생일케이크",
+            "price": "50,000원 ~ 100,000원"
+          },
+          {
+            "type": "기념일케이크",
+            "price": "60,000원 ~ 120,000원"
+          },
+          {
+            "type": "퇴사케이크",
+            "price": "40,000원 ~ 90,000원"
+          },
+          {
+            "type": "군인케이크",
+            "price": "45,000원 ~ 95,000원"
+          }
+        ]
+      },
+      {
+        "category": "케이크 장식 서비스",
+        "price": "10,000원 ~ 30,000원"
+      }
+    ],
+    "reviews": [
+      {
+        "user": "박철수",
+        "rating": 5,
+        "comment": "가격 대비 훌륭한 품질!"
+      },
+      {
+        "user": "이민정",
+        "rating": 4,
+        "comment": "조금 대기 시간이 길지만, 맛은 좋습니다."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "cakeshop3",
+    "storeName": "케이크 샵 3",
+    "address": "서울 강서구...",
+    "rating": 4.3,
+    "phoneNumber": "010-3456-7890",
+    "openingHours": {
+      "monday": "09:00 - 18:00",
+      "tuesday": "09:00 - 18:00",
+      "wednesday": "09:00 - 18:00",
+      "thursday": "09:00 - 18:00",
+      "friday": "09:00 - 18:00",
+      "saturday": "10:00 - 16:00",
+      "sunday": "Closed"
+    },
+    "services": [
+      {
+        "category": "케이크 주문 제작",
+        "types": [
+          {
+            "type": "생일케이크",
+            "price": "50,000원 ~ 100,000원"
+          },
+          {
+            "type": "기념일케이크",
+            "price": "60,000원 ~ 120,000원"
+          },
+          {
+            "type": "퇴사케이크",
+            "price": "40,000원 ~ 90,000원"
+          },
+          {
+            "type": "군인케이크",
+            "price": "45,000원 ~ 95,000원"
+          }
+        ]
+      },
+      {
+        "category": "케이크 장식 서비스",
+        "price": "10,000원 ~ 30,000원"
+      }
+    ],
+    "reviews": [
+      {
+        "user": "김철수",
+        "rating": 4,
+        "comment": "무난한 맛과 서비스입니다."
+      },
+      {
+        "user": "최영희",
+        "rating": 4,
+        "comment": "조금 비싸지만 맛있어요."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "cakeshop4",
+    "storeName": "케이크 샵 4",
+    "address": "서울 도봉구...",
+    "rating": 4.3,
+    "phoneNumber": "010-4567-8901",
+    "openingHours": {
+      "monday": "09:00 - 18:00",
+      "tuesday": "09:00 - 18:00",
+      "wednesday": "09:00 - 18:00",
+      "thursday": "09:00 - 18:00",
+      "friday": "09:00 - 18:00",
+      "saturday": "10:00 - 16:00",
+      "sunday": "Closed"
+    },
+    "services": [
+      {
+        "category": "케이크 주문 제작",
+        "types": [
+          {
+            "type": "생일케이크",
+            "price": "50,000원 ~ 100,000원"
+          },
+          {
+            "type": "기념일케이크",
+            "price": "60,000원 ~ 120,000원"
+          },
+          {
+            "type": "퇴사케이크",
+            "price": "40,000원 ~ 90,000원"
+          },
+          {
+            "type": "군인케이크",
+            "price": "45,000원 ~ 95,000원"
+          }
+        ]
+      },
+      {
+        "category": "케이크 장식 서비스",
+        "price": "10,000원 ~ 30,000원"
+      }
+    ],
+    "reviews": [
+      {
+        "user": "정수연",
+        "rating": 5,
+        "comment": "가격 대비 훌륭한 케이크!"
+      },
+      {
+        "user": "이강우",
+        "rating": 4,
+        "comment": "서비스가 조금 느리지만 괜찮습니다."
+      }
+    ]
+  }
+]
