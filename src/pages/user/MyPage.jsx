@@ -3,9 +3,9 @@ import ProfileHeader from '../../components/ProfileHeader';
 import ReservationFavoriteList from '../../components/ReservationFavoriteList';
 import ReviewList from '../../components/ReviewList';
 import StoreList from '../../components/StoreList';
-import '../../App.css'
+import '../../css/yewon.css'
 
-function UserMyPage(props) {
+function MyPage(props) {
 
     const isAdmin = false; // 유저 / 사장님 구분
     return (
@@ -19,4 +19,4 @@ function UserMyPage(props) {
     );
 }
 
-export default UserMyPage;
+export default MyPage;
