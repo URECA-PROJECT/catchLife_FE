@@ -7,5 +7,5 @@ function LifeCatchCrud(props) {
         </>
     );
 }
-//아직 react-router-dom 설치 X
+
 export default LifeCatchCrud;

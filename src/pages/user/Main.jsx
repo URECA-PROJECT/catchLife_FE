@@ -29,6 +29,9 @@ const Main = () => {
           <Link to="/signup">회원가입 페이지(상희)</Link>
         </div>
         <div>
+          <Link to="/login">로그인 페이지(상희)</Link>
+        </div>
+        <div>
           <Link to="/userMyPage">마이페이지(예원)</Link>
         </div>
       </Link>
