@@ -1,0 +1,14 @@
+[
+    {
+        "id":1,
+        "name_kor": "유레카 베이커리",
+        "name_eng" : "UREKA Bakery",
+        "rating" : 4.8
+    },
+    {
+        "id":2,
+        "name_kor": "유네일",
+        "name_eng" : "U-Nail",
+        "rating" : 4.5
+    }
+]

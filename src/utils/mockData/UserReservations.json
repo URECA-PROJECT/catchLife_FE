@@ -1,0 +1,83 @@
+[
+    {
+        "id": "1",
+        "name" : "노승희",
+        "service": "젤네일",
+        "date": "2024-09-10",
+        "startTime": "10:00",
+        "endTime" : "12:00",
+        "visitCnt" : 3
+    },
+    {
+        "id": "2",
+        "name" : "김예원",
+        "service": "이달의 네일 & 페디",
+        "date": "2024-09-10",
+        "startTime": "12:00",
+        "endTime" : "14:00",
+        "visitCnt" : 5
+    },
+    {
+        "id": "3",
+        "name" : "박상희",
+        "service": "네일케어",
+        "date": "2024-09-10",
+        "startTime": "14:00",
+        "endTime" : "16:00",
+        "visitCnt" : 1
+    },
+    {
+        "id": "4",
+        "name" : "노승희",
+        "service": "젤네일",
+        "date": "2024-09-10",
+        "startTime": "16:00",
+        "endTime" : "18:00",
+        "visitCnt" : 3
+    },
+    {
+        "id": "5",
+        "name" : "홍길동",
+        "service": "젤네일",
+        "date": "2024-09-11",
+        "startTime": "10:00",
+        "endTime" : "12:00",
+        "visitCnt" : 3
+    },
+    {
+        "id": "6",
+        "name" : "홍길동",
+        "service": "젤네일",
+        "date": "2024-09-12",
+        "startTime": "10:00",
+        "endTime" : "12:00",
+        "visitCnt" : 3
+    },
+    {
+        "id": "7",
+        "name" : "홍길동",
+        "service": "젤네일",
+        "date": "2024-09-13",
+        "startTime": "10:00",
+        "endTime" : "12:00",
+        "visitCnt" : 3
+    },
+    {
+        "id": "8",
+        "name" : "홍길동",
+        "service": "젤네일",
+        "date": "2024-09-14",
+        "startTime": "10:00",
+        "endTime" : "16:00",
+        "visitCnt" : 3
+    },
+    {
+        "id": "9",
+        "name" : "홍길동",
+        "service": "젤네일",
+        "date": "2024-09-15",
+        "startTime": "10:00",
+        "endTime" : "12:00",
+        "visitCnt" : 3
+    }
+]

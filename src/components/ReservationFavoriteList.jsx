@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import '../App.css'
+import myReservation from "../utils/mockData/myReservation.json";
+import myFavorites from "../utils/mockData/myFavorites.json";
+import '../css/yewon.css'
 
 function ReservationFavoriteList(props) {
 
     // props로 받아올 것
-    const favoriteCnt = 1;
+    const favoriteCnt = myFavorites.length;
 
     // '다가오는 예약', '즐겨찾는 매장' 버튼 -> 활성화된 탭 상태 관리 ('reservations' 또는 'favorites')
     const [activeTab, setActiveTab] = useState('reservations'); 
@@ -30,17 +32,30 @@ function ReservationFavoriteList(props) {
 
 function ReservationList(props) {
     return (
-        <div className='reservation-list'>
+        <div>
             {/* sql에서 데이터 가져와서 표시 */}
-            예약한 매장 목록
+            {myReservation.map((myr, index) => {
+                return (
+                    <div className='reservation-items'>
+                        <li key={index}>{myr.date} / {myr.name_kor} {myr.name_eng} / {myr.rating} / {myr.order}</li>
+                    </div>
+                )
+            })}
         </div>
     );
 }
 
 function FavoritesList(props) {
     return (
-        <div className='favorite-list'>
-            즐겨찾기 매장 목록
+        <div>
+            {myFavorites.map((myf, index) => {
+                return (
+                    <div className='favorite-items'>
+                        <a href='#' style={{textDecoration: "none", color: "black"
+                        }}><li key={index}>{myf.name_kor} {myf.name_eng} / {myf.rating}</li></a>
+                    </div>
+                )
+            })}
         </div>
     );
 }
