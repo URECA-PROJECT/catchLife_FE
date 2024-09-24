@@ -25,21 +25,60 @@ export const RegionProvider = ({ children }) => {
       .then((response) => {
         const data = response.data;
         setCity(data);
-        console.log(data);
         setDistrict([]);
         setNeighborhood([]);
+        console.log(data);
+
+        if (!data.length) {
+          setCity([]);
+          API.get(`region/districtToZone?zone=${zone}`)
+            .then((response) => {
+              const data = response.data;
+              setDistrict(data);
+            })
+            .catch((error) => {
+              console.error("Error fetching stores:", error);
+            });
+        }
       })
       .catch((error) => {
         console.error("Error fetching stores:", error);
       });
   };
 
-  const handleDistrict = (city) => {
-    console.log(city);
+  const handleDistrict = (zone, city) => {
+    if (city === "") {
+      console.log("city 비었다.");
+      setDistrict([]);
+      API.get(`region/neighborhoodToCity?zone=${zone}`)
+        .then((response) => {
+          const data = response.data;
+          setDistrict(data);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching stores:", error);
+        });
+    }
+
     API.get(`region/district?city=${city}`)
       .then((response) => {
         const data = response.data;
         setDistrict(data);
+        console.log(data);
+
+        // if (!data.length) {
+        //   setDistrict([]);
+        //   API.get(`region/neighborhoodToCity?zone=${zone}`)
+        //     .then((response) => {
+        //       const data = response.data;
+        //       setDistrict(data);
+        //       console.log(data);
+        //     })
+        //     .catch((error) => {
+        //       console.error("Error fetching stores:", error);
+        //     });
+        // }
       })
       .catch((error) => {
         console.error("Error fetching stores:", error);

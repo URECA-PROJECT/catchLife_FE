@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { CiLocationOn } from "react-icons/ci";
 import { images } from "../../utils/images";
 import "../../css/Main.css";
 import { Link } from "react-router-dom";
@@ -55,18 +54,11 @@ const Main = () => {
         <div>
           <Link to="/userMyPage">마이페이지(예원)</Link>
         </div>
-        <div>
-          <Link to="/test">test</Link>
-        </div>
       </Link>
 
-      <div className="locationBox">
-        <CiLocationOn />
-        <Region />
-      </div>
+      <Region />
 
       <div className="banner">임시배너공간</div>
-
       {!detail && (
         <div className="categoryBox">
           {mainCategory.map((category) => (
@@ -82,7 +74,6 @@ const Main = () => {
           ))}
         </div>
       )}
-
       {detail && (
         <>
           <button onClick={() => setDetail(false)}>뒤로 가기</button>
@@ -95,7 +86,6 @@ const Main = () => {
           </div>
         </>
       )}
-
       <div>
         <div className="subTitle">어디로 가시나요?</div>
         <div className="cityBox">
@@ -113,7 +103,6 @@ const Main = () => {
           </Link>
         </div>
       </div>
-
       <div>
         <div className="subTitle">내가 즐겨찾는 매장</div>
         <div className="bookMarkBox">

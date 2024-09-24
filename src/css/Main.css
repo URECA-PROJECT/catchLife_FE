@@ -152,3 +152,14 @@
 .orderContent {
   text-align: center;
 }
+
+/* Region */
+.locationBox {
+  margin: 15px;
+  display: flex;
+  align-items: center;
+}
+.regionItem {
+  margin: 2px;
+  border: none;
+}
