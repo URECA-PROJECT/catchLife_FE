@@ -1,36 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+// import '../App.css';
+import "../css/Login.css";
 
 function LoginAdmin(props) {
+    const navigate = useNavigate();
+    const location = useLocation(); 
+    const [ id, setId ] = useState('');
+    const [ password, setPassword ] = useState('');
     
     function handleSubmit(e){
         e.preventDefault();
     }
-    
+
+    const isUserLogin = location.pathname === '/loginUser'; 
+    const isAdminLogin = location.pathname === '/loginAdmin'; 
+    const isAdminSignup = location.pathname === '/signupAdmin'; 
+
+
     return (
         <> 
+    <div className="login-container">
+        <h1>CATCH LIFE</h1>
+        <div className="user-type">
+            <Link 
+                to="/loginUser" 
+                className={location.pathname === '/loginUser' ? 'active-link' : 'inactive-link'}>
+                유저
+            </Link>
+            <span className="separator">|</span>
+            <Link 
+                to="/loginAdmin" 
+                className={location.pathname === '/loginAdmin' ? 'active-link' : 'inactive-link'}>
+                사장님
+            </Link>
+        </div>
+
         <form onSubmit={handleSubmit}>
-            <span>유저</span>/
-            <span>사장님</span><br/>
-            
-            <label>
-                아이디 : 
-                <input name='id'></input>
-            </label><br></br>
-            <label>
-                비밀번호 : 
-                <input type='password' name='pw'></input>
-            </label><br></br>
-            <label>
-                    아이디 저장 :
-                    <input type="checkbox" name='saveId'></input>
-            </label>
-            <label>
-                    자동 로그인 :
-                    <input type="checkbox" name='autoLogin'></input>
-            </label><br></br>
-            <input type='submit' value="로그인"></input><br/>
-            <span>회원가입</span>
+            <div>
+                <label>아이디</label>
+                <input
+                    type="text"
+                    value={id}
+                    onChange={(e) => setId(e.target.value)}
+                    placeholder="아이디를 입력하세요"
+                />
+            </div>
+            <div>
+                <label>비밀번호</label>
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="비밀번호를 입력하세요"
+                />
+            </div>
+                <button type="submit" className="submit-button">로그인</button>
         </form>
+
+        <div>
+            <Link to={"/signupAdmin1"}
+                className="signup-link"
+                >회원가입</Link>
+            <Link to={"/"}
+                className="signup-link"
+                >메인</Link>
+        </div>
+        </div>
         </>
     );
 }
