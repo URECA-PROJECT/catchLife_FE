@@ -38,29 +38,47 @@ function LoginAdmin(props) {
 
         <form onSubmit={handleSubmit}>
             <div className='login-div'>
-                <label className='login-label'>아이디</label>
+                {/* <label className='login-label'>아이디</label> */}
                 <input
                     className='login-input'
                     type="text"
                     value={id}
                     onChange={(e) => setId(e.target.value)}
-                    placeholder="아이디를 입력하세요"
+                    placeholder="아이디"
                 />
             </div>
             <div className='login-div'>
-                <label className='login-label'>비밀번호</label>
+                {/* <label className='login-label'>비밀번호</label> */}
                 <input
                     className='login-input'
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="비밀번호를 입력하세요"
+                    placeholder="비밀번호"
                 />
+            </div>
+            <div className="login--div">
+                <label className='login-label'>
+                    <input
+                            className='login-input'
+                            type="radio"
+                            name="gender"
+                            value="고객"
+                    /> 고객
+                </label>
+                <label className='login-label' style={{ marginLeft: '20px' }}>
+                    <input
+                            className='login-input'
+                            type="radio"
+                            name="gender"
+                            value="관리자"
+                        /> 관리자
+                </label>
             </div>
                 <button type="submit" className="submit-button">로그인</button>
         </form>
 
-        <div className='login-div'>
+        <div className='login-bottom-div'>
             <Link to={"/signupAdmin1"}
                 className="signup-link"
                 >회원가입</Link>

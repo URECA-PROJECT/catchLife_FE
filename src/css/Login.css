@@ -58,11 +58,11 @@
   }
   
   /* 사용자 타입(유저, 사장님) 선택 스타일 */
-  /* .user-type {
+  .user-type {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
-  } */
+    margin-bottom: 10px;
+  }
   
   .user-type a {
     font-size: 2rem; /* 글자 크기를 1.5rem로 키움 */
@@ -92,6 +92,12 @@
     max-width: 400px;
   }
 
+  .gender-div{
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 400px;
+  }
+
   .login-bottom-div{
     margin-bottom: 15px;
     width: 100%;
@@ -107,6 +113,7 @@
   }
   
   .login-input {
+    margin-top: 10px;
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -128,7 +135,7 @@
   }
   
   /* 버튼 스타일 */
-  button {
+  .submit-button {
     width: 108%;
     max-width: 400px;
     padding: 10px;
@@ -142,7 +149,7 @@
     cursor: pointer;
   }
   
-  button:hover {
+  .submit-button:hover {
     background-color: #444444;
   }
   
