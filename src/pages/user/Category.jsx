@@ -1,27 +1,21 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { images } from "../../utils/images";
 import "../../css/Main.css";
 import UserMainHeader from "../../components/UserMainHeader";
-import categoryData from "../../utils/mockData/Category.json";
+import { useCategory } from "../../context/CategoryContext";
 
 const Category = () => {
-  const location = useLocation();
-
-  const pathSegments = location.pathname.split("/");
-  const categoryTitle = pathSegments[pathSegments.length - 1];
-
-  const filteredStores = categoryData
-    .filter((category) => category.name === categoryTitle)
-    .map((category) => category.stores);
+  const { stores } = useCategory();
+  const title = stores[0].categoryName;
 
   return (
     <div>
-      <UserMainHeader title={categoryTitle} />
+      <UserMainHeader title={title} />
       <div className="CategoryListBox">
-        {filteredStores[0].map((store) => (
+        {stores.map((store) => (
           <Link
-            to={store.name}
+            to={store.storeId}
             state={{ storeId: store.id }} // state는 to 바깥에서 전달
             key={store.id}
           >
@@ -29,7 +23,8 @@ const Category = () => {
               <img src={images.cakeStore} alt="케이크" />
               <div className="storeContent">
                 <div>{store.storeName}</div>
-                <div>{store.address}</div>
+                <div>지역 : {store.regionName}</div>
+                <div>카테고리 : {store.categoryName}</div>
               </div>
             </div>
           </Link>

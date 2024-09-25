@@ -1,12 +1,15 @@
 import React, { createContext, useContext, useState } from "react";
 import API from "../utils/axios";
+import { useNavigate } from "react-router-dom";
 
 const CategoryContext = createContext();
 
 export const CategoryProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [detail, setDetail] = useState(false);
   const [mainCategory, setMainCategory] = useState([]);
   const [detailCategory, setDetailCategory] = useState([]);
+  const [stores, setStores] = useState([]);
 
   // 메인 카테고리
   const handleMainCategory = () => {
@@ -37,15 +40,33 @@ export const CategoryProvider = ({ children }) => {
   };
 
   const handleStoreList = (categoryDetailId) => {
-    console.log(categoryDetailId);
-    console.log(
-      "서울 지역에서 뷰티 > 네일 클릭하면 서울지역의 모든 네일샵 리스트 보여주기 하면 됨 ~"
-    );
+    const regionId = localStorage.getItem("regionId");
+
+    API.get("/storeList/filtered", {
+      params: {
+        regionId: regionId,
+        categoryId: categoryDetailId,
+      },
+    })
+      .then((response) => {
+        const data = response.data;
+        setStores(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching stores:", error);
+      });
+
+    navigate("/category", {
+      state: { regionId, categoryDetailId },
+    });
   };
 
   return (
     <CategoryContext.Provider
       value={{
+        stores,
+        setStores,
         detail,
         setDetail,
         mainCategory,

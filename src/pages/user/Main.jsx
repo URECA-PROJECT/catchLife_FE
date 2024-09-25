@@ -12,6 +12,10 @@ const Main = () => {
   const { setDetail, handleMainCategory } = useCategory();
 
   useEffect(() => {
+    // testcode
+    const regionId = 2;
+    localStorage.setItem("regionId", regionId.toString());
+
     setDetail(false);
     handleZone();
     handleMainCategory();
