@@ -1,6 +1,6 @@
 import React from "react";
-import { useRegion } from "../context/RegionContext";
-import "../css/Main.css";
+import { useRegion } from "../../context/RegionContext";
+import "../../css/Main.css";
 import { CiLocationOn } from "react-icons/ci";
 
 const Region = () => {
@@ -13,6 +13,7 @@ const Region = () => {
     handleCities,
     handletNeighbolhood,
   } = useRegion();
+
   return (
     <div className="locationBox">
       <CiLocationOn />
