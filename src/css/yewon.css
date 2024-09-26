@@ -2,239 +2,267 @@
 
 /* ProfileHeader */
 .profile-header {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .profile-mypage h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    margin-top: 5px;
-  }
-  
-  .profile-info {
-    display: flex;
-    align-items: center;
-  }
-  
-  .profile-picture {
-    width: 80px;
-    height: 80px;
-    margin-right: 15px;
-  }
-  
-  .btn-edit-profile {
-    width: 100%;
-    margin-top: 10px;
-    padding: 5px;
-    border: 1px solid #000000;
-    border-radius: 25px;
-    background-color: white;
-    cursor: pointer;
-  }
-  
-  /* tab-menu */
-  .tab-menu {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 20px;
-  }
-  
-  .tab-menu button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    color: #00000036;
-  }
-  
-  .tab-menu button.active {
-    font-weight: bold;
-    color: black;
-  }
-  
-  /* ReservationList */
-  .mystores-list, .review-items, .reservation-items, .favorite-items {
-    /* display: flex; */
-    padding: 15px;
-    margin: 10px 20px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    align-items: center;
-  }
-  
-  /* ReviewList */
-  .review-header {
-    padding: 10px 20px;
-    margin-top: 20px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .review-list {
-    padding: 10px 20px;
-  }
-  
-  /* MyStores (내 매장 관리) */
-  .mystores-header {
-    padding: 10px 20px;
-    margin-top: 20px;
-  }
-  
-  .mystores-list {
-    list-style: none;
-  }
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
 
-  .review-items, .reservation-items, .favorite-items {
-    list-style: none;
-    text-align: center;
-  }
+.profile-mypage h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
 
-  .review-items a {
-    text-decoration: none;
-    color: black;
-  }
-  
-  /* 프로필 수정 (Edit Profile) */
-  .edit-profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .back-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 10px;
-    position: relative;
-    margin-bottom: 20px;
-  }
-  
-  .back-header .backbutton {
-    text-decoration: none;
-    font-size: 30px;
-    position: absolute;
-    left: 10px;
-    color: black;
-  }
-  
-  .backbutton {
-    margin-left: 10px;
-  }
-  
-  .back-header .back-header-top {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .yewon-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .profile-picture {
-    margin: 20px;
-    position: relative;
-    cursor: pointer;
-  
-  }
-  
-  .file-input {
-    display: none;
-  }
-  
-  /* Form labels */
-  .yewon-form label {
-    font-size: 14px;
-    display: block;
-    color: #0000009f;
-    margin-bottom: 5px;
-    text-align: left;
-    width: 100%;
-  }
-  
-  /* Form inputs */
-  .yewon-form input[type="text"],
-  .yewon-form input[type="password"],
-  .yewon-form select {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    background-color: #0000001b;
-  }
+.profile-info {
+  display: flex;
+  align-items: center;
+}
 
-  .yewon-form select {
-    width: 100%;
-  }
-  
-  /* Buttons */
-  .yewon-form button {
-    width: 120px;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .yewon-form button:hover {
-    background-color: #f2f2f2;
-  }
-  
-  .yewon-form button:first-of-type {
-    background-color: #ddd;
-  }
-  
-  .yewon-form button:last-of-type {
-    background-color: #fff;
-    border: 1px solid #000;
-  }
+.yewon-form select {
+  width: 100%;
+}
 
-  /* Schedule Management */
+/* Buttons */
+.yewon-form button {
+  width: 120px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-  /* 월간 달력 */
-  .weekday-header {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7일 (월~일) */
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 10px;
+.yewon-form button:hover {
+  background-color: #f2f2f2;
+}
+
+.yewon-form button:first-of-type {
+  background-color: #ddd;
+}
+
+.yewon-form button:last-of-type {
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+.btn-edit-profile {
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid #000000;
+  border-radius: 25px;
+  background-color: white;
+  cursor: pointer;
+}
+
+/* tab-menu */
+.tab-menu {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 20px;
+}
+
+.tab-menu button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #00000036;
+}
+
+.tab-menu button.active {
+  font-weight: bold;
+  color: black;
+}
+
+/* ReservationList */
+.mystores-list,
+.review-items,
+.reservation-items,
+.favorite-items {
+  /* display: flex; */
+  padding: 15px;
+  margin: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  align-items: center;
+}
+
+/* ReviewList */
+.review-header {
+  padding: 10px 20px;
+  margin-top: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.review-list {
+  padding: 10px 20px;
+}
+
+/* MyStores (내 매장 관리) */
+.mystores-header {
+  padding: 10px 20px;
+  margin-top: 20px;
+}
+
+.mystores-list {
+  list-style: none;
+}
+
+.review-items,
+.reservation-items,
+.favorite-items {
+  list-style: none;
+  text-align: center;
+}
+
+.review-items a {
+  text-decoration: none;
+  color: black;
+}
+
+/* 프로필 수정 (Edit Profile) */
+.edit-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.back-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.back-header .backbutton {
+  text-decoration: none;
+  font-size: 30px;
+  position: absolute;
+  left: 10px;
+  color: black;
+}
+
+.backbutton {
+  margin-left: 10px;
+}
+
+.back-header .back-header-top {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.yewon-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-picture {
+  margin: 20px;
+  position: relative;
+  cursor: pointer;
+}
+
+.file-input {
+  display: none;
+}
+
+/* Form labels */
+.yewon-form label {
+  font-size: 14px;
+  display: block;
+  color: #0000009f;
+  margin-bottom: 5px;
+  text-align: left;
+  width: 100%;
+}
+
+/* Form inputs */
+.yewon-form input[type="text"],
+.yewon-form input[type="password"],
+.yewon-form select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  background-color: #0000001b;
+}
+
+.yewon-form select {
+  width: 109%;
+}
+
+/* Buttons */
+.yewon-form button {
+  width: 120px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.yewon-form button:hover {
+  background-color: #f2f2f2;
+}
+
+.yewon-form button:first-of-type {
+  background-color: #ddd;
+}
+
+.yewon-form button:last-of-type {
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+/* Schedule Management */
+
+/* 월간 달력 */
+.weekday-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7일 (월~일) */
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7일 기준 */
-    grid-gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7일 기준 */
+  grid-gap: 10px;
 }
 
-.date-slot, .empty-slot {
-    padding: 10px;
-    border: 1px solid #00000034;
-    text-align: center;
-    border-radius: 10px;
+.date-slot,
+.empty-slot {
+  padding: 10px;
+  border: 1px solid #00000034;
+  text-align: center;
+  border-radius: 10px;
 }
 
 .date-label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .reservations {
-    margin-top: 5px;
+  margin-top: 5px;
 }
-  
+
 /* 주간 달력 */
 
 .weekly-schedule {
@@ -244,7 +272,7 @@
 
 .time-column {
   flex: 0 0 60px; /* 시간대 칸의 너비 */
- }
+}
 
 .time-slot {
   height: 30px; /* 1시간 단위로 표시 */
@@ -267,7 +295,5 @@
   text-align: center;
   padding: 5px;
 }
-
-
 
 /* Yewon Styling*/

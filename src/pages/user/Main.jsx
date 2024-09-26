@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { images } from "../../utils/images";
 import "../../css/Main.css";
 import { Link } from "react-router-dom";
-import mainCategory from "../../utils/mockData/mainCategory.json";
-import detailCategory from "../../utils/mockData/mainDetailCategory.json";
 import { useRegion } from "../../context/RegionContext";
-import Region from "../../components/Region";
+import Region from "../../components/Main/Region";
+import { useCategory } from "../../context/CategoryContext";
+import CategoryComponent from "../../components/Main/CategoryComponent";
 
 const Main = () => {
-  const { handleZone } = useRegion();
-  const [detail, setDetail] = useState(false);
-  const [categoryName, setCategoryName] = useState("");
-
-  const filteredStores = detailCategory
-    .filter((category) => category.name === categoryName)
-    .map((category) => category.category);
-
-  const handleCategory = (value) => {
-    setDetail(true);
-    setCategoryName(value);
-  };
+  const { handleZone, handleUserRegion } = useRegion();
+  const { setDetail, handleMainCategory } = useCategory();
 
   useEffect(() => {
     setDetail(false);
     handleZone();
+    handleMainCategory();
+    handleUserRegion();
   }, []);
 
   return (
@@ -56,52 +48,9 @@ const Main = () => {
       </Link>
 
       <Region />
-
       <div className="banner">임시배너공간</div>
-      {!detail && (
-        <div className="categoryBox">
-          {mainCategory.map((category) => (
-            <>
-              <button
-                className="category"
-                key={category.id}
-                onClick={() => handleCategory(category.name)}
-              >
-                <div>{category.title}</div>
-              </button>
-            </>
-          ))}
-        </div>
-      )}
-      {detail && (
-        <>
-          <button onClick={() => setDetail(false)}>뒤로 가기</button>
-          <div className="categoryBox">
-            {filteredStores[0].map((category) => (
-              <Link to={`/category/${category.name}`} key={category.id}>
-                <div className="category">{category.title}</div>
-              </Link>
-            ))}
-          </div>
-        </>
-      )}
-      <div>
-        <div className="subTitle">어디로 가시나요?</div>
-        <div className="cityBox">
-          <Link to="">
-            <div className="city">내 주변</div>
-          </Link>
-          <Link to="">
-            <div className="city">서울</div>
-          </Link>
-          <Link to="">
-            <div className="city">경기</div>
-          </Link>
-          <Link to="">
-            <div className="city">인천</div>
-          </Link>
-        </div>
-      </div>
+      <CategoryComponent />
+
       <div>
         <div className="subTitle">내가 즐겨찾는 매장</div>
         <div className="bookMarkBox">
