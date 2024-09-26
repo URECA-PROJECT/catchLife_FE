@@ -20,6 +20,7 @@ import EditProfile from "./pages/user/EditProfile";
 import ReservationManagement from "./pages/user/ReservationManagement";
 import StoreManagement from "./pages/user/StoreManagement";
 import EditStores from "./pages/user/EditStores";
+import ReservationDetail from "./pages/user/ReservationDetail";
 
 function App() {
   return (
@@ -47,11 +48,9 @@ function App() {
 
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/mypage/editprofile" element={<EditProfile />} />
-          <Route
-            path="/mypage/reservations"
-            element={<ReservationManagement />}
-          />
-          <Route path="/mypage/stores" element={<StoreManagement />} />
+          <Route path="/mypage/reservations" element={<ReservationManagement />}/>
+          <Route path="/mypage/reservations/detail" element={<ReservationDetail />} />
+          <Route path="/mypage/storemanage" element={<StoreManagement />} />
           <Route path="/mypage/editstores" element={<EditStores />} />
         </Routes>
       </div>

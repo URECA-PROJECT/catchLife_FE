@@ -55,7 +55,7 @@ function EditStores(props) {
                 <form className='yewon-form'>
                     <div className='edit-profile-image'>
                         <label htmlFor='file-input'>
-                            <img src={profileImage} alt='Profile' className='profile-picture' />
+                            <img src={profileImage} alt='Profile' className='profile-picture' style={{margin: "20px auto"}}/>
                         </label>
                     </div>
                     <input id='file-input' className='file-input' type='file' accept='image/*' onChange={handleImageChange} style={{display: "none"}}/>
