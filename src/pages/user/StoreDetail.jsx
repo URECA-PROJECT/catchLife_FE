@@ -1,63 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import UserMainHeader from "../../components/UserMainHeader";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { images } from "../../utils/images";
+import API from "../../utils/axios";
 
 const StoreDetail = () => {
   const location = useLocation();
-  const { storeName } = location.state || {};
+  const { storeId, storeName } = location.state || {};
+  const [menus, setMenus] = useState([]);
 
-  const pathSegments = location.pathname.split("/");
-  const detail = pathSegments[pathSegments.length - 1];
-
-  const navigate = useNavigate();
-  const nextPage = () => {
-    navigate("order", {
-      state: { key: "key", price: "20,000원", title: "케이크", img: "img" },
-    });
+  const handleStoreMenu = () => {
+    API.get(`/products/store/${storeId}`)
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        setMenus(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching stores:", error);
+      });
   };
+
+  useEffect(() => {
+    handleStoreMenu();
+  }, []);
 
   return (
     <div>
       <UserMainHeader title={storeName} />
 
-      {/* <Link to="custom">
-        <div className="customBtn">커스텀 주문</div>
-      </Link> */}
-
       <div className="gridBox">
-        <div className="gridItem" key="1">
-          <button onClick={nextPage}>
-            <img src={images.cakeStore} alt="" />
-            <div>
-              <div>가격</div>
-              <div>케이크종류</div>
-              <div>주문하기</div>
-            </div>
-          </button>
-        </div>
-
-        <div className="gridItem">
-          <button onClick={nextPage}>
-            <img src={images.cakeStore} alt="" />
-            <div>
-              <div>가격</div>
-              <div>케이크종류</div>
-              <div>주문하기</div>
-            </div>
-          </button>
-        </div>
-
-        <div className="gridItem">
-          <button onClick={nextPage}>
-            <img src={images.cakeStore} alt="" />
-            <div>
-              <div>가격</div>
-              <div>케이크종류</div>
-              <div>주문하기</div>
-            </div>
-          </button>
-        </div>
+        {menus.map((menu) => (
+          <div className="gridItem" key="1">
+            <button onClick={console.log("주문서 페이지로 이동")}>
+              <img src={images.cakeStore} alt="" />
+              <div>
+                <div>{menu.name}</div>
+                <div>{menu.description}</div>
+                <div>{menu.price}원</div>
+                <button>주문하기</button>
+              </div>
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );

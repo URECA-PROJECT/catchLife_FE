@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import UserMainHeader from "../../components/UserMainHeader";
-import { images } from "../../utils/images";
 import API from "../../utils/axios";
 
 const Store = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { storeListId, storeName } = location.state || {}; // state가 없으면 빈 객체로 대처
   const [store, setStore] = useState([]);
@@ -41,7 +39,7 @@ const Store = () => {
       </div>
       <Link
         to={`/category/${storeListId}/detail`}
-        state={{ storeName: storeName }} // state는 to 바깥에서 전달
+        state={{ storeId: store.id, storeName: storeName }} // state는 to 바깥에서 전달
       >
         매장 더보기
       </Link>
