@@ -18,7 +18,7 @@ function ReviewList(props) {
                     return (
                         // 클릭하면 리뷰 작성 페이지로 이동
                         <div className='review-items'>
-                            <a href='#'><li key={index}>{st.name_kor} / {st.name_eng} / {st.date} / {st.rating} <br /> {st.order} / {st.price}</li></a>
+                            <a href='#'><li key={index}>{st.name_kor} / {st.name_eng} / {st.date} <br /> {st.order} / {st.price}</li></a>
                         </div>
                     )
                 })}
