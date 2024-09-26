@@ -7,79 +7,69 @@ const Region = () => {
   const {
     zone,
     city,
-    district,
-    neighborhood,
-    handleDistrict,
     handleCities,
-    handletNeighbolhood,
+    userRegion,
+    handleChangeRegion,
+    setChangeRegion,
+    changeRegion,
   } = useRegion();
 
   return (
-    <div className="locationBox">
-      <CiLocationOn />
-      {/* zone */}
-      <select
-        className="regionItem"
-        name="location"
-        id="zone"
-        onChange={(e) => handleCities(e.target.value)}
-      >
-        {zone.map((item, index) => (
-          <option key={item}>{item}</option>
-        ))}
-      </select>
+    <>
+      {changeRegion && (
+        <div className="locationBox">
+          <CiLocationOn />
+          {/* zone */}
+          <select
+            className="regionItem"
+            name="location"
+            id="zone"
+            onChange={(e) => handleCities(e.target.value)}
+          >
+            {zone.map((item, index) => (
+              <option key={item}>{item}</option>
+            ))}
+          </select>
 
-      {/* city */}
-      {city.length > 0 && (
-        <select
-          className="regionItem"
-          name="location"
-          id="city"
-          onChange={(e) => handleDistrict(zone, e.target.value)}
-        >
-          <option value="default" disabled>
-            시/군
-          </option>
-          {city.map((item, index) => (
-            <option key={item}>{item}</option>
-          ))}
-        </select>
+          {/* city */}
+          {city.length > 0 && (
+            <select
+              className="regionItem"
+              name="location"
+              id="city"
+              onChange={(e) => handleChangeRegion(e.target.value)}
+            >
+              <option value="default" disabled>
+                시/군
+              </option>
+              {city.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.city}
+                </option>
+              ))}
+            </select>
+          )}
+
+          <button onClick={() => setChangeRegion(false)}>확인</button>
+        </div>
       )}
 
-      {/* district */}
-      {district.length > 0 && (
-        <select
-          className="regionItem"
-          name="location"
-          id="select"
-          onChange={(e) => handletNeighbolhood(e.target.value)}
-        >
-          <option value="default" disabled>
-            구
-          </option>
-          {district.map((item, index) => (
-            <option key={item}>{item}</option>
-          ))}
-        </select>
-      )}
+      {/* 내 지역 */}
+      {!changeRegion && (
+        <div className="locationBox flex items-center">
+          <CiLocationOn />
+          <div className="p-1">{userRegion.zone}</div>
+          <div className="p-1">{userRegion.city}</div>
 
-      {/* neighborhood */}
-      {neighborhood.length > 0 && (
-        <select
-          className="regionItem"
-          name="location"
-          id="neighborhood"
-          onChange={(e) => console.log(e.target.value)}
-        >
-          <option value="default" disabled>
-            읍/면/동
-          </option>
-          {neighborhood.map((item, index) => (
-            <option key={item}>{item}</option>
-          ))}
-        </select>
+          <button
+            onClick={() => setChangeRegion(true)}
+            className="text-xs mt-1 ml-1"
+          >
+            지역 변경하기
+          </button>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

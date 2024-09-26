@@ -8,17 +8,14 @@ import { useCategory } from "../../context/CategoryContext";
 import CategoryComponent from "../../components/Main/CategoryComponent";
 
 const Main = () => {
-  const { handleZone } = useRegion();
+  const { handleZone, handleUserRegion } = useRegion();
   const { setDetail, handleMainCategory } = useCategory();
 
   useEffect(() => {
-    // testcode
-    const regionId = 2;
-    localStorage.setItem("regionId", regionId.toString());
-
     setDetail(false);
     handleZone();
     handleMainCategory();
+    handleUserRegion();
   }, []);
 
   return (
@@ -54,23 +51,6 @@ const Main = () => {
       <div className="banner">임시배너공간</div>
       <CategoryComponent />
 
-      <div>
-        <div className="subTitle">어디로 가시나요?</div>
-        <div className="cityBox">
-          <Link to="">
-            <div className="city">내 주변</div>
-          </Link>
-          <Link to="">
-            <div className="city">서울</div>
-          </Link>
-          <Link to="">
-            <div className="city">경기</div>
-          </Link>
-          <Link to="">
-            <div className="city">인천</div>
-          </Link>
-        </div>
-      </div>
       <div>
         <div className="subTitle">내가 즐겨찾는 매장</div>
         <div className="bookMarkBox">
