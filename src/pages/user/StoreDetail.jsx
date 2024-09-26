@@ -5,6 +5,8 @@ import { images } from "../../utils/images";
 
 const StoreDetail = () => {
   const location = useLocation();
+  const { storeName } = location.state || {};
+
   const pathSegments = location.pathname.split("/");
   const detail = pathSegments[pathSegments.length - 1];
 
@@ -17,11 +19,11 @@ const StoreDetail = () => {
 
   return (
     <div>
-      <UserMainHeader title={detail} />
+      <UserMainHeader title={storeName} />
 
-      <Link to="custom">
-        <div className="customBtn">커스텀 케이크 주문하기</div>
-      </Link>
+      {/* <Link to="custom">
+        <div className="customBtn">커스텀 주문</div>
+      </Link> */}
 
       <div className="gridBox">
         <div className="gridItem" key="1">

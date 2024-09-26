@@ -32,7 +32,6 @@ export const CategoryProvider = ({ children }) => {
         const categoryDetailData = response.data;
 
         setDetailCategory(categoryDetailData);
-        console.log(categoryDetailData);
       })
       .catch((error) => {
         console.error("Error fetching stores:", error);
@@ -41,25 +40,20 @@ export const CategoryProvider = ({ children }) => {
 
   const handleStoreList = (categoryDetailId) => {
     const regionId = localStorage.getItem("regionId");
-
     API.get("/storeList/filtered", {
       params: {
         regionId: regionId,
-        categoryId: categoryDetailId,
+        categoryDetailId: categoryDetailId,
       },
     })
       .then((response) => {
         const data = response.data;
         setStores(data);
-        console.log(data);
+        navigate("/category");
       })
       .catch((error) => {
         console.error("Error fetching stores:", error);
       });
-
-    navigate("/category", {
-      state: { regionId, categoryDetailId },
-    });
   };
 
   return (

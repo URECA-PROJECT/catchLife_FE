@@ -1,42 +1,50 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import UserMainHeader from "../../components/UserMainHeader";
 import { images } from "../../utils/images";
+import API from "../../utils/axios";
 
 const Store = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-  const { storeId } = location.state || {}; // state가 없으면 빈 객체로 대처
+  const { storeListId, storeName } = location.state || {}; // state가 없으면 빈 객체로 대처
+  const [store, setStore] = useState([]);
 
-  console.log(storeId, "id"); // 여기서 storeId가 제대로 나오는지 확인
-  const pathSegments = location.pathname.split("/");
-  const store = pathSegments[pathSegments.length - 1];
+  const handleStoreInfo = () => {
+    API.get(`/store/${storeListId}`)
+      .then((response) => {
+        const data = response.data;
+        setStore(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching stores:", error);
+      });
+  };
+
+  useEffect(() => {
+    handleStoreInfo();
+  }, []);
 
   return (
     <div>
-      <UserMainHeader title={store} />
+      <UserMainHeader title={storeName} />
 
-      <div className="gridBox">
-        <div className="gridItem">
-          <Link to="birth">
-            <img src={images.cakeStore} alt="" />
-            <div>생일 케이크</div>
-          </Link>
-        </div>
-
-        <div className="gridItem">
-          <Link to="birth">
-            <img src={images.cakeStore} alt="" />
-            <div>생일 케이크</div>
-          </Link>
-        </div>
-
-        <div className="gridItem">
-          <Link to="birth">
-            <img src={images.cakeStore} alt="" />
-            <div>생일 케이크</div>
-          </Link>
+      <div>
+        <div>{store.store}</div>
+        <div>사진</div>
+        <div>{store.content}</div>
+        <div>{store.address}</div>
+        <div>{store.openDay}</div>
+        <div>
+          오픈 시간 : {store.openTime} ~ {store.closeTime}
         </div>
       </div>
+      <Link
+        to={`/category/${storeListId}/detail`}
+        state={{ storeName: storeName }} // state는 to 바깥에서 전달
+      >
+        매장 더보기
+      </Link>
     </div>
   );
 };

@@ -30,11 +30,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/category" element={<Category />} />
-            <Route path="/category/:store" element={<Store />} />
-            <Route
-              path="/category/:id/:store/:sort"
-              element={<StoreDetail />}
-            />
+            <Route path="/category/:storeId" element={<Store />} />
+            <Route path="/category/:storeId/detail" element={<StoreDetail />} />
             <Route
               path="/category/:id/:store/:sort/order"
               element={<Order />}

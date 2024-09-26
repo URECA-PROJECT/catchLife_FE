@@ -7,24 +7,23 @@ import { useCategory } from "../../context/CategoryContext";
 
 const Category = () => {
   const { stores } = useCategory();
-  const title = stores[0].categoryName;
 
   return (
     <div>
-      <UserMainHeader title={title} />
+      <UserMainHeader title={"dd"} />
       <div className="CategoryListBox">
-        {stores.map((store) => (
+        {stores.map((s) => (
           <Link
-            to={store.storeId}
-            state={{ storeId: store.id }} // state는 to 바깥에서 전달
-            key={store.id}
+            to={`/category/${s.storeId}`}
+            state={{ storeListId: s.storeId, storeName: s.storeName }} // state는 to 바깥에서 전달
+            key={s.storeId}
           >
             <div className="CategoryStore">
               <img src={images.cakeStore} alt="케이크" />
               <div className="storeContent">
-                <div>{store.storeName}</div>
-                <div>지역 : {store.regionName}</div>
-                <div>카테고리 : {store.categoryName}</div>
+                <div>{s.storeName}</div>
+                <div>지역 : {s.regionName}</div>
+                <div>카테고리 : {s.categoryDetailName}</div>
               </div>
             </div>
           </Link>
