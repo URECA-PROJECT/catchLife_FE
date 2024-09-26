@@ -7,7 +7,7 @@ import '../../css/yewon.css'
 
 function MyPage(props) {
 
-    const isAdmin = false; // 유저 / 사장님 구분
+    const isAdmin = true; // 유저 / 사장님 구분
     return (
         <div>
             <ProfileHeader isAdmin={isAdmin} />

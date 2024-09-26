@@ -17,9 +17,9 @@ function StoreList(props) {
                 {myStores.map((ms, index) => {
                     return (
                         <li className='mystores-list' key={index}>{ms.name_kor} {ms.name_eng} <span />
-                            <Link to="/mypage/reservations"><button>예약 관리</button></Link>
-                            <Link to="/mypage/stores"><button>매장 관리</button></Link>
-                            <Link to="/mypage/editstores"><button>매장 정보 수정</button></Link>
+                            <Link to="/mypage/reservations"><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-3 border border-gray-400 rounded shadow">예약 관리</button></Link>
+                            <Link to="/mypage/storemanage"><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-3 border border-gray-400 rounded shadow">매장 관리</button></Link>
+                            <Link to="/mypage/editstores"><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-3 border border-gray-400 rounded shadow">매장 정보 수정</button></Link>
                         </li>
                     )
                 })}

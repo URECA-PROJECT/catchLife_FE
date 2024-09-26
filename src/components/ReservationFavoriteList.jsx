@@ -37,7 +37,7 @@ function ReservationList(props) {
             {myReservation.map((myr, index) => {
                 return (
                     <div className='reservation-items'>
-                        <li key={index}>{myr.date} / {myr.name_kor} {myr.name_eng} / {myr.rating} / {myr.order}</li>
+                        <li key={index}>{myr.date} / {myr.name_kor} {myr.name_eng} / {myr.order}</li>
                     </div>
                 )
             })}
@@ -52,7 +52,7 @@ function FavoritesList(props) {
                 return (
                     <div className='favorite-items'>
                         <a href='#' style={{textDecoration: "none", color: "black"
-                        }}><li key={index}>{myf.name_kor} {myf.name_eng} / {myf.rating}</li></a>
+                        }}><li key={index}>{myf.name_kor} {myf.name_eng}</li></a>
                     </div>
                 )
             })}

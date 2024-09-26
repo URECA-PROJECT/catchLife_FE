@@ -20,10 +20,33 @@
   align-items: center;
 }
 
-.profile-picture {
-  width: 80px;
-  height: 80px;
-  margin-right: 15px;
+.yewon-form select {
+  width: 100%;
+}
+
+/* Buttons */
+.yewon-form button {
+  width: 120px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.yewon-form button:hover {
+  background-color: #f2f2f2;
+}
+
+.yewon-form button:first-of-type {
+  background-color: #ddd;
+}
+
+.yewon-form button:last-of-type {
+  background-color: #fff;
+  border: 1px solid #000;
 }
 
 .btn-edit-profile {
