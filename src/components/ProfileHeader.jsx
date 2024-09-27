@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 
 function ProfileHeader(props) {
 
-    const {isAdmin} = props;
-    // props로 받아와야 하는 것들
-    const name = "김예원";
-    const reviewCnt = 3; // 사용자가 쓴 리뷰 개수
+    const {isAdmin, name, phone, password, memberNum} = props;
     
     return (
         <div className="profile-header">
@@ -17,11 +14,11 @@ function ProfileHeader(props) {
             <div className="profile-info">
                 <img src="/assets/img/profilepicture.png" alt='Profile' className="profile-picture"/>
                 <div className='profile-details'>
-                    <strong>{name}</strong>
-                        {isAdmin ? (<span> 사장님</span>) : (<div> 나의 리뷰 <strong>{reviewCnt}건</strong></div>)}
+                    <strong style={{fontSize: "20px"}}>{name}</strong>
+                        {isAdmin ? (<span> 사장님</span>) : (<span> 님</span>)}
                 </div>
             </div>
-            <Link to='/mypage/editprofile' state={{isAdmin}}><button className='btn-edit-profile'>프로필 수정</button></Link>
+            <Link to='/mypage/editprofile' state={{name, phone, password, memberNum}}><button className='btn-edit-profile'>프로필 수정</button></Link>
         </div>
     );
 }
