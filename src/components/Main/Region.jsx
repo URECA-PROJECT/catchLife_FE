@@ -62,7 +62,10 @@ const Region = () => {
           <div className="p-1">{userRegion.city}</div>
 
           <button
-            onClick={() => setChangeRegion(true)}
+            onClick={() => {
+              handleCities("서울");
+              setChangeRegion(true);
+            }}
             className="text-xs mt-1 ml-1"
           >
             지역 변경하기

@@ -14,12 +14,17 @@ const Store = () => {
         const data = response.data;
         setStore(data);
       })
+      .then(() => {
+        console.log(store.id, "여기도 들어와야되는거아냐?");
+      })
       .catch((error) => {
         console.error("Error fetching stores:", error);
       });
   };
 
   useEffect(() => {
+    console.log("storeListId", storeListId);
+    console.log("storeId", store.id);
     handleStoreInfo();
   }, []);
 

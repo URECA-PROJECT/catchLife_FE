@@ -3,7 +3,7 @@ import "../css/Main.css";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
-const UserMainHeader = ({ title }) => {
+const UserMainHeader = ({ center, right }) => {
   const navigate = useNavigate();
 
   return (
@@ -15,7 +15,10 @@ const UserMainHeader = ({ title }) => {
           navigate(-1);
         }}
       />
-      <div>{title}</div>
+      <div className="flex flex-col text-center">
+        <div>{center}</div>
+        <div className="text-xs">{right}</div>
+      </div>
     </div>
   );
 };

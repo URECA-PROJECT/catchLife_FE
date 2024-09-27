@@ -7,10 +7,14 @@ import { useCategory } from "../../context/CategoryContext";
 
 const Category = () => {
   const { stores } = useCategory();
+  const title = stores[0]?.categoryDetailName || "";
+  const RegionName = stores[0]?.regionName || "";
+
+  console.log(stores);
 
   return (
     <div>
-      <UserMainHeader title={"dd"} />
+      <UserMainHeader center={title} right={RegionName} />
       <div className="CategoryListBox">
         {stores.map((s) => (
           <Link
