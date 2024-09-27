@@ -13,6 +13,10 @@ function StoreList(props) {
             <div className='mystores-header'>
                 <span><strong>내 매장 관리 </strong>{storeCnt}</span>
             </div>
+
+            <div className='my-store-register' style={{display: "flex", justifyContent: "flex-end", margin: "0 20px"}}>
+                <Link><button class="bg-black text-white py-1.5 px-4 border rounded shadow" style={{fontSize: "14px"}}>내 매장 등록하기</button></Link>
+            </div>
             <div className='mystores'>
                 {myStores.map((ms, index) => {
                     return (
