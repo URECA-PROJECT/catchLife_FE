@@ -1,85 +1,70 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-// import '../App.css';
+import { useNavigate } from 'react-router-dom';
 import "../css/Login.css";
 
-function Login(props) {
+function Login() {
     const navigate = useNavigate();
-    const location = useLocation(); 
-    const [ id, setId ] = useState('');
-    const [ password, setPassword ] = useState('');
-    
-    function handleSubmit(e){
+    const [id, setId] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-    }
+        
+        const loginData = {
+            memberid: id,
+            password: password
+        };
 
-    const isUserLogin = location.pathname === '/loginUser'; 
-    const isAdminLogin = location.pathname === '/loginAdmin'; 
-    const isAdminSignup = location.pathname === '/signupAdmin'; 
-
+        fetch("http://localhost:8080/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(loginData)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("로그인 성공");
+                navigate("/"); // 로그인 성공 시 메인 페이지로 이동
+            } else {
+                throw new Error("로그인 실패");
+            }
+        })
+        .catch(error => {
+            alert("로그인 실패: " + error.message);
+        });
+    };
 
     return (
-        <> 
-    <div className="login-container">
-        <h1 className='login-h1'>CATCH LIFE</h1>
-
-        <form onSubmit={handleSubmit}>
-            <div className="login-login-div">
-                <label className='login-login-label'>
+        <div className="login-container">
+            <h1 className='login-h1'>CATCH LIFE</h1>
+            <form onSubmit={handleSubmit}>
+                <div className='login-div'>
                     <input
-                            className='login-login-input'
-                            type="radio"
-                            name="gender"
-                            value="고객"
-                    /> 고객
-                </label>
-                <label className='login-login-label' style={{ marginLeft: '20px' }}>
+                        className='login-input'
+                        type="text"
+                        value={id}
+                        onChange={(e) => setId(e.target.value)}
+                        placeholder="아이디"
+                    />
+                </div>
+                <div className='login-div'>
                     <input
-                            className='login-login-input'
-                            type="radio"
-                            name="gender"
-                            value="관리자"
-                        /> 관리자
-                </label>
-            </div>
-            <div className='login-div'>
-                {/* <label className='login-label'>아이디</label> */}
-                <input
-                    className='login-input'
-                    type="text"
-                    value={id}
-                    onChange={(e) => setId(e.target.value)}
-                    placeholder="아이디"
-                />
-            </div>
-            <div className='login-div'>
-                {/* <label className='login-label'>비밀번호</label> */}
-                <input
-                    className='login-input'
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="비밀번호"
-                />
-            </div>
-            <div className='login-button-div'>
-                <button type="submit" className="submit-button">로그인</button>
-                <button type="button" className="cancel-button" onClick={() => navigate("/")}>
-                    취소
-                </button>
-            </div>
-        </form>
-
-        <div className='login-bottom-div'>
-            <Link to={"/signup"}
-                className="signup-link"
-                >회원가입</Link>
-            <Link to={"/"}
-                className="signup-link"
-                >메인</Link>
+                        className='login-input'
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="비밀번호"
+                    />
+                </div>
+                <div className='login-button-div'>
+                    <button type="submit" className="submit-button">로그인</button>
+                    <button type="button" className="cancel-button" onClick={() => navigate("/")}>
+                        취소
+                    </button>
+                </div>
+            </form>
         </div>
-        </div>
-        </>
     );
 }
 
