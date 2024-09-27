@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import "../css/Signup.css";
-import Region from "../components/Region";
+import Region from "../components/Main/Region";
 
 function Signup() {
     const navigate = useNavigate();
@@ -27,7 +27,7 @@ function Signup() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch("/signup", {
+        fetch("http://localhost:8080/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
