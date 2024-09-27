@@ -1,263 +1,145 @@
+/* 전체적인 레이아웃 스타일 */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+  font-family: 'Noto Sans KR', sans-serif;
+}
 
-.inactive-link {
-    color: gray;
-    text-decoration: none;
-  }
-  
-  /* 링크 클릭 후 검은색 */
-  .active-link {
-    color: black;
-    text-decoration: none;
-    font-weight: 700;
-  }
-  
-  /* 링크에 마우스를 올렸을 때 회색 */
-  .inactive-link:hover {
-    color: gray;
-  }
-  
-  /* 클릭한 후 색을 검은색으로 유지 */
-  .active-link:visited {
-    color: black;
-  }
-  
-  /* 링크 클릭 시 검은색으로 유지 */
-  .active-link:active {
-    color: black;
-  }
-  
-  /* 로그인페이지 회원가입 버튼 검은색 */
-  .signup-link {
-    color: black;
-    text-decoration: none; 
-  }
-  
-  .separator {
-    font-weight: bold;
-  }
-  /* Sanghee Styling */
-  
-  /* sanghee 9/19 */
-  /* 전체적인 레이아웃 스타일 */
-  .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f5f5f5;
-    font-family: 'Noto Sans KR', sans-serif;
-  }
-  
-  .login-h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #000000;
-  }
-  
-  /* 사용자 타입(유저, 사장님) 선택 스타일 */
-  .user-type {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
-  
-  .user-type a {
-    font-size: 2rem; /* 글자 크기를 1.5rem로 키움 */
-    cursor: pointer;
-    text-decoration: none; /* 링크 밑줄 제거 */
-  }
-  
-  .active-link {
-    font-weight: bolder;
-    color: #000000; /* 검은색 */
-  }
-  
-  .inactive-link {
-    font-weight: normal;
-    color: #bbbbbb; /* 회색 */
-  }
-  
-  .user-type .separator {
-    margin: 0 10px;
-    font-size: 1.2rem; /* 구분선 크기도 글자 크기와 동일하게 설정 */
-  }
-  
-  /* 입력 필드 스타일 */
-  .login-div {
-    margin-bottom: 15px;
-    width: 100%;
-    max-width: 400px;
-  }
+.login-h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #000000;
+}
 
-  .gender-div{
-    margin-bottom: 15px;
-    width: 100%;
-    max-width: 400px;
-  }
+/* 사용자 타입(고객, 관리자) 선택 스타일 */
+.login-login-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
 
-  .login-bottom-div{
-    margin-bottom: 15px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-  }
-  
-  .login-label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  .login-input {
-    margin-top: 10px;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 30px; 
-    font-size: 1rem;
-  } 
-  /* //radius 30으로 바꾸기 */
-  
-  /* 체크박스 스타일 */
-  form div label {
-    display: inline-block;
-    margin-right: 10px;
-    font-size: 0.9rem;
-    color: #555;
-  }
-  
-  form div input[type="checkbox"] {
-    margin-right: 5px;
-  }
-  
-  /* 버튼 스타일 */
-  .submit-button {
-    width: 108%;
-    max-width: 400px;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: none;
-    background-color: #000000;
-    color: white;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .submit-button:hover {
-    background-color: #444444;
-  }
-  
-  /* 링크 스타일 */
-  .login-container a {
-    color: #555555;
-    text-decoration: none;
-    font-size: 0.9rem;
-  }
-  
-  .login-container a:hover {
-    color: #000000;
-    text-decoration: underline;
-  }
-  
-  
-  /* 하단 링크 스타일 */
-  .signup-link {
-    margin-right: 10px; /* 회원가입과 메인 사이에 10px 간격 추가 */
-    text-decoration: none;
-    color: #555;
-  }
-  
-  .signup-link:last-child {
-    margin-right: 0; /* 마지막 링크에는 margin-right를 제거 */
-  }
-  
-  /* 회원가입 */
-  /* 성별 선택 라디오 버튼 */
-  .gender-selection {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .gender-selection label {
-    margin-right: 20px;
-    font-size: 1.2rem;
-  }
-  
-  /* 버튼 스타일 */
-  .submit-button, .cancel-button {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    border-radius: 30px; /* 버튼 모서리 둥글게 */
-    border: none;
-    font-size: 1.2rem;
-    margin-top: 10px;
-    cursor: pointer;
-  }
-  
-  .submit-button {
-    background-color: #000000;
-    color: white;
-  }
-  
-  .cancel-button {
-    background-color: white;
-    color: black;
-    border: 1px solid #ccc;
-  }
-  
-  .cancel-button:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .submit-button:hover {
-    background-color: #444444;
-  }
-  
-  
-  /* 회원가입 관리자 */
-  /* 셀렉트 박스 스타일 */
-  form select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 30px;
-    font-size: 1rem;
-    margin-bottom: 15px;
-    background-color: white;
-    appearance: none; /* 기본 화살표 스타일 제거 */
-    -webkit-appearance: none; /* 사파리에서의 기본 화살표 제거 */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray"><path d="M7 10l5 5 5-5z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-  }
-  
-  form select:focus {
-    border-color: #444444; /* 포커스 시 테두리 색상 */
-  }
-  
-  /* 페이지 이동 버튼 스타일 */
-  .navigation-button {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    border-radius: 30px;
-    border: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-    background-color: #000;
-    color: white;
-    margin-top: 10px;
-    text-align: center;
-  }
-  
-  .navigation-button:hover {
-    background-color: #444444;
-  }
+.login-login-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.login-login-input {
+  margin-right: 8px;
+  transform: scale(1.2);
+}
+
+.login-login-label + .login-login-label {
+  margin-left: 20px;
+}
+
+/* 아이디/비밀번호 입력 필드 스타일 */
+.login-div {
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-input {
+  width: 100%;
+  padding: 13px; 
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  font-size: 1.1rem; /* 폰트 크기를 키워서 입력 칸을 더 크고 명확하게 */
+  box-sizing: border-box;
+}
+
+/* 버튼 스타일 */
+.login-button-div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 380px;
+  margin: 20px auto 0;
+}
+
+.submit-button, .cancel-button {
+  width: 48%;
+  padding: 15px;
+  border-radius: 25px;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.submit-button {
+  background-color: #000000;
+  color: white;
+}
+
+.cancel-button {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+.submit-button:hover {
+  background-color: #444444;
+}
+
+.cancel-button:hover {
+  background-color: #f0f0f0;
+}
+
+/* 체크박스 스타일 */
+form div label {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+form div input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* 하단 링크 스타일 */
+.login-container a {
+  color: #555555;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.login-container a:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.signup-link {
+  margin-right: 10px;
+  text-decoration: none;
+  color: #555;
+}
+
+.signup-link:last-child {
+  margin-right: 0;
+}
+
+/* 성별 선택 라디오 버튼 */
+.gender-selection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.gender-selection label {
+  margin-right: 20px;
+  font-size: 1.2rem;
+}
+
+.login-bottom-div{
+  margin-top: 10px;
+}
