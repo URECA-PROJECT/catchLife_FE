@@ -22,7 +22,7 @@ function App() {
   return (
     <RegionProvider>
       <CategoryProvider>
-        <div className="App">
+        <div className="App font">
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/category" element={<Category />} />

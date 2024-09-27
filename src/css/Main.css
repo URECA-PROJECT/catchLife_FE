@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "SDKukdetopokki-Lt";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/SDKukdetopokki-aLt00.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font {
+  font-family: "SDKukdetopokki-Lt";
+}
+
 /* 메인페이지 */
 .banner {
   width: 100%;
@@ -10,7 +22,6 @@
 .categoryBox,
 .cityBox,
 .bookMarkBox,
-.locationBox,
 .logo {
   display: flex;
   flex-wrap: wrap;
@@ -32,7 +43,7 @@
 .city {
   height: 66px;
   width: 66px;
-  background: #d9d9d9;
+  background: #ededed;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -45,9 +56,11 @@
 .bookMark {
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   background-color: #d9d9d9;
   padding: 5px;
-  width: 100px;
+  width: 150px;
+  height: 130px;
   text-align: center;
   margin: 10px;
 }
@@ -155,7 +168,6 @@
 
 /* Region */
 .locationBox {
-  margin: 15px;
   display: flex;
   align-items: center;
 }
