@@ -8,13 +8,13 @@ import { BiPointer } from "react-icons/bi";
 const StoreDetail = () => {
   const location = useLocation();
   const param = useParams();
-  console.log(param, "파람파람");
-  const { storeId, storeName } = location.state || {};
+  const urlStoreId = param.storeId;
   const [products, setProducts] = useState([]);
+  const { storeId, storeName } = location.state || {};
 
   const handleStoreMenu = () => {
     // 해당 매장의 모든 메뉴들 불러오기
-    API.get(`/products/store/${storeId}`)
+    API.get(`/products/${storeId}`)
       .then((response) => {
         const data = response.data;
         setProducts(data);
@@ -36,7 +36,7 @@ const StoreDetail = () => {
         {products.map((product) => (
           <div key={product.id}>
             <Link
-              to={`/order`}
+              to={`/order/${urlStoreId}/${product.id}`}
               state={{ productId: product.id, storeId: storeId }} // state는 to 바깥에서 전달
             >
               <div className="border p-3 rounded-xl">
@@ -48,10 +48,10 @@ const StoreDetail = () => {
                     <div>{product.price}원</div>
                   </div>
                   <div className="text-end mt-1">
-                    <Link to="/order" className="flex items-center justify-end">
+                    <div className="flex items-center justify-end">
                       예약하기
                       <BiPointer className="ml-1" />
-                    </Link>
+                    </div>
                   </div>
                 </div>
               </div>
