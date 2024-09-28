@@ -8,6 +8,7 @@ import { FaArrowRight } from "react-icons/fa6";
 const Store = () => {
   const location = useLocation();
   const param = useParams();
+  const urlStoreId = param.storeId;
 
   const { storeListId, storeName } = location.state || {}; // state가 없으면 빈 객체로 대처
   const [store, setStore] = useState([]);
@@ -45,7 +46,7 @@ const Store = () => {
 
           <Link
             className="flex items-center justify-end"
-            to={`/category/${param}/detail`}
+            to={`/category/${urlStoreId}/menus`}
             state={{ storeId: store.id, storeName: storeName }} // state는 to 바깥에서 전달
           >
             매장 더보기
