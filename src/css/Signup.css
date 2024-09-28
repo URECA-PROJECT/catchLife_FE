@@ -59,6 +59,14 @@
   box-sizing: border-box;
 }
 
+.signup-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+
 /* 버튼 스타일 */
 .signup-button-div {
   display: flex;

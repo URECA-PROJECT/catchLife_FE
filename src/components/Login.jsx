@@ -29,6 +29,7 @@ function Login() {
             } else {
                 throw new Error("로그인 실패");
             }
+            console.log(response) 
         })
         .catch(error => {
             alert("로그인 실패: " + error.message);

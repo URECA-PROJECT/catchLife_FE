@@ -52,8 +52,10 @@ function Signup() {
       <h1 className="signup-h1">CATCH LIFE</h1>
       <form className="signup-form" onSubmit={handleSubmit}>
         <div className="signup-div">
+          <label htmlFor="name" className="signup-label">성함</label>
           <input
             className="signup-input"
+            id="name"
             name="name"
             type="text"
             placeholder="이름"
@@ -62,8 +64,10 @@ function Signup() {
           />
         </div>
         <div className="signup-div">
+          <label htmlFor="memberid" className="signup-label">아이디</label>
           <input
             className="signup-input"
+            id="memberid"
             name="memberid"
             type="text"
             placeholder="아이디"
@@ -72,8 +76,10 @@ function Signup() {
           />
         </div>
         <div className="signup-div">
+          <label htmlFor="password" className="signup-label">비밀번호</label>
           <input
             className="signup-input"
+            id="password"
             name="password"
             type="password"
             placeholder="비밀번호"
@@ -82,8 +88,10 @@ function Signup() {
           />
         </div>
         <div className="signup-div">
+          <label htmlFor="phone" className="signup-label">전화번호</label>
           <input
             className="signup-input"
+            id="phone"
             name="phone"
             type="text"
             placeholder="전화번호"
@@ -92,15 +100,20 @@ function Signup() {
           />
         </div>
         <div className="signup-div">
+          <label htmlFor="birth" className="signup-label">생년월일</label>
           <input
             className="signup-input"
-            type="date"
+            id="birth"
             name="birth"
+            type="date"
             value={formData.birth}
             onChange={handleChange}
           />
         </div>
-        <Region />
+        <div className="signup-div">
+          <label className="signup-label">관심지역</label>
+          <Region />
+        </div>
         <div className="signup-signup-div">
           <label className="signup-signup-label">
             <input
@@ -110,7 +123,7 @@ function Signup() {
               value="user"
               onChange={handleChange}
             />{" "}
-            고객
+            소비자
           </label>
           <label className="signup-signup-label" style={{ marginLeft: "20px" }}>
             <input
@@ -120,29 +133,7 @@ function Signup() {
               value="admin"
               onChange={handleChange}
             />{" "}
-            관리자
-          </label>
-        </div>
-        <div className="signup-signup-div">
-          <label className="signup-signup-label">
-            <input
-              className="signup-signup-input"
-              type="radio"
-              name="gender"
-              value="남"
-              onChange={handleChange}
-            />{" "}
-            남
-          </label>
-          <label className="signup-signup-label" style={{ marginLeft: "20px" }}>
-            <input
-              className="signup-signup-input"
-              type="radio"
-              name="gender"
-              value="여"
-              onChange={handleChange}
-            />{" "}
-            여
+            사업자
           </label>
         </div>
         <div className="signup-button-div">
