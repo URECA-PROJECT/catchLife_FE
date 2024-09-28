@@ -10,24 +10,21 @@ const Category = () => {
   const title = stores[0]?.categoryDetailName || "";
   const RegionName = stores[0]?.regionName || "";
 
-  console.log(stores);
-
   return (
     <div>
       <UserMainHeader center={title} right={RegionName} />
-      <div className="CategoryListBox">
+      <div className="grid grid-cols-2 gap-5 w-[90%] mx-auto">
         {stores.map((s) => (
           <Link
             to={`/category/${s.storeId}`}
             state={{ storeListId: s.storeId, storeName: s.storeName }} // state는 to 바깥에서 전달
             key={s.storeId}
+            className="mx-auto"
           >
             <div className="CategoryStore">
               <img src={images.cakeStore} alt="케이크" />
               <div className="storeContent">
                 <div>{s.storeName}</div>
-                <div>지역 : {s.regionName}</div>
-                <div>카테고리 : {s.categoryDetailName}</div>
               </div>
             </div>
           </Link>

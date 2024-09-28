@@ -6,6 +6,18 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "InkLipquid";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.titleFont {
+  font-family: "InkLipquid";
+}
+
 .font {
   font-family: "SDKukdetopokki-Lt";
 }
@@ -74,28 +86,27 @@
 .headerTitle {
   display: flex;
   justify-content: center;
-  margin: 10px;
+  margin: 20px;
   position: relative;
 }
 .backBtn {
   position: absolute;
   left: 5px;
-  height: 40px;
-  line-height: 40px;
+  height: 25px;
+  line-height: 25px;
 }
 .CategoryStore {
-  width: 95%;
-  height: 200px;
-  margin: 20px auto;
+  height: 250px;
+  width: 250px;
   position: relative;
 }
 
 .CategoryStore img {
+  border-radius: 15px;
   width: 100%;
   position: absolute;
   z-index: -1;
   opacity: 0.5;
-  height: 200px;
 }
 
 .storeContent {
@@ -103,6 +114,7 @@
   flex-direction: column;
   height: 100%;
   justify-content: flex-end;
+  padding: 10px;
 }
 
 /* Store */

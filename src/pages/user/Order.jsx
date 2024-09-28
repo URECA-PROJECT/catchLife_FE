@@ -60,7 +60,7 @@ const Order = () => {
 
   return (
     <div>
-      <UserMainHeader title={"주문서"} />
+      <UserMainHeader center={"주문서"} />
       <div className="orderTitle">
         <img src={img} alt={title} />
         <h2>{title}</h2>

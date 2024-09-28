@@ -42,7 +42,7 @@ const MainHeader = () => {
               />
             </svg>
           </div>
-          <span className="ml-2 text-xl">ATCHLIFE</span>
+          <span className="ml-2 text-3xl titleFont">ATCHLIFE</span>
         </Link>
 
         <div className="flex items-center">
