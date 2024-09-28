@@ -1,7 +1,9 @@
 import React from "react";
 import { useRegion } from "../../context/RegionContext";
 import "../../css/Main.css";
-import { CiLocationOn } from "react-icons/ci";
+import { SlLocationPin } from "react-icons/sl";
+import { TbArrowsExchange } from "react-icons/tb";
+import { FaRegCircleCheck } from "react-icons/fa6";
 
 const Region = () => {
   const {
@@ -17,55 +19,67 @@ const Region = () => {
   return (
     <>
       {changeRegion && (
-        <div className="locationBox">
-          <CiLocationOn />
-          {/* zone */}
-          <select
-            className="regionItem"
-            name="location"
-            id="zone"
-            onChange={(e) => handleCities(e.target.value)}
-          >
-            {zone.map((item, index) => (
-              <option key={item}>{item}</option>
-            ))}
-          </select>
-
-          {/* city */}
-          {city.length > 0 && (
+        <div className="flex items-center justify-between px-10 py-3">
+          <div className="flex items-center">
+            <SlLocationPin size={20} className="mr-2" />
+            {/* zone */}
             <select
-              className="regionItem"
+              className="regionItem "
               name="location"
-              id="city"
-              onChange={(e) => handleChangeRegion(e.target.value)}
+              id="zone"
+              onChange={(e) => handleCities(e.target.value)}
             >
-              <option value="default" disabled>
-                시/군
-              </option>
-              {city.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.city}
-                </option>
+              {zone.map((item, index) => (
+                <option key={item}>{item}</option>
               ))}
             </select>
-          )}
 
-          <button onClick={() => setChangeRegion(false)}>확인</button>
+            {/* city */}
+            {city.length > 0 && (
+              <select
+                className="regionItem"
+                name="location"
+                id="city"
+                onChange={(e) => handleChangeRegion(e.target.value)}
+              >
+                <option value="default" disabled>
+                  시/군
+                </option>
+                {city.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.city}
+                  </option>
+                ))}
+              </select>
+            )}
+          </div>
+
+          <button
+            onClick={() => setChangeRegion(false)}
+            className="text-xs ml-2"
+          >
+            완료
+          </button>
         </div>
       )}
 
       {/* 내 지역 */}
       {!changeRegion && (
-        <div className="locationBox flex items-center">
-          <CiLocationOn />
-          <div className="p-1">{userRegion.zone}</div>
-          <div className="p-1">{userRegion.city}</div>
+        <div className="flex items-center justify-between px-10 py-3">
+          <div className="flex items-center">
+            <SlLocationPin size={20} className="mr-1" />
+            <div className="p-1 font-bold">{userRegion.zone}</div>
+            <div className="p-1 font-bold">{userRegion.city}</div>
+          </div>
 
           <button
-            onClick={() => setChangeRegion(true)}
-            className="text-xs mt-1 ml-1"
+            onClick={() => {
+              handleCities("서울");
+              setChangeRegion(true);
+            }}
+            className="text-xs"
           >
-            지역 변경하기
+            다른 지역 찾기
           </button>
         </div>
       )}

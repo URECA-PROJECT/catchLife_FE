@@ -1,19 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserMainHeader from "../../components/UserMainHeader";
 import { useLocation } from "react-router-dom";
+import API from "../../utils/axios";
 
 const Order = () => {
   const location = useLocation();
-  const { key, img, title, price } = location?.state || {};
+  const [member, setMember] = useState({
+    id: "",
+    name: "",
+    phone: "",
+  });
+  const { productId, storeId } = location.state || {};
+  const { img, title, price } = location?.state || {};
+
+  useEffect(() => {
+    console.log("productId:", productId, "storeId:", storeId);
+    console.log("testcode");
+    console.log(localStorage.getItem("memberId"));
+    console.log(localStorage.getItem("memberName"));
+    console.log(localStorage.getItem("memberphone"));
+
+    setMember({
+      id: localStorage.getItem("memberId"),
+      name: localStorage.getItem("memberName"),
+      phone: localStorage.getItem("memberphone"),
+    });
+
+    API.get(`/questions`)
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching stores:", error);
+      });
+  }, []);
 
   const [formData, setFormData] = useState({
-    name: "",
-    contact: "",
-    date: "",
-    shape: "",
-    size: "",
-    flavor: "",
-    message: "",
+    member_id: 0,
+    store_id: 0,
+    product_id: 0,
+    dateTime: 0,
+    content: "",
   });
 
   const handleChange = (e) => {
@@ -32,7 +60,7 @@ const Order = () => {
 
   return (
     <div>
-      <UserMainHeader title={"주문서"} />
+      <UserMainHeader center={"주문서"} />
       <div className="orderTitle">
         <img src={img} alt={title} />
         <h2>{title}</h2>
@@ -42,26 +70,12 @@ const Order = () => {
       <form onSubmit={handleSubmit}>
         <label className="orderLabel">
           <div>이름</div>
-          <input
-            type="text"
-            name="name"
-            className="orderInput"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          <div>{member.name}</div>
         </label>
 
         <label className="orderLabel">
           <div>연락처</div>
-          <input
-            type="tel"
-            name="contact"
-            className="orderInput"
-            value={formData.contact}
-            onChange={handleChange}
-            required
-          />
+          <div className="">{member.phone}</div>
         </label>
 
         <label className="orderLabel">

@@ -22,22 +22,20 @@ function App() {
   return (
     <RegionProvider>
       <CategoryProvider>
-        <div className="App">
+        <div className="App font">
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/category" element={<Category />} />
             <Route path="/category/:storeId" element={<Store />} />
             <Route path="/category/:storeId/detail" element={<StoreDetail />} />
-            <Route
-              path="/category/:id/:store/:sort/order"
-              element={<Order />}
-            />
+            <Route path="/order" element={<Order />} />
+
             <Route
               path="/category/:id/:store/:sort/custom"
               element={<OrderCustom />}
             />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/login" element={<LoginPage />} />
 
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/mypage/editprofile" element={<EditProfile />} />
@@ -54,7 +52,6 @@ function App() {
           </Routes>
         </div>
       </CategoryProvider>
-
     </RegionProvider>
   );
 }
