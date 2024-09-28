@@ -115,6 +115,7 @@
   padding: 10px;
   position: relative;
   margin-bottom: 20px;
+  border-bottom: 1px solid #0000001c;
 }
 
 .back-header .backbutton {
@@ -235,5 +236,14 @@
   margin-top: 5px;
 }
 
+/* Edit Store */
+
+.button-container {
+  display: flex;
+  justify-content: center;  /* 수평 가운데 정렬 */
+  align-items: center;      /* 수직 가운데 정렬 */
+  width: 100%;              /* 부모 요소의 전체 너비를 차지 */
+  margin-top: 20px;         /* 상단 여백 */
+}
 
 /* Yewon Styling*/

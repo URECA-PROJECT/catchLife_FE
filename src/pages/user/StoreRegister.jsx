@@ -16,7 +16,7 @@ function StoreRegister(props) {
 
     // 지역 목록 가져오기 
     useEffect(() => {
-        fetch('http://localhost:8080/regions')
+        fetch('http://localhost:8080/region')
         .then(response => response.json())
         .then(data => setRegions(data))
         .catch(error => console.error("Error: ", error))
@@ -72,8 +72,9 @@ function StoreRegister(props) {
     return (
         <div>
             <div className='back-header'>
-                <a href='#' className='backbutton' onClick={() => navigate(-1)}>←</a>
-                <span className='back-header-top'>매장 등록</span>
+                <button className='backbutton' onClick={() => navigate('/mypage')}>←</button>
+                {/* <a className='backbutton' onClick={handleBackClick}>←</a> */}
+                <span className='back-header-top'>프로필 수정</span>
             </div>
 
             <div>

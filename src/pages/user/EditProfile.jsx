@@ -62,7 +62,8 @@ function EditProfile(props) {
     return (
         <div>
             <div className='back-header'>
-                <a href='#' className='backbutton' onClick={handleBackClick}>←</a>
+                <button className='backbutton' onClick={handleBackClick}>←</button>
+                {/* <a className='backbutton' onClick={handleBackClick}>←</a> */}
                 <span className='back-header-top'>프로필 수정</span>
             </div>
 
@@ -85,7 +86,7 @@ function EditProfile(props) {
                     <input type='password' value={newPassword} onChange={(e) => setNewPassword(e.target.value)} /><br /><br />
 
                     <div className='button-container'>
-                        <button type='submit'>완료</button>
+                        <button type='submit' >완료</button>
                         <button type='button' onClick={handleBackClick}>취소</button>
                     </div>
                 </form>

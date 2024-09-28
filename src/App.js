@@ -17,6 +17,7 @@ import { CategoryProvider } from "./context/CategoryContext";
 import ReservationDetail from "./pages/user/ReservationDetail";
 import LoginPage from "./pages/user/LoginPage";
 import SignupPage from "./pages/user/SignupPage";
+import StoreRegister from "./pages/user/StoreRegister";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
               path="/mypage/reservations/detail"
               element={<ReservationDetail />}
             />
+            <Route path="/mypage/register" element={<StoreRegister />} />
             <Route path="/mypage/storemanage" element={<StoreManagement />} />
             <Route path="/mypage/editstores" element={<EditStores />} />
           </Routes>
