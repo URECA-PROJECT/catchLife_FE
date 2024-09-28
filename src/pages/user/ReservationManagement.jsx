@@ -21,10 +21,6 @@ function ReservationManagement(props) {
         setReservations(userReservations) // 예약 데이터 세팅
     }, []);
 
-    function handleBackClick() {
-        navigate(-1);
-    }
-
     // 현재 월의 첫 번째 날짜와 마지막 날짜 가져오기
     const startOfMonth = currentMonth.startOf('month');
     const endOfMonth = currentMonth.endOf('month');
@@ -126,8 +122,9 @@ function ReservationManagement(props) {
     return (
         <div>
             <div className='back-header'>
-                <a href='#' className='backbutton' onClick={handleBackClick}>←</a>
-                <span className='back-header-top'>스케줄 관리</span>
+                <button className='backbutton' onClick={() => navigate('/mypage')}>←</button>
+                {/* <a className='backbutton' onClick={handleBackClick}>←</a> */}
+                <span className='back-header-top'>프로필 수정</span>
             </div>
 
             <div className='btn-block-reservations' style={{ display: "flex", justifyContent: "right" }}>

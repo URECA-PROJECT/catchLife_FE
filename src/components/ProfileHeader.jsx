@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../css/yewon.css'
 import { Link } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ function ProfileHeader(props) {
     
     return (
         <div className="profile-header">
-            <div className="profile-mypage">
+            <div className="profile-mypage" style={{borderBottom: "1px solid #eee"}}>
                 <h2>마이페이지</h2>
             </div>
             <div className="profile-info">

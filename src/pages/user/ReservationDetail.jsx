@@ -26,15 +26,12 @@ function ReservationDetail(props) {
     // 'YYYY년 M월 D일' 형식으로 변환
     const formattedDate = fullDate.format('YYYY년 M월 D일');
 
-    function handleBackClick() {
-        navigate(-1);
-    }
-
     return (
         <div>
             <div className='back-header'>
-                <a href='#' className='backbutton' onClick={handleBackClick}>←</a>
-                <span className='back-header-top'>예약 목록</span>
+                <button className='backbutton' onClick={() => navigate('/mypage/reservations')}>←</button>
+                {/* <a className='backbutton' onClick={handleBackClick}>←</a> */}
+                <span className='back-header-top'>프로필 수정</span>
             </div>
 
             <div className='today-date'>

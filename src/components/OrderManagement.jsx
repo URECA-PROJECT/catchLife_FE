@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function OrderManagement(props) {
 
+    const {storeID} = props;
+
     const [fields, setFields] = useState([]);
     const [newFieldName, setNewFieldName] = useState(''); // 새로 추가할 항목의 이름
     const [newFieldType, setNewFieldType] = useState('text');  // 새로 추가할 항목의 입력 타입
+    const [isActive, setIsActive] = useState(1); // 0 false 1 true
     const [dropdownOptions, setDropdownOptions] = useState('');
     const navigate = useNavigate();
+
 
     // 항목 추가
     function addField() {
@@ -20,13 +24,14 @@ function OrderManagement(props) {
         const newField = {
             type: newFieldType,
             label: newFieldName,
+            storeID: storeID,
+            isActive: isActive,
             value: ''
         }
         
         if (newFieldType === 'dropdown') {
             newField.options = dropdownOptions.split(',').map(opt => opt.trim());
         }
-
 
         // 항목 추가 버튼 클릭 후 초기화
         setFields([...fields, newField]);
@@ -49,6 +54,28 @@ function OrderManagement(props) {
 
     // 양식 저장 (서버로 전송)
     function handleSave() {
+        console.log(fields)
+        const formData = fields.map(field => ({
+            question_text: field.label,
+            question_type: field.type,
+            isActive: field.isActive,
+            storeID: field.storeID
+        }));
+
+        console.log(formData)
+        fetch("http://localhost:8080/questions", {
+            method: "POST",
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('저장되었습니다.');
+            navigate(-1);
+        })
+        .catch(error => console.error("Error: ", error))
 
     }
 
@@ -175,6 +202,8 @@ function OrderManagement(props) {
                     </div>
                 ))}
             </div>
+
+
 
             {/* 양식 제출 */}
             <div className="flex justify-center space-x-4 mt-6">
