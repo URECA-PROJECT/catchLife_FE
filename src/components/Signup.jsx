@@ -27,7 +27,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("/signup", {
+    fetch("http://localhost:8080/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
