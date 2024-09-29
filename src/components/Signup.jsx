@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Signup.css";
+import "../css/Main.css";
 import Region from "../components/Main/Region";
-import API from "../utils/axios";
 import { useLogin } from "../context/LoginContext";
 
 function Signup() {
@@ -11,9 +11,9 @@ function Signup() {
 
   return (
     <div className="login-container">
-      <h1 className="signup-h1">CATCH LIFE</h1>
-      <form className="signup-form" onSubmit={handleSignup}>
-        <div className="signup-div">
+      <h1 className="signup-h1 titleFont">CatchLife</h1>
+      <form className="w-9/12 mx-auto my-8" onSubmit={handleSignup}>
+        <div className="flex items-center mb-4">
           <label htmlFor="name" className="signup-label">
             성함
           </label>
@@ -86,27 +86,35 @@ function Signup() {
           <label className="signup-label">관심지역</label>
           <Region />
         </div>
-        <div className="signup-signup-div">
-          <label className="signup-signup-label">
-            <input
-              className="signup-signup-input"
-              type="radio"
-              name="role"
-              value="user"
-              onChange={handleChange}
-            />{" "}
-            소비자
-          </label>
-          <label className="signup-signup-label" style={{ marginLeft: "20px" }}>
-            <input
-              className="signup-signup-input"
-              type="radio"
-              name="role"
-              value="admin"
-              onChange={handleChange}
-            />{" "}
-            사업자
-          </label>
+        <div className="signup-div">
+          <label className="signup-label">역할</label>
+          <div className="signup-signup-div grow text-center">
+            <div className="signup-input">
+              <label className="signup-signup-label">
+                <input
+                  className="signup-signup-input"
+                  type="radio"
+                  name="role"
+                  value="user"
+                  onChange={handleChange}
+                />{" "}
+                소비자
+              </label>
+              <label
+                className="signup-signup-label"
+                style={{ marginLeft: "20px" }}
+              >
+                <input
+                  className="signup-signup-input"
+                  type="radio"
+                  name="role"
+                  value="admin"
+                  onChange={handleChange}
+                />{" "}
+                사업자
+              </label>
+            </div>
+          </div>
         </div>
         <div className="signup-button-div">
           <button type="submit" className="submit-button">

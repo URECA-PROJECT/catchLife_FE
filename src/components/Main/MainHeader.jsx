@@ -10,6 +10,9 @@ const MainHeader = () => {
   const { isLoggedIn, handleLogout, member } = useLogin();
   const { setUserRegion } = useRegion();
 
+  const myPage = isLoggedIn ? "/mypage" : "/login";
+  const favoriteStore = isLoggedIn ? "/favoriteStore" : "/login";
+
   return (
     <>
       {isLoggedIn ? (
@@ -68,11 +71,11 @@ const MainHeader = () => {
 
         <div className="flex items-center">
           {/* 로그인시 myPage, 미로그인시 login */}
-          <Link to="myPage">
+          <Link to={myPage}>
             <GoPerson size={35} />
           </Link>
           {/* 즐겨찾는 매장 */}
-          <Link className="/">
+          <Link to={favoriteStore}>
             <IoIosHeartEmpty size={35} className="ml-3" />
           </Link>
         </div>

@@ -19,6 +19,7 @@ import LoginPage from "./pages/user/LoginPage";
 import SignupPage from "./pages/user/SignupPage";
 import StoreRegister from "./pages/user/StoreRegister";
 import { LoginProvider } from "./context/LoginContext";
+import FavoriteStore from "./pages/user/FavoriteStore";
 
 function App() {
   return (
@@ -56,6 +57,8 @@ function App() {
               <Route path="/mypage/register" element={<StoreRegister />} />
               <Route path="/mypage/storemanage" element={<StoreManagement />} />
               <Route path="/mypage/editstores" element={<EditStores />} />
+
+              <Route path="/favoriteStore" element={<FavoriteStore />} />
             </Routes>
           </div>
         </CategoryProvider>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Login.css";
+import "../css/Signup.css";
 import { useLogin } from "../context/LoginContext";
 
 function Login() {
@@ -9,10 +10,11 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h1 className="login-h1">CATCH LIFE</h1>
-      <form onSubmit={handleLogin}>
+      <h1 className="signup-h1 titleFont">CatchLife</h1>
+      <form onSubmit={handleLogin} className="flex flex-col w-8/12 mx-auto">
         <div className="login-div">
           <input
+            required
             className="login-input"
             type="text"
             value={id}
@@ -22,6 +24,7 @@ function Login() {
         </div>
         <div className="login-div">
           <input
+            required
             className="login-input"
             type="password"
             value={password}

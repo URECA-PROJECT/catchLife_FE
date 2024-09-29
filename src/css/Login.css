@@ -6,7 +6,7 @@
   justify-content: center;
   height: 100vh;
   background-color: #f5f5f5;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .login-h1 {
@@ -44,13 +44,11 @@
 /* 아이디/비밀번호 입력 필드 스타일 */
 .login-div {
   margin-bottom: 15px;
-  width: 100%;
-  max-width: 400px;
 }
 
 .login-input {
   width: 100%;
-  padding: 13px; 
+  padding: 13px;
   border: 1px solid #ccc;
   border-radius: 25px;
   font-size: 1.1rem; /* 폰트 크기를 키워서 입력 칸을 더 크고 명확하게 */
@@ -66,7 +64,8 @@
   margin: 20px auto 0;
 }
 
-.submit-button, .cancel-button {
+.submit-button,
+.cancel-button {
   width: 48%;
   padding: 15px;
   border-radius: 25px;
@@ -140,6 +139,6 @@ form div input[type="checkbox"] {
   font-size: 1.2rem;
 }
 
-.login-bottom-div{
+.login-bottom-div {
   margin-top: 10px;
 }

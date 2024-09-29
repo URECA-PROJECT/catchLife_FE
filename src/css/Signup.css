@@ -6,12 +6,12 @@
   justify-content: center;
   height: 100vh;
   background-color: #ffffff; /* 배경색 흰색 */
-  font-family: 'Noto Sans KR', sans-serif; /* 폰트 설정 */
+  font-family: "Noto Sans KR", sans-serif; /* 폰트 설정 */
 }
 
 /* 타이틀 */
 .signup-h1 {
-  font-size: 4rem; /* 타이틀 크기 */
+  font-size: 6em; /* 타이틀 크기 */
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
@@ -40,43 +40,42 @@
 }
 
 /* 입력 필드 스타일 */
-.signup-form {
-  width: 100%;
-  max-width: 380px; /* 입력 필드 너비 */
-  margin: 0 auto;
-}
 
 .signup-div {
-  margin-bottom: 9px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .signup-input {
-  width: 100%;
-  padding: 13px;
+  flex-grow: 1;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 25px; /* 입력 상자 둥근 모서리 */
   font-size: 1.1rem;
   box-sizing: border-box;
+  padding-left: 20px;
 }
 
 .signup-label {
+  text-align: center;
+  width: 60px;
+  margin-right: 15px;
   display: block;
   font-weight: bold;
-  margin-bottom: 5px;
   color: #333;
 }
-
 
 /* 버튼 스타일 */
 .signup-button-div {
   display: flex;
   justify-content: space-between; /* 버튼 간 간격을 자동으로 설정 */
   width: 100%;
-  max-width: 380px;
-  margin: 20px auto 0; /* 위쪽에 여백 추가 */
+  margin: 50px auto;
 }
 
-.submit-button, .cancel-button {
+.submit-button,
+.cancel-button {
   width: 48%; /* 버튼이 48%씩 차지하도록 설정 */
   padding: 15px;
   border-radius: 25px;
