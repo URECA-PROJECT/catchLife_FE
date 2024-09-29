@@ -1,58 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Signup.css";
-import Region from "../components/Main/Region";
+import "../css/Main.css";
+import { useLogin } from "../context/LoginContext";
+import RegionSignup from "./RegionSignup";
 
 function Signup() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    memberid: "",
-    password: "",
-    phone: "",
-    birth: "",
-    gender: "",
-    address: "",
-    role: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    fetch("http://localhost:8080/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          alert("회원가입이 완료되었습니다.");
-          navigate("/"); // 회원가입 후 메인 페이지로 이동
-        } else {
-          return response.text().then((text) => {
-            throw new Error(text);
-          });
-        }
-      })
-      .catch((error) => alert(error.message));
-  };
+  const { handleSignup, formData, handleChange } = useLogin();
 
   return (
     <div className="login-container">
-      <h1 className="signup-h1">CATCH LIFE</h1>
-      <form className="signup-form" onSubmit={handleSubmit}>
-        <div className="signup-div">
-          <label htmlFor="name" className="signup-label">성함</label>
+      <button onClick={() => navigate("/")}>
+        <div className="signup-h1 titleFont">CatchLife</div>
+      </button>
+      <form className="w-9/12 mx-auto my-4" onSubmit={handleSignup}>
+        <div className="flex items-center mb-4">
+          <label htmlFor="name" className="signup-label">
+            성함
+          </label>
           <input
             className="signup-input"
             id="name"
@@ -64,7 +30,9 @@ function Signup() {
           />
         </div>
         <div className="signup-div">
-          <label htmlFor="memberid" className="signup-label">아이디</label>
+          <label htmlFor="memberid" className="signup-label">
+            아이디
+          </label>
           <input
             className="signup-input"
             id="memberid"
@@ -76,7 +44,9 @@ function Signup() {
           />
         </div>
         <div className="signup-div">
-          <label htmlFor="password" className="signup-label">비밀번호</label>
+          <label htmlFor="password" className="signup-label">
+            비밀번호
+          </label>
           <input
             className="signup-input"
             id="password"
@@ -88,7 +58,9 @@ function Signup() {
           />
         </div>
         <div className="signup-div">
-          <label htmlFor="phone" className="signup-label">전화번호</label>
+          <label htmlFor="phone" className="signup-label">
+            전화번호
+          </label>
           <input
             className="signup-input"
             id="phone"
@@ -100,7 +72,9 @@ function Signup() {
           />
         </div>
         <div className="signup-div">
-          <label htmlFor="birth" className="signup-label">생년월일</label>
+          <label htmlFor="birth" className="signup-label">
+            생년월일
+          </label>
           <input
             className="signup-input"
             id="birth"
@@ -112,29 +86,37 @@ function Signup() {
         </div>
         <div className="signup-div">
           <label className="signup-label">관심지역</label>
-          <Region />
+          <RegionSignup />
         </div>
-        <div className="signup-signup-div">
-          <label className="signup-signup-label">
-            <input
-              className="signup-signup-input"
-              type="radio"
-              name="role"
-              value="user"
-              onChange={handleChange}
-            />{" "}
-            소비자
-          </label>
-          <label className="signup-signup-label" style={{ marginLeft: "20px" }}>
-            <input
-              className="signup-signup-input"
-              type="radio"
-              name="role"
-              value="admin"
-              onChange={handleChange}
-            />{" "}
-            사업자
-          </label>
+        <div className="signup-div">
+          <label className="signup-label">역할</label>
+          <div className="signup-signup-div grow text-center">
+            <div className="signup-input">
+              <label className="signup-signup-label">
+                <input
+                  className="signup-signup-input"
+                  type="radio"
+                  name="role"
+                  value="user"
+                  onChange={handleChange}
+                />{" "}
+                소비자
+              </label>
+              <label
+                className="signup-signup-label"
+                style={{ marginLeft: "20px" }}
+              >
+                <input
+                  className="signup-signup-input"
+                  type="radio"
+                  name="role"
+                  value="admin"
+                  onChange={handleChange}
+                />{" "}
+                사업자
+              </label>
+            </div>
+          </div>
         </div>
         <div className="signup-button-div">
           <button type="submit" className="submit-button">

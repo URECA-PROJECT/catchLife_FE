@@ -18,43 +18,52 @@ import ReservationDetail from "./pages/user/ReservationDetail";
 import LoginPage from "./pages/user/LoginPage";
 import SignupPage from "./pages/user/SignupPage";
 import StoreRegister from "./pages/user/StoreRegister";
+import { LoginProvider } from "./context/LoginContext";
+import FavoriteStore from "./pages/user/FavoriteStore";
 
 function App() {
   return (
-    <RegionProvider>
-      <CategoryProvider>
-        <div className="App font">
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/category" element={<Category />} />
-            <Route path="/category/:storeId" element={<Store />} />
-            <Route path="/category/:storeId/menus" element={<StoreDetail />} />
-            <Route path="/order/:storeId/:productId" element={<Order />} />
+    <LoginProvider>
+      <RegionProvider>
+        <CategoryProvider>
+          <div className="App font">
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/category" element={<Category />} />
+              <Route path="/category/:storeId" element={<Store />} />
+              <Route
+                path="/category/:storeId/menus"
+                element={<StoreDetail />}
+              />
+              <Route path="/order/:storeId/:productId" element={<Order />} />
 
-            <Route
-              path="/category/:id/:store/:sort/custom"
-              element={<OrderCustom />}
-            />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/login" element={<LoginPage />} />
+              <Route
+                path="/category/:id/:store/:sort/custom"
+                element={<OrderCustom />}
+              />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/login" element={<LoginPage />} />
 
-            <Route path="/mypage" element={<MyPage />} />
-            <Route path="/mypage/editprofile" element={<EditProfile />} />
-            <Route
-              path="/mypage/reservations"
-              element={<ReservationManagement />}
-            />
-            <Route
-              path="/mypage/reservations/detail"
-              element={<ReservationDetail />}
-            />
-            <Route path="/mypage/register" element={<StoreRegister />} />
-            <Route path="/mypage/storemanage" element={<StoreManagement />} />
-            <Route path="/mypage/editstores" element={<EditStores />} />
-          </Routes>
-        </div>
-      </CategoryProvider>
-    </RegionProvider>
+              <Route path="/mypage" element={<MyPage />} />
+              <Route path="/mypage/editprofile" element={<EditProfile />} />
+              <Route
+                path="/mypage/reservations"
+                element={<ReservationManagement />}
+              />
+              <Route
+                path="/mypage/reservations/detail"
+                element={<ReservationDetail />}
+              />
+              <Route path="/mypage/register" element={<StoreRegister />} />
+              <Route path="/mypage/storemanage" element={<StoreManagement />} />
+              <Route path="/mypage/editstores" element={<EditStores />} />
+
+              <Route path="/favoriteStore" element={<FavoriteStore />} />
+            </Routes>
+          </div>
+        </CategoryProvider>
+      </RegionProvider>
+    </LoginProvider>
   );
 }
 

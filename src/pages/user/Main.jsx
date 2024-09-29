@@ -18,11 +18,10 @@ const Main = () => {
     handleMainCategory();
     handleUserRegion();
 
-    console.log("로그인 후 메인으로 돌아오면 회원정보 스토리지에 저장");
-    localStorage.setItem("memberName", "승희");
-    localStorage.setItem("memberphone", "010-2937-2595");
-    localStorage.setItem("memberId", 5);
-    localStorage.setItem("regionId", 24);
+    const region = localStorage.getItem("regionId")
+      ? localStorage.getItem("regionId")
+      : 1;
+    localStorage.setItem("regionId", region);
   }, []);
 
   return (
