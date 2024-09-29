@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProfileHeader from '../../components/ProfileHeader';
 import ReservationFavoriteList from '../../components/ReservationFavoriteList';
-import ReviewList from '../../components/ReviewList';
 import StoreList from '../../components/StoreList';
 import '../../css/yewon.css'
 
