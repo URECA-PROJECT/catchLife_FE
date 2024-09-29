@@ -2,8 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Signup.css";
 import "../css/Main.css";
-import Region from "../components/Main/Region";
 import { useLogin } from "../context/LoginContext";
+import RegionSignup from "./RegionSignup";
 
 function Signup() {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ function Signup() {
   return (
     <div className="login-container">
       <h1 className="signup-h1 titleFont">CatchLife</h1>
-      <form className="w-9/12 mx-auto my-8" onSubmit={handleSignup}>
+      <form className="w-9/12 mx-auto my-4" onSubmit={handleSignup}>
         <div className="flex items-center mb-4">
           <label htmlFor="name" className="signup-label">
             성함
@@ -84,7 +84,7 @@ function Signup() {
         </div>
         <div className="signup-div">
           <label className="signup-label">관심지역</label>
-          <Region />
+          <RegionSignup />
         </div>
         <div className="signup-div">
           <label className="signup-label">역할</label>

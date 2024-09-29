@@ -26,6 +26,7 @@ export const LoginProvider = ({ children }) => {
     birth: "",
     gender: "",
     address: "",
+    regino: "",
     role: "",
   });
 
@@ -41,15 +42,27 @@ export const LoginProvider = ({ children }) => {
   const handleSignup = (e) => {
     e.preventDefault();
 
+    console.log(formData);
+
     API.post(`/signup`, formData)
       .then((response) => {
-        if (response.ok) {
+        if (response.status === 200) {
           alert("회원가입이 완료되었습니다.");
           navigate("/login"); // 회원가입 후 메인 페이지로 이동
-        } else {
-          return response.text().then((text) => {
-            throw new Error(text);
+
+          setFormData({
+            name: "",
+            memberid: "",
+            password: "",
+            phone: "",
+            birth: "",
+            gender: "",
+            address: "",
+            regino: "",
+            role: "",
           });
+        } else {
+          alert("정보를 다시 확인해주세요.");
         }
       })
       .catch((error) => {
