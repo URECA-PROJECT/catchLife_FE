@@ -14,7 +14,7 @@ const CategoryComponent = () => {
 
   return (
     <>
-      <div className="px-8 pt-5">오늘의 베스트 카테고리</div>
+      <div className="px-8 pt-5">🔥 오늘의 베스트 카테고리</div>
       {/* 메인 카테고리 */}
       {!detail && (
         <div className="flex items-center justify-center">

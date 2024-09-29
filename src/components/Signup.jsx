@@ -11,7 +11,9 @@ function Signup() {
 
   return (
     <div className="login-container">
-      <h1 className="signup-h1 titleFont">CatchLife</h1>
+      <button onClick={() => navigate("/")}>
+        <div className="signup-h1 titleFont">CatchLife</div>
+      </button>
       <form className="w-9/12 mx-auto my-4" onSubmit={handleSignup}>
         <div className="flex items-center mb-4">
           <label htmlFor="name" className="signup-label">

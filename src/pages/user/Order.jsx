@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import UserMainHeader from "../../components/UserMainHeader";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import API from "../../utils/axios";
 import { images } from "../../utils/images";
 import { useLogin } from "../../context/LoginContext";
 
 const Order = () => {
+  const navigate = useNavigate();
   const param = useParams();
   const urlStoreId = param.storeId;
   const urlProductId = param.productId;
@@ -80,7 +81,6 @@ const Order = () => {
   // 최종 예약
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
 
     setFormData((prevFormData) => {
       const newContent =
@@ -94,12 +94,14 @@ const Order = () => {
       };
     });
 
-    console.log(formData, " 문자열 변경");
-
     API.post(`/orders`, formData)
       .then((response) => {
-        const data = response.data;
-        console.log(data, " ??");
+        if (response.status === 200) {
+          alert("예약 완료되었습니다.");
+          navigate("/"); // 회원가입 후 메인 페이지로 이동
+        } else {
+          alert("예약 실패");
+        }
       })
       .catch((error) => {
         console.error("Error fetching stores:", error);

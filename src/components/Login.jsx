@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/Login.css";
 import "../css/Signup.css";
 import { useLogin } from "../context/LoginContext";
@@ -10,7 +10,9 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h1 className="signup-h1 titleFont">CatchLife</h1>
+      <button onClick={() => navigate("/")}>
+        <div className="signup-h1 titleFont">CatchLife</div>
+      </button>
       <form onSubmit={handleLogin} className="flex flex-col w-8/12 mx-auto">
         <div className="login-div">
           <input
@@ -45,6 +47,10 @@ function Login() {
           </button>
         </div>
       </form>
+
+      <Link to="/signup">
+        <div className="mt-5">회원가입</div>
+      </Link>
     </div>
   );
 }

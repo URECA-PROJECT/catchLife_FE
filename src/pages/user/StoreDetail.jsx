@@ -4,6 +4,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { images } from "../../utils/images";
 import API from "../../utils/axios";
 import { BiPointer } from "react-icons/bi";
+import { useLogin } from "../../context/LoginContext";
 
 const StoreDetail = () => {
   const location = useLocation();
@@ -11,6 +12,7 @@ const StoreDetail = () => {
   const urlStoreId = param.storeId;
   const [products, setProducts] = useState([]);
   const { storeId, storeName } = location.state || {};
+  const { isLoggedIn } = useLogin();
 
   const handleStoreMenu = () => {
     // 해당 매장의 모든 메뉴들 불러오기
@@ -36,7 +38,7 @@ const StoreDetail = () => {
         {products.map((product) => (
           <div key={product.id}>
             <Link
-              to={`/order/${urlStoreId}/${product.id}`}
+              to={isLoggedIn ? `/order/${urlStoreId}/${product.id}` : "/login"}
               state={{ productId: product.id, storeId: storeId }} // state는 to 바깥에서 전달
             >
               <div className="border p-3 rounded-xl">
