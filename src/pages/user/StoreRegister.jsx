@@ -56,6 +56,8 @@ function StoreRegister(props) {
             categoryDetailId: selectedCategoryDetail
         };
 
+        console.log(requestData)
+
         fetch('http://localhost:8080/storelist/register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},

@@ -39,7 +39,6 @@ function MyPage(props) {
       ) : (
         <ReservationFavoriteList />
       )}
-      {role === "admin" ? <></> : <ReviewList />}
     </div>
   );
 }
