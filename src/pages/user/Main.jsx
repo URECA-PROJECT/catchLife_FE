@@ -7,7 +7,6 @@ import { useCategory } from "../../context/CategoryContext";
 import CategoryComponent from "../../components/Main/CategoryComponent";
 import MainHeader from "../../components/Main/MainHeader";
 import FavoriteStore from "../../components/Main/FavoriteStore";
-import Bottom from "../../components/Bottom";
 
 const Main = () => {
   const { handleZone, handleUserRegion } = useRegion();

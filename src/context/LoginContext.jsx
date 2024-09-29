@@ -58,7 +58,7 @@ export const LoginProvider = ({ children }) => {
             birth: "",
             gender: "",
             address: "",
-            regino: "",
+            region: "",
             role: "",
           });
         } else {
@@ -84,6 +84,7 @@ export const LoginProvider = ({ children }) => {
         const member = response.data.data;
         console.log("회원정보", member);
         localStorage.setItem("id", member.id);
+        localStorage.setItem("memberId", member.memberid);
         localStorage.setItem("name", member.name);
         localStorage.setItem("phone", member.phone);
         localStorage.setItem("role", member.role);
@@ -91,6 +92,7 @@ export const LoginProvider = ({ children }) => {
 
         setMember({
           id: member.id,
+          memberId: member.memberid,
           name: member.name,
           phone: member.phone,
           region: member.region,
