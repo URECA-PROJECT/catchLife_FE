@@ -2,57 +2,21 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Signup.css";
 import Region from "../components/Main/Region";
+import API from "../utils/axios";
+import { useLogin } from "../context/LoginContext";
 
 function Signup() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    memberid: "",
-    password: "",
-    phone: "",
-    birth: "",
-    gender: "",
-    address: "",
-    role: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    fetch("http://localhost:8080/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          alert("회원가입이 완료되었습니다.");
-          navigate("/"); // 회원가입 후 메인 페이지로 이동
-        } else {
-          return response.text().then((text) => {
-            throw new Error(text);
-          });
-        }
-      })
-      .catch((error) => alert(error.message));
-  };
+  const { handleSignup, formData, handleChange } = useLogin();
 
   return (
     <div className="login-container">
       <h1 className="signup-h1">CATCH LIFE</h1>
-      <form className="signup-form" onSubmit={handleSubmit}>
+      <form className="signup-form" onSubmit={handleSignup}>
         <div className="signup-div">
-          <label htmlFor="name" className="signup-label">성함</label>
+          <label htmlFor="name" className="signup-label">
+            성함
+          </label>
           <input
             className="signup-input"
             id="name"
@@ -64,7 +28,9 @@ function Signup() {
           />
         </div>
         <div className="signup-div">
-          <label htmlFor="memberid" className="signup-label">아이디</label>
+          <label htmlFor="memberid" className="signup-label">
+            아이디
+          </label>
           <input
             className="signup-input"
             id="memberid"
@@ -76,7 +42,9 @@ function Signup() {
           />
         </div>
         <div className="signup-div">
-          <label htmlFor="password" className="signup-label">비밀번호</label>
+          <label htmlFor="password" className="signup-label">
+            비밀번호
+          </label>
           <input
             className="signup-input"
             id="password"
@@ -88,7 +56,9 @@ function Signup() {
           />
         </div>
         <div className="signup-div">
-          <label htmlFor="phone" className="signup-label">전화번호</label>
+          <label htmlFor="phone" className="signup-label">
+            전화번호
+          </label>
           <input
             className="signup-input"
             id="phone"
@@ -100,7 +70,9 @@ function Signup() {
           />
         </div>
         <div className="signup-div">
-          <label htmlFor="birth" className="signup-label">생년월일</label>
+          <label htmlFor="birth" className="signup-label">
+            생년월일
+          </label>
           <input
             className="signup-input"
             id="birth"

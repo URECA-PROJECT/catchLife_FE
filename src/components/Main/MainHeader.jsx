@@ -3,27 +3,48 @@ import { Link } from "react-router-dom";
 import { GoPerson } from "react-icons/go";
 import { AiOutlineLogout } from "react-icons/ai";
 import { IoIosHeartEmpty } from "react-icons/io";
+import { useLogin } from "../../context/LoginContext";
+import { useRegion } from "../../context/RegionContext";
 
 const MainHeader = () => {
+  const { isLoggedIn, handleLogout, member } = useLogin();
+  const { setUserRegion } = useRegion();
+
   return (
     <>
-      <div className="p-2 flex justify-end">
-        {/* 미로그인 상태 */}
-        <Link to="/login" className="mr-3 text-xs">
-          로그인
-        </Link>
-        <Link to="/signup" className="mr-3 text-xs">
-          회원가입
-        </Link>
-        {/* 로그인 상태 */}
-        <button
-          onClick={() => localStorage.clear()}
-          className="mr-3 text-xs flex items-center"
-        >
-          <AiOutlineLogout className="mr-1" />
-          로그아웃
-        </button>
-      </div>
+      {isLoggedIn ? (
+        <>
+          <div className="flex justify-between items-center mx-5 p-2">
+            <div className=" text-xs">{member.name}님 환영합니다 🎊</div>
+            <button
+              onClick={() => {
+                setUserRegion({
+                  id: 1,
+                  zone: "서울",
+                  city: "강남/역삼/삼성",
+                });
+                handleLogout();
+              }}
+              className="mr-3 text-xs flex items-center"
+            >
+              <AiOutlineLogout className="mr-1" />
+              로그아웃
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="flex justify-between items-center mx-5 p-2">
+          <div className=" text-xs">로그인이 필요합니다.</div>
+          <div className="flex">
+            <Link to="/login" className="mr-3 text-xs">
+              로그인
+            </Link>
+            <Link to="/signup" className="mr-3 text-xs">
+              회원가입
+            </Link>
+          </div>
+        </div>
+      )}
 
       <div className="flex items-center justify-between px-8 border border-b-gray">
         <Link to="/" className="flex items-center">

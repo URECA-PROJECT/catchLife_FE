@@ -1,45 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Login.css";
+import { useLogin } from "../context/LoginContext";
 
 function Login() {
   const navigate = useNavigate();
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const loginData = {
-      memberid: id,
-      password: password,
-    };
-
-    fetch("http://localhost:8080/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          alert("로그인 성공");
-          navigate("/"); // 로그인 성공 시 메인 페이지로 이동
-          console.log(response);
-        } else {
-          throw new Error("로그인 실패");
-        }
-      })
-      .catch((error) => {
-        alert("로그인 실패: " + error.message);
-      });
-  };
+  const { id, password, setId, setPassword, handleLogin } = useLogin();
 
   return (
     <div className="login-container">
       <h1 className="login-h1">CATCH LIFE</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         <div className="login-div">
           <input
             className="login-input"

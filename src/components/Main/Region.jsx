@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRegion } from "../../context/RegionContext";
 import "../../css/Main.css";
 import { SlLocationPin } from "react-icons/sl";
+import { useLogin } from "../../context/LoginContext";
 
 const Region = () => {
   const {
