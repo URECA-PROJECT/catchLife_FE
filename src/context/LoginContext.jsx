@@ -82,12 +82,12 @@ export const LoginProvider = ({ children }) => {
     API.post(`/login`, loginData)
       .then((response) => {
         const member = response.data.data;
-        localStorage.setItem("id", member.memberid);
+        console.log("회원정보", member);
+        localStorage.setItem("id", member.id);
         localStorage.setItem("name", member.name);
         localStorage.setItem("phone", member.phone);
         localStorage.setItem("role", member.role);
-        //localStorage.setItem("regionId", member.region);
-        localStorage.setItem("regionId", 24);
+        localStorage.setItem("regionId", member.region);
 
         setMember({
           id: member.id,
@@ -100,7 +100,6 @@ export const LoginProvider = ({ children }) => {
         setId("");
         setPassword("");
 
-        console.log(member, "로그인 된 회원정보");
         alert(`${member.name}님 환영합니다.`);
         setIsLoggedIn(true);
         navigate("/"); // 회원가입 후 메인 페이지로 이동
