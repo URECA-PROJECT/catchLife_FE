@@ -2,8 +2,6 @@ import React from "react";
 import { useRegion } from "../../context/RegionContext";
 import "../../css/Main.css";
 import { SlLocationPin } from "react-icons/sl";
-import { TbArrowsExchange } from "react-icons/tb";
-import { FaRegCircleCheck } from "react-icons/fa6";
 
 const Region = () => {
   const {

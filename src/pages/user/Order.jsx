@@ -18,9 +18,9 @@ const Order = () => {
   });
 
   const [formData, setFormData] = useState({
-    member_id: 0,
-    store_id: 0,
-    product_id: 0,
+    memberId: 0,
+    storeId: 0,
+    productId: 0,
     date: 0,
     time: 0,
     content: "",
@@ -52,9 +52,9 @@ const Order = () => {
     // 기본정보 담기
     setFormData({
       ...formData,
-      member_id: localStorage.getItem("memberId"),
-      store_id: urlStoreId,
-      product_id: urlProductId,
+      memberId: localStorage.getItem("memberId"),
+      storeId: urlStoreId,
+      productId: urlProductId,
     });
 
     // 회원 정보 세팅 - 로그인 프로바이더 만들면 없애도 됨
@@ -90,9 +90,30 @@ const Order = () => {
   // 최종 예약
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
 
-    console.log("최종 주문서 내용", formData);
-    console.log("통신해야 함 여기");
+    setFormData((prevFormData) => {
+      const newContent =
+        typeof prevFormData.content === "object"
+          ? JSON.stringify(prevFormData.content) // content가 객체인 경우에만 문자열로 변환
+          : prevFormData.content; // 이미 문자열이라면 그대로 사용
+
+      return {
+        ...prevFormData,
+        content: newContent,
+      };
+    });
+
+    console.log(formData, " 문자열 변경");
+
+    API.post(`/orders`, formData)
+      .then((response) => {
+        const data = response.data;
+        console.log(data, " ??");
+      })
+      .catch((error) => {
+        console.error("Error fetching stores:", error);
+      });
   };
 
   return (
