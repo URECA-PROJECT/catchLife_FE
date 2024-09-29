@@ -20,13 +20,14 @@ import SignupPage from "./pages/user/SignupPage";
 import StoreRegister from "./pages/user/StoreRegister";
 import { LoginProvider } from "./context/LoginContext";
 import FavoriteStore from "./pages/user/FavoriteStore";
+import Bottom from "./components/Bottom";
 
 function App() {
   return (
     <LoginProvider>
       <RegionProvider>
         <CategoryProvider>
-          <div className="App font">
+          <div className="App font relative h-[100vh] overflow-y-hidden">
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/category" element={<Category />} />
@@ -60,6 +61,8 @@ function App() {
 
               <Route path="/favoriteStore" element={<FavoriteStore />} />
             </Routes>
+
+            <Bottom />
           </div>
         </CategoryProvider>
       </RegionProvider>
