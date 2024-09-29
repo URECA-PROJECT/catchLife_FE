@@ -31,7 +31,6 @@ function MyPage(props) {
             <ProfileHeader isAdmin={role==='admin'} memberNum={memberNum} name={name} phone={phone} password={password}/>
             {/* 일반 유저면 예약 매장 목록을, 관리자면 내 매장 목록을 표시 */}
             {role==='admin'? (<StoreList memberNum={memberNum} />) : (<ReservationFavoriteList />)}
-            {role==='admin'? (<></>) : (<ReviewList />)}
             
         </div>
     );
