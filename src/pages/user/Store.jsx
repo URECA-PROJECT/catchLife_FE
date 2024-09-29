@@ -6,6 +6,7 @@ import { images } from "../../utils/images";
 import { FaArrowRight } from "react-icons/fa6";
 import emptyHeart from "../../utils/heart.png";  
 import filledHeart from "../../utils/red heart.png"; 
+import { useLogin } from "../../context/LoginContext";
 
 
 const Store = () => {
@@ -17,6 +18,7 @@ const Store = () => {
   const [store, setStore] = useState([]);
   const [closeDay, setCloseDay] = useState("");
   const [isFavorite, setIsFavorite] = useState(false); 
+  const { member } = useLogin();
 
   const convertCloseDayToWeekdays = (closeDay) => {
     const daysOfWeek = ["월", "화", "수", "목", "금", "토", "일"];
@@ -44,29 +46,45 @@ const Store = () => {
   }, []);
 
   const toggleFavorite = () => {
-    // setIsFavorite((prevState) => !prevState); 
+    const store_id = urlStoreId; 
+    const member_id = member.id; 
+  
+    if (isFavorite) {
+      // 즐겨찾기 해제
+      fetch(`http://localhost:8080/bookmark`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ memberID: member_id, storeID: store_id }),
+      })
+        .then((response) => response.json())
+        .then(() => {
+          alert('즐겨찾기가 해제되었습니다.');
+          setIsFavorite(false); // 빈 하트로 변경
+        })
+        .catch((error) => console.log('Error: ', error));
+    } else {
+      // 즐겨찾기 등록
+      const bookmarkData = {
+        storeID: store_id,
+        memberID: member_id,
+      };
 
-    const store_id = 1
-    const member_id = 1
-  
-    const bookmarkData = {
-      storeID: store_id,
-      memberID: member_id
-  }
-  
-  fetch('http://localhost:8080/bookmark', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bookmarkData)
-  })
-  .then(response => response.json())
-  .then(() => {
-      alert('즐겨찾기에 등록되었습니다.')
-  })
-  
-  .catch(error => console.log("Error: ", error))
+      fetch('http://localhost:8080/bookmark', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookmarkData),
+      })
+        .then((response) => response.json())
+        .then(() => {
+          alert('즐겨찾기에 등록되었습니다.');
+          setIsFavorite(true); // 빨간 하트로 변경
+        })
+        .catch((error) => console.log('Error: ', error));
+    }
   };
 
   return (
