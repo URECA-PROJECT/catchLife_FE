@@ -11,15 +11,47 @@ function ReservationManagement(props) {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(dayjs()); // 현재 월 (dayjs 사용)
     const [reservations, setReservations] = useState([]);
-    const [blockedTimes, setBlockedTimes] = useState([]);
 
     // 요일 배열 생성 (월~일)
     const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
     
     // 예약 데이터 가져오기
+    // 예약 데이터 가져오기
     useEffect(() => {
-        
+        const fetchReservations = async () => {
+            try {
+                // 서버에서 예약 데이터 가져오기
+                const response = await fetch('http://localhost:8080/orders');
+                const data = await response.json();
+
+                // 예약 데이터에서 member_id로 회원 정보 가져오기
+                const memberIds = [...new Set(data.map(res => res.memberId))]; // 중복 제거한 member_id 리스트
+                const memberRequests = memberIds.map(id => fetch(`http://localhost:8080/members/${id}`).then(res => res.json()));
+
+                console.log(memberRequests)
+
+                const memberData = await Promise.all(memberRequests);
+                const membersMap = memberData.reduce((acc, member) => {
+                    acc[member.id] = member.name;
+                    return acc;
+                }, {});
+
+                // 예약 데이터와 이름을 결합
+                const reservationsWithNames = data.map(res => ({
+                    ...res,
+                    name: membersMap[res.memberId] || 'Unknown'
+                }));
+
+                setReservations(reservationsWithNames); // 상태에 저장
+            } catch (error) {
+                console.error('Error fetching reservations:', error);
+            }
+        };
+
+        fetchReservations();
     }, []);
+
+    console.log(reservations)
 
     // 현재 월의 첫 번째 날짜와 마지막 날짜 가져오기
     const startOfMonth = currentMonth.startOf('month');
@@ -127,12 +159,12 @@ function ReservationManagement(props) {
                 <span className='back-header-top'>예약 관리</span>
             </div>
 
-            <div className='btn-block-reservations' style={{ display: "flex", justifyContent: "right" }}>
+            {/* <div className='btn-block-reservations' style={{ display: "flex", justifyContent: "right" }}>
                 <Link to="/mypage/reservations/block"><button  class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded shadow"
                     style={{margin: "0 20px 0 0", textAlign: "center", fontSize: "13px" }}>예약 막기</button></Link>
-            </div>
+            </div> */}
 
-            <div className='reservations-calendar'>
+            <div className='reservations-calendar' style={{border: "1px solid #ddd", borderRadius: "20px", margin: "10px"}}>
                 {renderMonthlyView()}
             </div>
         </div>

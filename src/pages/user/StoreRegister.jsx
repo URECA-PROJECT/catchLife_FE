@@ -81,7 +81,7 @@ function StoreRegister(props) {
       <UserMainHeader center="내 매장 등록하기" />
 
       <div className="flex flex-col w-9/12 mx-auto justify-center p-10">
-        <div className="flex mb-5">
+        <div className="flex mb-5" style={{border: "2px solid #ddd", margin: "20px", padding: "20px", borderRadius: "20px"}}>
           <label className="w-3/12">매장명</label>
           <input
             className="grow border-b border-black"
@@ -90,7 +90,7 @@ function StoreRegister(props) {
             onChange={(e) => setStoreName(e.target.value)}
           />
         </div>
-        <div className="flex">
+        <div className="flex" style={{border: "2px solid #ddd", margin: "20px", padding: "20px", borderRadius: "20px"}}>
           <label className="w-3/12">지역</label>
           <select
             className="grow mb-5"
@@ -105,7 +105,7 @@ function StoreRegister(props) {
             ))}
           </select>
         </div>
-        <div className="flex mb-5">
+        <div className="flex mb-5" style={{border: "2px solid #ddd", margin: "20px", padding: "20px", borderRadius: "20px", width: ""}}>
           <label className="w-3/12">대분류</label>
           <select
             className="grow"
@@ -120,7 +120,7 @@ function StoreRegister(props) {
             ))}
           </select>
         </div>
-        <div className="flex mb-5">
+        <div className="flex mb-5" style={{border: "2px solid #ddd", margin: "20px", padding: "20px", borderRadius: "20px"}}>
           <label className="w-3/12">소분류</label>
           <select
             className="grow"

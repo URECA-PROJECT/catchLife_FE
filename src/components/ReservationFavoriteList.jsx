@@ -12,14 +12,12 @@ function ReservationFavoriteList(props) {
 
   const { member } = useLogin(); // 로그인된 사용자 정보
   const memberId = member.id; // 전역 변수에서 가져와야 함
-  console.log(memberId)
 
   // 즐겨찾기 목록 가져오기
   useEffect(() => {
     fetch("http://localhost:8080/bookmark")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         const filteredBookmarks = data.filter((bm) => bm.memberID == memberId); // 로그인된 사용자 ID와 일치하는 항목만 필터링
         setBookmarkList(filteredBookmarks); // 필터링된 bookmarkList 저장
       })
@@ -31,12 +29,14 @@ function ReservationFavoriteList(props) {
         <button
           className={activeTab === "reservations" ? "active" : ""}
           onClick={() => setActiveTab("reservations")}
+          style={{fontSize: "25px"}}
         >
           다가오는 예약
         </button>
         <button
           className={activeTab === "favorites" ? "active" : ""}
           onClick={() => setActiveTab("favorites")}
+          style={{fontSize: "25px"}}
         >
           즐겨찾는 매장 {bookmarkList.length} {/* 즐겨찾는 매장 개수 표시 */}
         </button>
@@ -52,20 +52,92 @@ function ReservationFavoriteList(props) {
   );
 }
 
-function ReservationList(props) {
+function ReservationList() {
+  const { member } = useLogin();
+  const [upcomingReservations, setUpcomingReservations] = useState([]);
+  const [storeNames, setStoreNames] = useState({});
+  const [productNames, setProductNames] = useState({});
+  
+  useEffect(() => {
+      const fetchUpcomingReservations = async () => {
+          try {
+              const response = await fetch(`http://localhost:8080/orders/upcoming/${member.id}`);
+              const data = await response.json();
+              setUpcomingReservations(data);
+              
+              // 매장명과 상품명을 동시에 가져오는 로직
+              const storeIds = data.map(reservation => reservation.storeId);
+              const productIds = data.map(reservation => reservation.productId);
+
+              const fetchStoreNames = storeIds.map(id =>
+                  fetch(`http://localhost:8080/storelist/${id}`).then(res => res.json())
+              );
+
+              const fetchProductNames = productIds.map(id =>
+                  fetch(`http://localhost:8080/products/list/${id}`).then(res => res.json())
+              );
+
+              const storeResults = await Promise.all(fetchStoreNames);
+              const productResults = await Promise.all(fetchProductNames);
+
+              const storeNamesMap = {};
+              const productNamesMap = {};
+
+              // store와 product 데이터를 맵핑해서 저장
+              storeResults.forEach((store, index) => {
+                  if (store && store.store) {
+                      storeNamesMap[storeIds[index]] = store.store;
+                  }
+              });
+
+
+              productResults.forEach((product, index) => {
+                  if (product && product.name) {
+                      productNamesMap[productIds[index]] = product.name;
+                  }
+              });
+
+              setStoreNames(storeNamesMap);
+              setProductNames(productNamesMap);
+          } catch (error) {
+              console.error("Error fetching upcoming reservations:", error);
+          }
+      };
+
+      if (member.id) {
+          fetchUpcomingReservations();
+      }
+  }, [member.id]);
+
+  // 날짜를 한국어 형식으로 변환하는 함수
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return new Intl.DateTimeFormat('ko-KR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    }).format(date);
+  };
+
   return (
-    <div>
-      {/* sql에서 데이터 가져와서 표시 */}
-      {myReservation.map((myr, index) => {
-        return (
-          <div className="reservation-items" key={index}>
-            <li>
-              {myr.date} / {myr.name_kor} {myr.name_eng} / {myr.order}
-            </li>
-          </div>
-        );
-      })}
-    </div>
+      <div>
+          {upcomingReservations.length > 0 ? (
+              upcomingReservations.map((reservation, index) => (
+                  <div key={index} style={{
+                    margin: "20px",
+                    padding: "20px",
+                    border: "1px solid #ddd",
+                    borderRadius: "10px",
+                }}>
+                      <p style={{fontSize: "20px", fontWeight: "bold"}}>{formatDate(reservation.date)} {reservation.time}</p>
+                      <p>{storeNames[reservation.storeId]}</p>
+                      <p style={{color: "lightgray"}}>{productNames[reservation.productId]}</p>
+                  </div>
+              ))
+          ) : (
+              <p>다가오는 예약이 없습니다.</p>
+          )}
+      </div>
   );
 }
 
