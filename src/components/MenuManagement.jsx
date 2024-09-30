@@ -98,7 +98,7 @@ function MenuManagement(props) {
                     </form>
                 </div>
             )}
-
+            <div className="max-h-50vh overflow-y-scroll">
                 {menuList.map(menu => (
                     <div className='menu-container' style={{border: "1px solid black", borderRadius: "10px", margin: "20px", padding: "0 5px 0 5px", height: "fit-content"}}>
                         <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700" style={{padding: "10px"}}>
@@ -120,6 +120,7 @@ function MenuManagement(props) {
                         </div>
                     </div>
                 ))}
+            </div>
         </div>
     );
 }

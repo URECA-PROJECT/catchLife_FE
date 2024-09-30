@@ -132,13 +132,12 @@ function OrderManagement(props) {
                         value={newFieldType}
                     >
                         <option value="text">텍스트</option>
-                        <option value="date">날짜</option>
                         <option value="dropdown">드롭다운</option>
                     </select>
                 </div>
 
                 <div>
-                    {(newFieldType === 'text' || newFieldType==="date") && (
+                    {(newFieldType === 'text') && (
                         <button 
                             onClick={addField}
                             className='bg-black text-white p-2 rounded-lg hover:bg-gray-800 transition duration-300 ease-in-out'
@@ -191,10 +190,6 @@ function OrderManagement(props) {
                             <input readOnly type="text" className="border p-2" placeholder={"텍스트 입력"} />
                         )}
 
-                        {field.questionType === 'date' && (
-                            <input readOnly type="date" className="border p-2" />
-                        )}
-
                         <button
                             onClick={() => handleDeleteField(field.id)}
                             className='bg-red-500 text-white p-2 rounded-lg hover:bg-red-700 transition duration-300 ease-in-out'
@@ -211,9 +206,9 @@ function OrderManagement(props) {
                     <div key={index} className="field-item flex justify-between items-center p-4 bg-gray-100 rounded-lg">
                         <label className='text-black font-medium'>{field.label}</label>
 
-                        {field.question_type === 'dropdown' && (
+                        {field.type === 'dropdown' && field.options && (
                             <select className="border p-2">
-                                {JSON.parse(field.question_content || '[]').map((option, i) => (
+                                {field.options.map((option, i) => (
                                     <option key={i} value={option}>{option}</option>
                                 ))}
                             </select>
@@ -221,10 +216,6 @@ function OrderManagement(props) {
 
                         {field.type === 'text' && (
                             <input readOnly type="text" className="border p-2" placeholder={"텍스트 입력"} />
-                        )}
-
-                        {field.type === 'date' && (
-                            <input readOnly type="date" className="border p-2" />
                         )}
 
                         <button

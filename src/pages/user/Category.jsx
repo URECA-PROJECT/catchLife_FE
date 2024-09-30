@@ -9,11 +9,10 @@ const Category = () => {
   const { stores } = useCategory();
   const title = stores[0]?.categoryDetailName || "";
   const RegionName = stores[0]?.regionName || "";
-
   return (
     <div>
       <UserMainHeader center={title} right={RegionName} />
-      <div className="max-h-screen grid grid-cols-2 gap-5 w-[90%] mx-auto overflow-y-scroll max-h-[80vh]">
+      <div className="max-h-screen grid grid-cols-2 gap-5 w-[90%] mx-auto" style={{marginTop: "20px"}}>
         {stores.map((s) => (
           <Link
             to={`/category/${s.storeId}`}

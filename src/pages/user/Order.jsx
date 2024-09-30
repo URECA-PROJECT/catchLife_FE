@@ -77,30 +77,38 @@ const Order = () => {
       },
     }));
   };
+  console.log(formData)
 
   // 최종 예약
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setFormData((prevFormData) => {
-      const newContent =
-        typeof prevFormData.content === "object"
-          ? JSON.stringify(prevFormData.content) // content가 객체인 경우에만 문자열로 변환
-          : prevFormData.content; // 이미 문자열이라면 그대로 사용
+    const preparedContent = typeof formData.content === "object"
+        ? JSON.stringify(formData.content)
+        : formData.content;
 
-      return {
-        ...prevFormData,
-        content: newContent,
-      };
-    });
+    // 준비된 formData를 가져옴
+    const dataToSend = {
+        ...formData,
+        content: preparedContent,
+    };
 
-    API.post(`/orders`, formData)
+    console.log("dataToSend : ", dataToSend)
+
+    // POST 요청
+    fetch(`http://localhost:8080/orders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataToSend),
+    })
       .then((response) => {
-        if (response.status === 200) {
-          alert("예약 완료되었습니다.");
-          navigate("/"); // 회원가입 후 메인 페이지로 이동
+        if (response.ok) {
+          alert("예약이 완료되었습니다.");
+          navigate("/"); // 예약 완료 후 메인 페이지로 이동
         } else {
-          alert("예약 실패");
+          alert("예약이 정상적으로 처리되지 않았습니다.");
         }
       })
       .catch((error) => {
@@ -154,16 +162,17 @@ const Order = () => {
               required
             />
           </label>
+
           {/* default */}
 
           {questions?.map((q) => (
             <>
               {/* 텍스트 */}
-              {q.questions_Type === "text" ? (
+              {q.questionType == "text" ? (
                 <label className="orderLabel">
                   <div>{q.questionText}</div>
                   <input
-                    type={q.questionType}
+                    type='text'
                     name={q.questionText}
                     className="orderInput"
                     value={formData.content[q.questionText] || ""} // 해당 질문에 대한 값을 content에서 가져옴

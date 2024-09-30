@@ -1,30 +1,30 @@
-import myFavorites from "../utils/mockData/myFavorites.json";
 import "../css/yewon.css";
 import React, { useEffect, useState } from "react";
 import myReservation from "../utils/mockData/myReservation.json";
 import { useLogin } from "../context/LoginContext";
+import { Link } from "react-router-dom";
 
 function ReservationFavoriteList(props) {
   // props로 받아올 것
-  const favoriteCnt = myFavorites.length;
 
   const [activeTab, setActiveTab] = useState("reservations"); // '다가오는 예약', '즐겨찾는 매장' 탭 상태
   const [bookmarkList, setBookmarkList] = useState([]); // bookmarkList를 상위 컴포넌트에서 관리
 
   const { member } = useLogin(); // 로그인된 사용자 정보
   const memberId = member.id; // 전역 변수에서 가져와야 함
+  console.log(memberId)
 
   // 즐겨찾기 목록 가져오기
   useEffect(() => {
     fetch("http://localhost:8080/bookmark")
       .then((response) => response.json())
       .then((data) => {
-        const filteredBookmarks = data.filter((bm) => bm.memberID === memberId); // 로그인된 사용자 ID와 일치하는 항목만 필터링
+        console.log(data)
+        const filteredBookmarks = data.filter((bm) => bm.memberID == memberId); // 로그인된 사용자 ID와 일치하는 항목만 필터링
         setBookmarkList(filteredBookmarks); // 필터링된 bookmarkList 저장
       })
       .catch((error) => console.error("Error: ", error));
   }, [memberId]);
-
   return (
     <div>
       <div className="tab-menu">
@@ -107,9 +107,11 @@ function FavoritesList({ bookmarkList }) {
   return (
     <div>
       {storeDetailsList.map((store, index) => (
-        <div className="favorite-items" key={index}>
-          <li>{store.store}</li> {/* store 이름을 표시 */}
-        </div>
+        <Link to={`/category/${store.id}`} state={{storeListId: store.id}}>
+          <div className="favorite-items" key={index} style={{ border: "3px solid black" }}>
+            <li style={{ fontSize: "20px" }}>{store.store}</li> {/* store 이름을 표시 */}
+          </div>
+        </Link>
       ))}
     </div>
   );
