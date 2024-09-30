@@ -25,19 +25,6 @@ function EditStores(props) {
   const [openTime, setOpenTime] = useState("00:00");
   const [closeTime, setCloseTime] = useState("00:00");
 
-  function handleCloseDayChange(e) {
-    const { value, checked } = e.target; // 클릭된 체크박스의 value와 체크 상태를 가져옴
-
-    // 체크박스가 체크된 경우 closeDay 배열에 추가하고, 체크 해제된 경우 배열에서 제거
-    setCloseDay((prevCloseDay) => {
-      if (checked) {
-        return [...prevCloseDay, value];
-      } else {
-        return prevCloseDay.filter((day) => day !== value);
-      }
-    });
-  }
-
   useEffect(() => {
     fetch("http://localhost:8080/category")
       .then((response) => response.json())
@@ -50,6 +37,19 @@ function EditStores(props) {
       category = c.name;
     }
   }, []);
+
+  function handleCloseDayChange(e) {
+    const { value, checked } = e.target; // 클릭된 체크박스의 value와 체크 상태를 가져옴
+
+    // 체크박스가 체크된 경우 closeDay 배열에 추가하고, 체크 해제된 경우 배열에서 제거
+    setCloseDay((prevCloseDay) => {
+      if (checked) {
+        return [...prevCloseDay, value];
+      } else {
+        return prevCloseDay.filter((day) => day !== value);
+      }
+    });
+  }
 
   useEffect(() => {
     fetch("http://localhost:8080/region")
@@ -68,14 +68,9 @@ function EditStores(props) {
     fetch(`http://localhost:8080/store`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data, "store");
-        console.log(store.store.id, "storesotreid");
         const selectedStore = data.find(
           (sd) => sd.storeListId === store.store.id
         );
-
-        console.log(selectedStore, "같은거");
-
         if (selectedStore) {
           setId(selectedStore.id);
           setAddress(selectedStore.address);
@@ -121,13 +116,6 @@ function EditStores(props) {
           );
 
           const imgURL = URL.createObjectURL(response.data); // Blob을 URL로 변환
-          console.log("스토어이미지 url", imgURL);
-          // setProfileImageFile(imgURL); // state를 업데이트하여 이미지 표시
-          // localStorage.setItem("profileImage", imgURL);
-          // setMember({
-          //   ...member,
-          //   profileImage: localStorage.getItem("profileImage"),
-          // });
 
           setStoreImageFile(imgURL);
           console.log(storeImageFile, "과연;");

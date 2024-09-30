@@ -7,11 +7,11 @@ import API from "../../utils/axios";
 const FavoriteStore = () => {
   const { isLoggedIn, member } = useLogin(); 
   const [favoriteStores, setFavoriteStores] = useState([]); 
-  
+  const [storeDetailsList, setStoreDetailsList] = useState([]);
+
   const fetchFavoriteStores = () => {
     API.get(`/bookmark`) 
       .then((response) => {
-        console.log(response.data); 
         setFavoriteStores(response.data); 
       })
       .catch((error) => {
@@ -21,10 +21,41 @@ const FavoriteStore = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      console.log("member.id:", member.id);
       fetchFavoriteStores(); 
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    const fetchStoreDetails = async () => {
+        try {
+            // bookmarkList가 비어있지 않으면 storeID들만 가져와서 storeList와 비교
+            if (favoriteStores.length > 0) {
+                const storeIDs = favoriteStores.map(fs => fs.storeID);
+                
+                // storeID에 해당하는 storelist 테이블에서 정보 가져오기
+                const storeResponses = await Promise.all(
+                    storeIDs.map(storeID => 
+                        fetch(`http://localhost:8080/storelist`)
+                        .then(response => response.json())
+                        .then(storeList => {
+                            // storelist에서 storeID와 일치하는 store 찾기
+                            return storeList.find(store => store.id === storeID);
+                        })
+                        .catch(error => console.error('Error: ', error))
+                    )
+                );
+                
+                // storeResponses에 각 storeID에 해당하는 store 정보를 저장
+                setStoreDetailsList(storeResponses);
+            }
+        } catch (error) {
+            console.error('Error fetching store details:', error);
+        }
+    };
+    fetchStoreDetails();
+}, [favoriteStores]);
+
+  console.log(storeDetailsList)
 
   return (
     <>
@@ -34,15 +65,18 @@ const FavoriteStore = () => {
         <div className="subTitle">❤️ 최근 인기 가게</div>
       )}
       <div className="grid grid-cols-3 w-[90%] mx-auto">
-        {favoriteStores.length > 0 ? (
-          favoriteStores.map((store) => (
-            <Link to={`/store/${store.id}`} key={store.id} className="m-5 flex">
-              <div className="text-center">
-                <img src={images.nailStore} alt="" className="rounded-xl" />
-                <div className="text-sm mt-2">{store.storeName}</div> 
-              </div>
-            </Link>
-          ))
+        {storeDetailsList.length > 0 ? (
+          storeDetailsList.map((store) => {
+            console.log(store);
+            return (
+              <Link to={`/category/${store.id}`} state={{storeListId: store.id}} key={store.storeID} className="m-5 flex">
+                <div className="text-center">
+                  <img src={images.nailStore} alt="" className="rounded-xl" />
+                  <div className="text-sm mt-2">{store.store}</div> {/* 매장 이름 출력 */}
+                </div>
+              </Link>
+            );
+          })
         ) : (
           <div>즐겨찾기한 매장이 없습니다.</div>
         )}
