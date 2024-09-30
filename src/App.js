@@ -22,6 +22,7 @@ import { LoginProvider } from "./context/LoginContext";
 import FavoriteStore from "./pages/user/FavoriteStore";
 import BlockReservations from "./pages/user/BlockReservations";
 import Bottom from "./components/Bottom";
+import Reservation from "./components/Reservation";
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
               <Route path="/mypage/editstores" element={<EditStores />} />
 
               <Route path="/favoriteStore" element={<FavoriteStore />} />
+
             </Routes>
 
             <Bottom />

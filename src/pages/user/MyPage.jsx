@@ -6,30 +6,30 @@ import "../../css/yewon.css";
 import { useLogin } from "../../context/LoginContext";
 
 function MyPage(props) {
-  const { member } = useLogin();
-  const [role, setRole] = useState();
+    const { member } = useLogin();
+    const [role, setRole] = useState();
 
-  useEffect(() => {
-    setRole(localStorage.getItem("role"));
-  }, []);
+    useEffect(() => {
+        setRole(localStorage.getItem("role"));
+    }, []);
 
-  return (
-    <div>
-      <ProfileHeader
-        isAdmin={role === "admin"}
-        memberNum={member.id}
-        name={member.name}
-        phone={member.phone}
-        password={member.password}
-      />
-      {/* 일반 유저면 예약 매장 목록을, 관리자면 내 매장 목록을 표시 */}
-      {role === "admin" ? (
-        <StoreList memberNum={member.id} />
-      ) : (
-        <ReservationFavoriteList />
-      )}
-    </div>
-  );
+    return (
+        <div>
+        <ProfileHeader
+            isAdmin={role === "admin"}
+            memberNum={member.id}
+            name={member.name}
+            phone={member.phone}
+            password={member.password}
+        />
+        {/* 일반 유저면 예약 매장 목록을, 관리자면 내 매장 목록을 표시 */}
+        {role === "admin" ? (
+            <StoreList memberNum={member.id} />
+        ) : (
+            <ReservationFavoriteList />
+        )}
+        </div>
+    );
 }
 
 export default MyPage;
