@@ -65,13 +65,13 @@ function ProfileHeader(props) {
             <img
               src={member.profileImage}
               alt="Profile"
-              className="profile-picture w-3/12 rounded-[50px]"
+              className="profile-picture w-3/12"
             />
           ) : (
             <img
               src="/assets/img/profilepicture.png"
               alt="Profile"
-              className="profile-picture w-3/12 rounded-xl"
+              className="profile-picture w-3/12"
             />
           )}
           <div className="profile-details">

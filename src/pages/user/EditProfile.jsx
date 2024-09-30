@@ -138,7 +138,7 @@ function EditProfile(props) {
               <img
                 src={member.profileImage}
                 alt="Profile"
-                className="profile-picture rounded-[50px]"
+                className="profile-picture"
                 style={{ margin: "20px auto", width: "200px" }}
               />
             </label>

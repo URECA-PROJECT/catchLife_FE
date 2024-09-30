@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../css/yewon.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import UserMainHeader from "../../components/UserMainHeader";
 
 function EditStores(props) {
   const navigate = useNavigate();
@@ -89,72 +90,8 @@ function EditStores(props) {
     );
   }
 
-  // 예약 시간 범위를 생성하는 함수 (09:00 ~ 10:00 ,, )
-  // function generateReservationTimes(openTime, closeTime) {
-  //     const reservationTime = {};
-
-  //     let [openHour, openMin] = openTime.split(":").map(Number);
-  //     let [closeHour, closeMin] = closeTime.split(":").map(Number);
-
-  //     let currentTime = new Date();
-  //     currentTime.setHours(openHour, openMin, 0, 0); // openTime으로 시간 설정
-
-  //     // closeTime보다 큰 경우 자정이 넘는 경우임을 처리
-  //     if (closeHour < openHour) {
-  //         // Step 1: openTime에서 자정(24:00)까지 시간을 생성
-  //         let endOfDay = new Date();
-  //         endOfDay.setHours(24, 0, 0, 0); // 자정 시간 설정
-
-  //         while (currentTime < endOfDay) {
-  //             let nextTime = new Date(currentTime);
-  //             nextTime.setHours(currentTime.getHours() + 1);
-
-  //             const timeSlot = `${currentTime.getHours().toString().padStart(2, '0')}:${currentTime.getMinutes().toString().padStart(2, '0')} ~ ${nextTime.getHours().toString().padStart(2, '0')}:${nextTime.getMinutes().toString().padStart(2, '0')}`;
-  //             reservationTime[timeSlot] = true;
-
-  //             currentTime = nextTime;
-  //         }
-
-  //         // Step 2: 자정(00:00)에서 closeTime까지 시간을 생성
-  //         currentTime.setHours(0, 0, 0, 0); // 자정으로 다시 설정
-
-  //         let endTime = new Date();
-  //         endTime.setHours(closeHour, closeMin, 0, 0); // closeTime으로 시간 설정
-
-  //         while (currentTime < endTime) {
-  //             let nextTime = new Date(currentTime);
-  //             nextTime.setHours(currentTime.getHours() + 1);
-
-  //             const timeSlot = `${currentTime.getHours().toString().padStart(2, '0')}:${currentTime.getMinutes().toString().padStart(2, '0')} ~ ${nextTime.getHours().toString().padStart(2, '0')}:${nextTime.getMinutes().toString().padStart(2, '0')}`;
-  //             reservationTime[timeSlot] = true;
-
-  //             currentTime = nextTime;
-  //         }
-
-  //     } else {
-  //         // 일반적인 하루 안에서 끝나는 경우
-  //         let endTime = new Date();
-  //         endTime.setHours(closeHour, closeMin, 0, 0); // closeTime으로 시간 설정
-
-  //         while (currentTime < endTime) {
-  //             let nextTime = new Date(currentTime);
-  //             nextTime.setHours(currentTime.getHours() + 1);
-
-  //             const timeSlot = `${currentTime.getHours().toString().padStart(2, '0')}:${currentTime.getMinutes().toString().padStart(2, '0')} ~ ${nextTime.getHours().toString().padStart(2, '0')}:${nextTime.getMinutes().toString().padStart(2, '0')}`;
-  //             reservationTime[timeSlot] = true;
-
-  //             currentTime = nextTime;
-  //         }
-  //     }
-
-  //     return reservationTime;
-  // }
-
   function handleSubmit(e) {
     e.preventDefault();
-
-    // reservationTime 객체 생성
-    // const reservationTime = generateReservationTimes(openTime, closeTime);
 
     const storeData = {
       store: store.store.store, // 매장명
@@ -165,7 +102,6 @@ function EditStores(props) {
       content: content,
       image: profileImage,
       storeListId: store.store.id, // 매장 ID
-      // reservationTime: reservationTime
     };
 
     console.log(storeData);
@@ -206,21 +142,16 @@ function EditStores(props) {
 
   return (
     <div>
-      <div className="back-header">
-        <button className="backbutton" onClick={() => navigate("/mypage")}>
-          ←
-        </button>
-        {/* <a className='backbutton' onClick={handleBackClick}>←</a> */}
-        <span className="back-header-top">프로필 수정</span>
-      </div>
-      <div className="edit-profile max-h-[80vh] overflow-y-scroll mb-20">
+      <UserMainHeader center={"매장 정보 수정"} />
+
+      <div className="edit-profile max-h-[85vh] overflow-y-scroll py-10">
         <form className="yewon-form">
-          <div className="edit-profile-image text-center">
+          <div className="edit-profile-image">
             <label htmlFor="file-input">
               <img
                 src={profileImage}
                 alt="Profile"
-                className="profile-picture w-7/12"
+                className="profile-picture w-6/12"
                 style={{ margin: "20px auto" }}
               />
             </label>
@@ -233,176 +164,194 @@ function EditStores(props) {
             onChange={handleImageChange}
             style={{ display: "none" }}
           />
-          <label>매장명</label>
-          <input
-            type="text"
-            readOnly
-            value={store.store.store}
-            style={{ color: "gray" }}
-          ></input>
-          <label>업종</label>
-          <input
-            type="text"
-            style={{ color: "gray" }}
-            readOnly
-            value={category}
-          ></input>
-          <label>지역</label>
-          <input
-            type="text"
-            style={{ color: "gray" }}
-            readOnly
-            value={region}
-          ></input>
-          <label>상세주소</label>
-          <input
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          ></input>
-          <label>매장 설명</label>
-          <input
-            type="text"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          ></input>
-          <label>휴무일</label>
-          <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-              <div class="flex items-center ps-3">
-                <input
-                  id="mon-checkbox-list"
-                  type="checkbox"
-                  value="월요일"
-                  checked={closeDay.includes("월요일")}
-                  onChange={handleCloseDayChange}
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="mon-checkbox-list"
-                  class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  style={{ marginTop: "3px" }}
-                >
-                  월
-                </label>
-                <input
-                  id="tue-checkbox-list"
-                  type="checkbox"
-                  value="화요일"
-                  checked={closeDay.includes("화요일")}
-                  onChange={handleCloseDayChange}
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="tue-checkbox-list"
-                  class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  style={{ marginTop: "3px" }}
-                >
-                  화
-                </label>
-                <input
-                  id="wed-checkbox-list"
-                  type="checkbox"
-                  value="수요일"
-                  checked={closeDay.includes("수요일")}
-                  onChange={handleCloseDayChange}
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="wed-checkbox-list"
-                  class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  style={{ marginTop: "3px" }}
-                >
-                  수
-                </label>
-                <input
-                  id="thu-checkbox-list"
-                  type="checkbox"
-                  value="목요일"
-                  checked={closeDay.includes("목요일")}
-                  onChange={handleCloseDayChange}
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="thu-checkbox-list"
-                  class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  style={{ marginTop: "3px" }}
-                >
-                  목
-                </label>
-                <input
-                  id="fri-checkbox-list"
-                  type="checkbox"
-                  value="금요일"
-                  checked={closeDay.includes("금요일")}
-                  onChange={handleCloseDayChange}
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="fri-checkbox-list"
-                  class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  style={{ marginTop: "3px" }}
-                >
-                  금
-                </label>
-                <input
-                  id="sat-checkbox-list"
-                  type="checkbox"
-                  value="토요일"
-                  checked={closeDay.includes("토요일")}
-                  onChange={handleCloseDayChange}
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="sat-checkbox-list"
-                  class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  style={{ marginTop: "3px" }}
-                >
-                  토
-                </label>
-                <input
-                  id="sun-checkbox-list"
-                  type="checkbox"
-                  value="일요일"
-                  checked={closeDay.includes("일요일")}
-                  onChange={handleCloseDayChange}
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="sun-checkbox-list"
-                  class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  style={{ marginTop: "3px" }}
-                >
-                  일
-                </label>
-              </div>
-            </li>
-          </ul>
-          <label style={{ marginTop: "15px" }}>오픈 / 마감</label>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              alignItems: "baseline",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <select
-              value={openTime}
-              onChange={(e) => setOpenTime(e.target.value)}
+          <div className="flex items-center mb-5">
+            <label className="w-3/12 text-black text-lg">매장명</label>
+            <input
+              type="text"
+              readOnly
+              value={store.store.store}
+              style={{ color: "gray" }}
+            ></input>
+          </div>
+          <div className="flex items-center mb-5">
+            <label className="w-3/12 text-black text-lg">업종</label>
+            <input
+              type="text"
+              style={{ color: "gray" }}
+              readOnly
+              value={category}
+            ></input>
+          </div>
+          <div className="flex items-center mb-5">
+            <label className="w-3/12 text-black text-lg">지역</label>
+            <input
+              type="text"
+              style={{ color: "gray" }}
+              readOnly
+              value={region}
+            ></input>
+          </div>
+          <div className="flex items-center mb-5">
+            <label className="w-3/12 text-black text-lg">상세 주소</label>
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            ></input>
+          </div>
+          <div className="flex items-center mb-5">
+            <label className="w-3/12 text-black text-lg">매장 설명</label>
+            <input
+              type="text"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            ></input>
+          </div>
+          <div className="flex items-center mb-5">
+            <label className="w-3/12 text-black text-lg">휴무일</label>
+            <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+              <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                <div class="flex items-center ps-3">
+                  <input
+                    id="mon-checkbox-list"
+                    type="checkbox"
+                    value="월요일"
+                    checked={closeDay.includes("월요일")}
+                    onChange={handleCloseDayChange}
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                  />
+                  <label
+                    for="mon-checkbox-list"
+                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    style={{ marginTop: "3px" }}
+                  >
+                    월
+                  </label>
+                  <input
+                    id="tue-checkbox-list"
+                    type="checkbox"
+                    value="화요일"
+                    checked={closeDay.includes("화요일")}
+                    onChange={handleCloseDayChange}
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                  />
+                  <label
+                    for="tue-checkbox-list"
+                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    style={{ marginTop: "3px" }}
+                  >
+                    화
+                  </label>
+                  <input
+                    id="wed-checkbox-list"
+                    type="checkbox"
+                    value="수요일"
+                    checked={closeDay.includes("수요일")}
+                    onChange={handleCloseDayChange}
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                  />
+                  <label
+                    for="wed-checkbox-list"
+                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    style={{ marginTop: "3px" }}
+                  >
+                    수
+                  </label>
+                  <input
+                    id="thu-checkbox-list"
+                    type="checkbox"
+                    value="목요일"
+                    checked={closeDay.includes("목요일")}
+                    onChange={handleCloseDayChange}
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                  />
+                  <label
+                    for="thu-checkbox-list"
+                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    style={{ marginTop: "3px" }}
+                  >
+                    목
+                  </label>
+                  <input
+                    id="fri-checkbox-list"
+                    type="checkbox"
+                    value="금요일"
+                    checked={closeDay.includes("금요일")}
+                    onChange={handleCloseDayChange}
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                  />
+                  <label
+                    for="fri-checkbox-list"
+                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    style={{ marginTop: "3px" }}
+                  >
+                    금
+                  </label>
+                  <input
+                    id="sat-checkbox-list"
+                    type="checkbox"
+                    value="토요일"
+                    checked={closeDay.includes("토요일")}
+                    onChange={handleCloseDayChange}
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                  />
+                  <label
+                    for="sat-checkbox-list"
+                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    style={{ marginTop: "3px" }}
+                  >
+                    토
+                  </label>
+                  <input
+                    id="sun-checkbox-list"
+                    type="checkbox"
+                    value="일요일"
+                    checked={closeDay.includes("일요일")}
+                    onChange={handleCloseDayChange}
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                  />
+                  <label
+                    for="sun-checkbox-list"
+                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    style={{ marginTop: "3px" }}
+                  >
+                    일
+                  </label>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className="flex items-center mb-5">
+            <label
+              style={{ marginTop: "15px" }}
+              className="w-3/12 text-black text-lg"
             >
-              {timeOptions}
-            </select>
-            <span style={{ margin: "10px" }}>&nbsp;~&nbsp;</span>
-            <select
-              value={closeTime}
-              onChange={(e) => setCloseTime(e.target.value)}
+              오픈 / 마감
+            </label>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "baseline",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
             >
-              {timeOptions}
-            </select>
-          </div>{" "}
-          <br />
+              <select
+                value={openTime}
+                onChange={(e) => setOpenTime(e.target.value)}
+              >
+                {timeOptions}
+              </select>
+              <span style={{ margin: "10px" }}>&nbsp;~&nbsp;</span>
+              <select
+                value={closeTime}
+                onChange={(e) => setCloseTime(e.target.value)}
+              >
+                {timeOptions}
+              </select>
+            </div>
+          </div>
           <div className="button-container" style={{ width: "100%" }}>
             <button
               className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition duration-300 ease-in-out"
@@ -420,7 +369,6 @@ function EditStores(props) {
             </button>
           </div>
         </form>
-        <div className="h-[100px]"></div>
       </div>
     </div>
   );
