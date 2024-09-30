@@ -10,10 +10,6 @@ const Category = () => {
   const title = stores[0]?.categoryDetailName || "";
   const RegionName = stores[0]?.regionName || "";
 
-  useEffect(() => {
-    console.log(stores);
-  }, []);
-
   return (
     <div>
       <UserMainHeader center={title} right={RegionName} />

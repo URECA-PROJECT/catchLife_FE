@@ -160,7 +160,7 @@ const Store = () => {
   };
   return (
     <div>
-      <UserMainHeader center={storeName} />
+      <UserMainHeader center={store.store} />
 
       <div className="w-10/12 mx-auto text-md" style={{ marginTop: "10px" }}>
         <div className=" max-h-60vh overflow-y-auto">
@@ -190,7 +190,7 @@ const Store = () => {
           <Link
             className="flex items-center justify-end"
             to={`/category/${urlStoreId}/menus`}
-            state={{ storeId: store.id, storeName: storeName }} // state는 to 바깥에서 전달
+            state={{ storeId: store.id, storeName: store.store }} // state는 to 바깥에서 전달
           >
             매장 예약하기
             <FaArrowRight className="ml-1" />

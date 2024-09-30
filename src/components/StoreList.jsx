@@ -19,7 +19,7 @@ function StoreList(props) {
     <div className="max-h-[60vh] overflow-y-scroll">
       <div className="mystores-header flex items-center justify-between">
         <span>
-          <strong>내 매장 관리 </strong> {storeList.length}
+          <strong style={{fontSize: "25px"}}>내 매장 관리 </strong> {storeList.length}
         </span>
 
         <div
@@ -45,7 +45,7 @@ function StoreList(props) {
           if (store.memberId == memberNum) {
             return (
               <li className="mystores-list flex flex-col" key={index}>
-                <div className="mb-2">{store.store}</div>
+                <div className="mb-2" style={{fontSize: "20px"}}>{store.store}</div>
                 <div className="flex justify-evenly w-8/12">
                   <Link to="/mypage/reservations">
                     <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-3 border border-gray-400 rounded shadow">
