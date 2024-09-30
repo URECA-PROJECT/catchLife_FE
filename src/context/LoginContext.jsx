@@ -9,7 +9,7 @@ export const LoginProvider = ({ children }) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [heart, setHeart] = useState(false);
+  const [heart, setHeart] = useState([]);
   const [member, setMember] = useState({
     id: "",
     name: "",
@@ -30,7 +30,6 @@ export const LoginProvider = ({ children }) => {
     region: "",
     role: "",
   });
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -153,7 +152,7 @@ export const LoginProvider = ({ children }) => {
         member,
         setMember,
         heart,
-        setHeart
+        setHeart,
       }}
     >
       {children}
