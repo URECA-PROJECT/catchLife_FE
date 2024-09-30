@@ -17,7 +17,7 @@ const Store = () => {
   const [store, setStore] = useState([]);
   const [closeDay, setCloseDay] = useState("");
   const [isFavorite, setIsFavorite] = useState(false);
-  const { member } = useLogin();
+  const { member, heart, setHeart } = useLogin();
 
   const convertCloseDayToWeekdays = (closeDay) => {
     if (!closeDay) {
