@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import "../../css/yewon.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import UserMainHeader from "../../components/UserMainHeader";
+import { useLogin } from "../../context/LoginContext";
+import API from "../../utils/axios";
 
 function EditStores(props) {
   const navigate = useNavigate();
-
+  const { member, setMember } = useLogin();
   const location = useLocation();
   const store = location.state;
-  const [profileImage, setProfileImage] = useState(
+  const [profileImageFile, setProfileImageFile] = useState(
+    "/assets/img/profilepicture.png"
+  );
+  const [storeImageFile, setStoreImageFile] = useState(
     "/assets/img/profilepicture.png"
   );
   const [categoryList, setCategoryList] = useState([]);
   const [regionList, setRegionList] = useState([]);
-
+  const [id, setId] = useState(0);
   const [address, setAddress] = useState("");
   const [content, setContent] = useState("");
   const [closeDay, setCloseDay] = useState([]); // 휴무일 저장할 배열
@@ -32,7 +37,7 @@ function EditStores(props) {
       }
     });
   }
-  console.log(store);
+
   useEffect(() => {
     fetch("http://localhost:8080/category")
       .then((response) => response.json())
@@ -63,17 +68,25 @@ function EditStores(props) {
     fetch(`http://localhost:8080/store`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data, "store");
+        console.log(store.store.id, "storesotreid");
         const selectedStore = data.find(
           (sd) => sd.storeListId === store.store.id
         );
+
+        console.log(selectedStore, "같은거");
+
         if (selectedStore) {
+          setId(selectedStore.id);
           setAddress(selectedStore.address);
           setContent(selectedStore.content);
           setOpenTime(selectedStore.openTime);
           setCloseTime(selectedStore.closeTime);
+          setStoreImageFile(selectedStore.profileImage);
           setCloseDay(
             selectedStore.closeDay ? selectedStore.closeDay.split(",") : []
           );
+          handleGetStoreImage(selectedStore.profileImage);
         }
       })
       .catch((error) => console.error("Error: ", error));
@@ -90,40 +103,93 @@ function EditStores(props) {
     );
   }
 
+  const handleGetStoreImage = (fullUrl) => {
+    console.log("스토어 fullUrl", fullUrl);
+    const fileName = fullUrl.split("/").pop(); // URL의 마지막 부분을 추출
+    const backendUrl = `/uploads/${fileName}`; // 백엔드 URL 조합
+    console.log("fileName", fileName);
+    console.log(backendUrl);
+    // Axios로 Blob 요청
+    API.get(backendUrl, { responseType: "blob" })
+      .then((response) => {
+        console.log("응답상태", response);
+        // 상태 코드가 200인 경우에만 Blob으로 변환
+        if (response.status === 200) {
+          console.log(
+            "스토어 응답 데이터 타입:",
+            response.data instanceof Blob
+          );
+
+          const imgURL = URL.createObjectURL(response.data); // Blob을 URL로 변환
+          console.log("스토어이미지 url", imgURL);
+          // setProfileImageFile(imgURL); // state를 업데이트하여 이미지 표시
+          // localStorage.setItem("profileImage", imgURL);
+          // setMember({
+          //   ...member,
+          //   profileImage: localStorage.getItem("profileImage"),
+          // });
+
+          setStoreImageFile(imgURL);
+          console.log(storeImageFile, "과연;");
+        } else {
+          throw new Error("Network response was not ok.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching stores:", error);
+      });
+  };
+
   function handleSubmit(e) {
     e.preventDefault();
 
+    const formData = new FormData();
     const storeData = {
+      id: id,
       store: store.store.store, // 매장명
       address: address, // 상세 주소
       closeDay: closeDay.join(","),
       openTime: openTime,
       closeTime: closeTime,
       content: content,
-      image: profileImage,
+      image: member.profileImage,
       storeListId: store.store.id, // 매장 ID
     };
 
-    console.log(storeData);
+    // storeData 객체를 JSON으로 변환하여 FormData에 추가
+    // formData.append("store", JSON.stringify(storeData));
+    formData.append(
+      "store",
+      new Blob([JSON.stringify(storeData)], { type: "application/json" })
+    );
 
-    fetch(`http://localhost:8080/store/saveOrUpdate`, {
-      method: "POST", // 이제 saveOrUpdate로 항상 POST 요청 보냄
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(storeData),
+    if (storeImageFile && storeImageFile.startsWith("data:image/")) {
+      formData.append("profileImage", storeImageFile); // 프로필 이미지 파일 추가
+    }
+
+    // fetch로 POST 요청 보내기
+    fetch("http://localhost:8080/store/saveOrUpdate", {
+      method: "POST",
+      body: formData, // FormData 사용
     })
       .then((response) => response.json())
       .then((data) => {
-        alert("매장 정보가 수정되었습니다.");
-        navigate(-1); // 뒤로 돌아가기
+        console.log("매장 정보 저장", data);
+        alert("매장 정보가 저장되었습니다.");
+        navigate("/mypage"); // 페이지 이동
+
+        // 이미지 파일 경로 처리
+        const imageFileName = data.updatedStore.profileImage.replace("./", ""); // './'를 제거
+        const imageUrl = `http://localhost:8080/${imageFileName}`; // 절대 경로로 설정
+        console.log("store", imageUrl);
+        handleGetStoreImage(imageUrl); // 이미지 처리
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   }
 
-  // 프로필 이미지 변경 함수
+  // 프로필 이미지 임시 변경 함수
   function handleImageChange(e) {
     const file = e.target.files[0]; // 파일 가져오기
 
@@ -131,14 +197,18 @@ function EditStores(props) {
       const reader = new FileReader();
 
       reader.onload = (ev) => {
-        setProfileImage(ev.target.result); // 이미지 src 변경
+        setStoreImageFile(ev.target.result); // 이미지 src 변경
       };
 
       reader.readAsDataURL(file); // 파일을 읽어서 data URL로 변환
     } else {
-      setProfileImage("/assets/img/profilePicture.png"); // 기본 이미지로 변경
+      setProfileImageFile("/assets/img/profilePicture.png"); // 기본 이미지로 변경
     }
   }
+
+  useEffect(() => {
+    handleGetStoreImage(storeImageFile);
+  }, []);
 
   return (
     <div>
@@ -146,10 +216,10 @@ function EditStores(props) {
 
       <div className="edit-profile max-h-[85vh] overflow-y-scroll py-10">
         <form className="yewon-form">
-          <div className="edit-profile-image">
+          <div className="edit-profile-image text-center">
             <label htmlFor="file-input">
               <img
-                src={profileImage}
+                src={storeImageFile}
                 alt="Profile"
                 className="profile-picture w-6/12"
                 style={{ margin: "20px auto" }}

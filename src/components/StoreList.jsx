@@ -16,7 +16,7 @@ function StoreList(props) {
   }, []);
 
   return (
-    <div>
+    <div className="max-h-[60vh] overflow-y-scroll">
       <div className="mystores-header flex items-center justify-between">
         <span>
           <strong>내 매장 관리 </strong> {storeList.length}

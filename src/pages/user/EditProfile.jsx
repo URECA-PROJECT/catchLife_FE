@@ -51,32 +51,33 @@ function EditProfile(props) {
   };
 
   useEffect(() => {
-    console.log(member);
-    // setProfileImageFile(member.profileImage);
-  }, [member]);
+    console.log(member.profileImage, profileImageFile);
+  }, []);
 
-  // 프로필 이미지 변경 함수
+  // 프로필 이미지 임시 변경 함수
   function handleImageChange(e) {
     const file = e.target.files[0]; // 파일 가져오기
 
     if (file) {
       const reader = new FileReader();
+
       reader.onload = (ev) => {
         setProfileImageFile(ev.target.result); // 이미지 src 변경
-        console.log("변경된 이미지 URL:", ev.target.result); // 변경된 URL 확인
+        setMember({
+          ...member,
+          profileImage: ev.target.result,
+        });
       };
+
       reader.readAsDataURL(file); // 파일을 읽어서 data URL로 변환
     } else {
-      const defaultImage = "/assets/img/profilePicture.png"; // 기본 이미지
-      setProfileImageFile(defaultImage); // 기본 이미지로 변경
-      console.log("기본 이미지 설정:", defaultImage); // 기본 이미지 확인
+      setProfileImageFile("/assets/img/profilePicture.png"); // 기본 이미지로 변경
     }
   }
 
   function handleSubmit(e) {
     e.preventDefault(); // 기본 폼 동작 방지
 
-    console.log("제출");
     const formData = new FormData();
     const memberData = {
       id: member.id, // 확인: 이 값이 유효한 ID인지 확인
@@ -136,7 +137,7 @@ function EditProfile(props) {
           <div className="edit-profile-image">
             <label htmlFor="file-input" className="file-seunghee">
               <img
-                src={member.profileImage}
+                src={member.profileImage || profileImageFile}
                 alt="Profile"
                 className="profile-picture"
                 style={{ margin: "20px auto", width: "200px" }}
