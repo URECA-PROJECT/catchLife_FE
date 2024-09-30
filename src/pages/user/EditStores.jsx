@@ -30,17 +30,7 @@ function EditStores(props) {
             }
         });
     }
-
-    // 00:00 ~ 23:00 1시간 단위로 선택지를 생성
-    const timeOptions = [];
-    for (let i = 0; i <= 23; i++) {
-        const time = i < 10 ? `0${i}:00` : `${i}:00`;
-        timeOptions.push(
-        <option key={time} value={time}>
-            {time}
-        </option>
-        );
-    }
+    console.log(store)
     useEffect(() => {
         fetch('http://localhost:8080/category')
         .then(response => response.json())
@@ -83,6 +73,17 @@ function EditStores(props) {
             .catch(error => console.error('Error: ', error));
     }, [store.store.id]);  // 의존성 배열에 store.store.id를 추가하여 첫 렌더링 시에만 실행되도록 설정
 
+    // 00:00 ~ 23:00 1시간 단위로 선택지를 생성
+    const timeOptions = [];
+    for (let i = 0; i <= 23; i++) {
+        const time = i < 10 ? `0${i}:00` : `${i}:00`;
+        timeOptions.push(
+        <option key={time} value={time}>
+            {time}
+        </option>
+        );
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
     
@@ -94,8 +95,10 @@ function EditStores(props) {
             closeTime: closeTime,
             content: content,
             image: profileImage,
-            storeListId: store.store.id  // 매장 ID
+            storeListId: store.store.id,  // 매장 ID
         };
+
+        console.log(storeData)
     
         fetch(`http://localhost:8080/store/saveOrUpdate`, {
             method: 'POST',  // 이제 saveOrUpdate로 항상 POST 요청 보냄
@@ -203,10 +206,6 @@ function EditStores(props) {
                         <button className="border border-black text-black bg-white px-6 py-2 rounded-lg hover:bg-black hover:text-white transition duration-300 ease-in-out" type='button' onClick={() => navigate('/mypage')}>취소</button>
                     </div>
                 </form>
-            </div>
-
-            <div style={{textAlign: "center"}}>
-                하단 nav-bar
             </div>
         </div>
     );

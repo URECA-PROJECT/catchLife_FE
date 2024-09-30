@@ -5,19 +5,54 @@ function OrderManagement(props) {
 
     const {storeID} = props;
 
-    const [fields, setFields] = useState([]);
+    const [fields, setFields] = useState([]); // 새로 추가할 항목
+    const [existingFields, setExistingFields] = useState([]); // 기존에 저장된 항목 (question 테이블)
     const [newFieldName, setNewFieldName] = useState(''); // 새로 추가할 항목의 이름
     const [newFieldType, setNewFieldType] = useState('text');  // 새로 추가할 항목의 입력 타입
-    const [isActive, setIsActive] = useState(1); // 0 false 1 true
     const [dropdownOptions, setDropdownOptions] = useState('');
     const navigate = useNavigate();
 
+    /* 질문 = field */
 
-    // 항목 추가
+    // 기존 질문 데이터 가져오기
+    useEffect(() => {
+        fetch(`http://localhost:8080/questions/${storeID}`)
+        .then(response => response.json())
+        .then(data => {
+            const activeFields = data.filter(question => question.isActive === 1);
+            setExistingFields(activeFields);
+        })
+        .catch(error => console.error("Error: ", error));
+    }, [storeID])
+    
+    // 서버로 새 필드 전송하는 함수
+    function sendFieldToServer(field) {
+        const formData = {
+            storeID: field.storeID,
+            questionText: field.label,
+            questionType: field.type,
+            questionContent: field.options ? JSON.stringify(field.options) : null,
+            isActive: field.isActive
+        };
+
+        fetch('http://localhost:8080/questions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(() => {
+            alert('주문서 항목이 저장되었습니다.');
+        })
+        .catch(error => console.error("Error: ", error));
+    }
+
+    // 새 질문 추가 시 서버로 즉시 전송 
     function addField() {
-        // 새로 추가할 필드의 이름과 유형이 반드시 있어야 추가되도록 함
         if (newFieldName.trim() === '') {
-            alert('항목의 이름을 입력해주세요.')
+            alert('항목을 입력해주세요.');
             return;
         }
 
@@ -25,81 +60,62 @@ function OrderManagement(props) {
             type: newFieldType,
             label: newFieldName,
             storeID: storeID,
-            isActive: isActive,
+            isActive: 1,
+            options: newFieldType === 'dropdown' ? dropdownOptions.split(',').map(opt => opt.trim()) : null,
             value: ''
         }
         
-        if (newFieldType === 'dropdown') {
-            newField.options = dropdownOptions.split(',').map(opt => opt.trim());
-        }
+        // 새 필드 상태 업데이트 및 서버로 전송 
+        setFields([...fields, newField]);
+        sendFieldToServer(newField);
 
         // 항목 추가 버튼 클릭 후 초기화
-        setFields([...fields, newField]);
         setDropdownOptions(''); // 드롭다운 항목 추가 후 초기화
         setNewFieldName('');
         setNewFieldType('text');
     }
 
-    // 필드 값 업데이트
-    function handleFieldChange(index, value) {
-        const updatedFields = [...fields];
-        updatedFields[index].value = value;
-        setFields(updatedFields);
-    }
 
-    // 필드 삭제
+    // 새로 추가된 질문 삭제
     function removeField(index) {
-        setFields(fields.filter((_, i) => i !== index));
-    }
-
-    // 양식 저장 (서버로 전송)
-    function handleSave() {
-        console.log(fields)
-        const formData = fields.map(field => ({
-            question_text: field.label,
-            question_type: field.type,
-            isActive: field.isActive,
-            storeID: field.storeID
-        }));
-
-        console.log(formData)
-        fetch("http://localhost:8080/questions", {
-            method: "POST",
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert('저장되었습니다.');
-            navigate(-1);
-        })
-        .catch(error => console.error("Error: ", error))
-
-    }
-
-    // 취소 버튼 클릭 시 처리
-    const handleCancel = async () => {
-        const userConfirmed = window.confirm('변경 사항을 저장하시겠습니까?');
-
+        const userConfirmed = window.confirm('삭제하시겠습니까?');
         if (userConfirmed) {
-            // "예" 누를 경우 저장 후 이전 페이지로 이동
-            await handleSave();
-            navigate(-1);
-        } else {
-            // "아니오" 누를 경우 저장하지 않고 이전 페이지로 이동
-            navigate(-1);
+            const updatedFields = [...fields];
+            const removedField = updatedFields.splice(index, 1); // 삭제된 필드
+    
+            setFields(updatedFields);
+    
+            if (removedField[0].id) {
+                handleDeleteField(removedField[0].id); // 이미 서버에 있는 필드일 경우 삭제
+            } else {
+                alert('항목이 삭제되었습니다.');
+            }
         }
     }
 
+    // 기존 질문 삭제 (isActive를 0으로 업데이트)
+    function handleDeleteField(id) {
+        const userConfirmed = window.confirm('삭제하시겠습니까?');
+        if (userConfirmed) {
+            fetch(`http://localhost:8080/questions/delete/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(() => {
+                setExistingFields(existingFields.filter(field => field.id !== id));
+                console.log('항목이 삭제되었습니다.');
+            })
+            .catch(error => console.error("Error : ", error));
+        }
+    }
 
     return (
         <div>
-            
             {/* 항목(필드)의 이름과 유형 설정 */}
-            <div className='order-field-add flex justify-center items-center space-x-4 p-4 bg-white shadow-md rounded-lg'>
-                <div className="flex flex-col">
+            <div className='order-field-add flex flex-wrap justify-center items-center p-4 bg-white shadow-md rounded-lg'>
+                <div className="flex flex-col mr-4">
                     <input
                         type="text"
                         value={newFieldName}
@@ -109,7 +125,7 @@ function OrderManagement(props) {
                     />
                 </div>
 
-                <div className="flex flex-col">
+                <div className="flex flex-col mr-4">
                     <select
                         className='border border-gray-300 rounded-lg p-2 text-black bg-white focus:outline-none focus:ring-2 focus:ring-black'
                         onChange={(e) => setNewFieldType(e.target.value)}
@@ -118,84 +134,70 @@ function OrderManagement(props) {
                         <option value="text">텍스트</option>
                         <option value="date">날짜</option>
                         <option value="dropdown">드롭다운</option>
-                        <option value="file">파일 업로드</option>
                     </select>
                 </div>
 
-                {newFieldType === 'dropdown' && (
-                    <div className="flex flex-col">
-                        <label className='text-black font-medium'>드롭다운 옵션(쉼표로 구분)</label>
-                        <input
-                            type="text"
-                            value={dropdownOptions}
-                            onChange={(e) => setDropdownOptions(e.target.value)}
-                            placeholder='옵션1, 옵션2, 옵션3'
-                            className='border border-gray-300 rounded-lg p-2 text-black bg-white mt-2 focus:outline-none focus:ring-2 focus:ring-black'
-                        />
-                    </div>
-                )}
+                <div>
+                    {(newFieldType === 'text' || newFieldType==="date") && (
+                        <button 
+                            onClick={addField}
+                            className='bg-black text-white p-2 rounded-lg hover:bg-gray-800 transition duration-300 ease-in-out'
+                        >
+                            항목 추가
+                        </button>
+                    ) }
 
-                <button 
-                    onClick={addField}
-                    className='bg-black text-white p-2 rounded-lg hover:bg-gray-800 transition duration-300 ease-in-out'
-                >
-                    항목 추가
-                </button>
+                    {newFieldType === 'dropdown' && (
+                        <div className="flex items-center w-full mt-4">
+                            <div className="flex flex-col mr-4">
+                                <label className='text-black font-medium'>드롭다운 옵션(쉼표로 구분)</label>
+                                <input
+                                    type="text"
+                                    value={dropdownOptions}
+                                    onChange={(e) => setDropdownOptions(e.target.value)}
+                                    placeholder='옵션1, 옵션2, 옵션3'
+                                    className='border border-gray-300 rounded-lg p-2 text-black bg-white mt-2 focus:outline-none focus:ring-2 focus:ring-black'
+                                />
+                            </div>
+
+                            <div className="flex-shrink-0">
+                                <button 
+                                    onClick={addField}
+                                    className='bg-black text-white p-2 ml-4 rounded-lg hover:bg-gray-800 transition duration-300 ease-in-out'
+                                >
+                                    항목 추가
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
 
-            <div className="mt-4 space-y-4">
-                {fields.map((field, index) => (
-                    <div key={index} className="field-item flex flex-col p-4 bg-gray-100 rounded-lg">
-                        <label className='text-black font-medium'>{field.label}</label>
+            {/* 기존 질문들 */}
+            <div className="mt-4 space-y-2">
+                {existingFields.map((field, index) => (
+                    <div key={index} className="field-item flex justify-between items-center p-4 bg-gray-100 rounded-lg">
+                        <label className='text-black font-medium'>{field.questionText}</label>
 
-                        {/* 텍스트 필드 */}
-                        {field.type === 'text' && (
-                            <input
-                                type="text"
-                                value={field.value}
-                                onChange={(e) => handleFieldChange(index, e.target.value)}
-                                className='border border-gray-300 rounded-lg p-2 mt-2 text-black bg-white focus:outline-none focus:ring-2 focus:ring-black'
-                            />
-                        )}
-
-                        {/* 날짜 필드 */}
-                        {field.type === 'date' && (
-                            <input
-                                type="date"
-                                value={field.value}
-                                onChange={(e) => handleFieldChange(index, e.target.value)}
-                                className='border border-gray-300 rounded-lg p-2 mt-2 text-black bg-white focus:outline-none focus:ring-2 focus:ring-black'
-                            />
-                        )}
-
-                        {/* 드롭다운 필드 */}
-                        {field.type === 'dropdown' && (
-                            <select
-                                value={field.value}
-                                onChange={(e) => handleFieldChange(index, e.target.value)}
-                                className='border border-gray-300 rounded-lg p-2 mt-2 text-black bg-white focus:outline-none focus:ring-2 focus:ring-black'
-                            >
-                                <option value="">선택하세요</option>
-                                {field.options.map((option, i) => (
-                                    <option key={i} value={option}>
-                                        {option}
-                                    </option>
+                        {field.questionType === 'dropdown' && (
+                            <select className="border p-2">
+                                {JSON.parse(field.questionContent || '[]').map((option, i) => (
+                                    <option key={i} value={option}>{option}</option>
                                 ))}
                             </select>
                         )}
 
-                        {/* 파일 업로드 필드 */}
-                        {field.type === 'file' && (
-                            <input
-                                type="file"
-                                onChange={(e) => handleFieldChange(index, e.target.files[0])}
-                                className='border border-gray-300 rounded-lg p-2 mt-2 text-black bg-white focus:outline-none focus:ring-2 focus:ring-black'
-                            />
+                        {field.questionType === 'text' && (
+                            <input readOnly type="text" className="border p-2" placeholder={"텍스트 입력"} />
+                        )}
+
+                        {field.questionType === 'date' && (
+                            <input readOnly type="date" className="border p-2" />
                         )}
 
                         <button
-                            onClick={() => removeField(index)}
-                            className='mt-2 bg-red-500 text-white p-2 rounded-lg hover:bg-red-700 transition duration-300 ease-in-out'
+                            onClick={() => handleDeleteField(field.id)}
+                            className='bg-red-500 text-white p-2 rounded-lg hover:bg-red-700 transition duration-300 ease-in-out'
                         >
                             삭제
                         </button>
@@ -203,36 +205,38 @@ function OrderManagement(props) {
                 ))}
             </div>
 
+            {/* 새로 추가된 필드들 */}
+            <div className="mt-4 space-y-4">
+                {fields.map((field, index) => (
+                    <div key={index} className="field-item flex justify-between items-center p-4 bg-gray-100 rounded-lg">
+                        <label className='text-black font-medium'>{field.label}</label>
 
+                        {field.question_type === 'dropdown' && (
+                            <select className="border p-2">
+                                {JSON.parse(field.question_content || '[]').map((option, i) => (
+                                    <option key={i} value={option}>{option}</option>
+                                ))}
+                            </select>
+                        )}
 
-            {/* 양식 제출 */}
-            <div className="flex justify-center space-x-4 mt-6">
-                {/* 저장 버튼 */}
-                <button
-                    onClick={() => {
-                        const userConfirmed = window.confirm('저장하시겠습니까?');
+                        {field.type === 'text' && (
+                            <input readOnly type="text" className="border p-2" placeholder={"텍스트 입력"} />
+                        )}
 
-                        if (userConfirmed) {
-                            // '확인'을 누르면 서버로 양식 전송
-                            handleSave();
-                        } else {
-                            // '취소' 누르면 알림창 닫힘
-                        }
-                    }}
-                    className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition duration-300 ease-in-out"
-                >
-                    저장
-                </button>
+                        {field.type === 'date' && (
+                            <input readOnly type="date" className="border p-2" />
+                        )}
 
-                {/* 취소 버튼 */}
-                <button
-                    onClick={handleCancel}
-                    className="border border-black text-black bg-white px-6 py-2 rounded-lg hover:bg-black hover:text-white transition duration-300 ease-in-out"
-                >
-                    취소
-                </button>
+                        <button
+                            onClick={() => removeField(field.id)}
+                            className='bg-red-500 text-white p-2 rounded-lg hover:bg-red-700 transition duration-300 ease-in-out'
+                        >
+                            삭제
+                        </button>
+                    </div>
+                ))}
             </div>
-            </div>
+        </div>
     );
 }
 

@@ -32,7 +32,7 @@ function StoreList(props) {
                             <li className='mystores-list' key={index}>{store.store} <span />
 
                                 <Link to="/mypage/reservations"><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-3 border border-gray-400 rounded shadow">예약 관리</button></Link>
-                                <Link to="/mypage/storemanage" state={{storeID: store.id}}><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-3 border border-gray-400 rounded shadow">매장 관리</button></Link>
+                                <Link to="/mypage/storemanage" state={{store: store}}><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-3 border border-gray-400 rounded shadow">매장 관리</button></Link>
                                 <Link to="/mypage/editstores" state={{store: store}}><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-3 border border-gray-400 rounded shadow">매장 정보 수정</button></Link>
                             </li>
                         )

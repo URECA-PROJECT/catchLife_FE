@@ -20,13 +20,16 @@ import SignupPage from "./pages/user/SignupPage";
 import StoreRegister from "./pages/user/StoreRegister";
 import { LoginProvider } from "./context/LoginContext";
 import FavoriteStore from "./pages/user/FavoriteStore";
+import BlockReservations from "./pages/user/BlockReservations";
+import Bottom from "./components/Bottom";
+
 
 function App() {
   return (
     <LoginProvider>
       <RegionProvider>
         <CategoryProvider>
-          <div className="App font">
+          <div className="App font relative h-[100vh] overflow-y-hidden">
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/category" element={<Category />} />
@@ -51,15 +54,22 @@ function App() {
                 element={<ReservationManagement />}
               />
               <Route
+                path="/mypage/reservations/block"
+                element={<BlockReservations />}
+              />
+              <Route
                 path="/mypage/reservations/detail"
                 element={<ReservationDetail />}
               />
+
               <Route path="/mypage/register" element={<StoreRegister />} />
               <Route path="/mypage/storemanage" element={<StoreManagement />} />
               <Route path="/mypage/editstores" element={<EditStores />} />
 
               <Route path="/favoriteStore" element={<FavoriteStore />} />
             </Routes>
+
+            <Bottom />
           </div>
         </CategoryProvider>
       </RegionProvider>
