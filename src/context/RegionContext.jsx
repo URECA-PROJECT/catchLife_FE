@@ -21,12 +21,13 @@ export const RegionProvider = ({ children }) => {
   };
 
   const handleUserRegion = () => {
-    const regionId = localStorage.getItem("regionId");
+    const regionId = localStorage.getItem("regionId")
+      ? localStorage.getItem("regionId")
+      : 1;
 
     API.get(`region/${regionId}`)
       .then((response) => {
         const data = response.data;
-        console.log(data, "userRegion");
         setUserRegion(data);
       })
       .catch((error) => {

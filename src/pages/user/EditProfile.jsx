@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "../../css/yewon.css";
+import "../../css/Signup.css";
+import "../../css/Login.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useLogin } from "../../context/LoginContext";
 import API from "../../utils/axios";
+import UserMainHeader from "../../components/UserMainHeader";
 
 function EditProfile(props) {
   const { member, setMember } = useLogin();
   const location = useLocation();
   const { name } = location.state || {};
-  const [profileImageFile, setProfileImageFile] = useState();
+  const [profileImageFile, setProfileImageFile] = useState(
+    "/assets/img/profilePicture.png"
+  );
   const [newPhone, setNewPhone] = useState(member.phone || "");
   const [newPassword, setNewPassword] = useState(member.password || "");
   const navigate = useNavigate();
 
   const handleGetImage = (fullUrl) => {
-    // fullUrl에서 파일 이름 추출
     console.log("fullUrl", fullUrl);
     const fileName = fullUrl.split("/").pop(); // URL의 마지막 부분을 추출
     const backendUrl = `/uploads/${fileName}`; // 백엔드 URL 조합
@@ -23,7 +27,7 @@ function EditProfile(props) {
     // Axios로 Blob 요청
     API.get(backendUrl, { responseType: "blob" })
       .then((response) => {
-        navigate(-1);
+        navigate("/mypage");
         console.log("응답상태", response);
         // 상태 코드가 200인 경우에만 Blob으로 변환
         if (response.status === 200) {
@@ -32,9 +36,10 @@ function EditProfile(props) {
           const imgURL = URL.createObjectURL(response.data); // Blob을 URL로 변환
           console.log("이미지 url", imgURL);
           setProfileImageFile(imgURL); // state를 업데이트하여 이미지 표시
+          localStorage.setItem("profileImage", imgURL);
           setMember({
             ...member,
-            profileImage: profileImageFile,
+            profileImage: localStorage.getItem("profileImage"),
           });
         } else {
           throw new Error("Network response was not ok.");
@@ -46,25 +51,27 @@ function EditProfile(props) {
   };
 
   useEffect(() => {
-    console.log(member);
-    // setProfileImageFile(member.profileImage);
-  }, [member]);
+    console.log(member.profileImage, profileImageFile);
+  }, []);
 
-  // 프로필 이미지 변경 함수
+  // 프로필 이미지 임시 변경 함수
   function handleImageChange(e) {
     const file = e.target.files[0]; // 파일 가져오기
 
     if (file) {
       const reader = new FileReader();
+
       reader.onload = (ev) => {
         setProfileImageFile(ev.target.result); // 이미지 src 변경
-        console.log("변경된 이미지 URL:", ev.target.result); // 변경된 URL 확인
+        setMember({
+          ...member,
+          profileImage: ev.target.result,
+        });
       };
+
       reader.readAsDataURL(file); // 파일을 읽어서 data URL로 변환
     } else {
-      const defaultImage = "/assets/img/profilePicture.png"; // 기본 이미지
-      setProfileImageFile(defaultImage); // 기본 이미지로 변경
-      console.log("기본 이미지 설정:", defaultImage); // 기본 이미지 확인
+      setProfileImageFile("/assets/img/profilePicture.png"); // 기본 이미지로 변경
     }
   }
 
@@ -84,8 +91,7 @@ function EditProfile(props) {
       new Blob([JSON.stringify(memberData)], { type: "application/json" })
     );
 
-    // 프로필 이미지가 있을 경우 추가
-    if (profileImageFile) {
+    if (profileImageFile && profileImageFile.startsWith("data:image/")) {
       formData.append("profileImage", profileImageFile); // 프로필 이미지 파일 추가
     }
 
@@ -103,6 +109,7 @@ function EditProfile(props) {
       .then((data) => {
         console.log(data);
         alert("수정이 완료되었습니다.");
+        navigate("/mypage");
 
         setMember(data.updatedMember);
 
@@ -123,50 +130,57 @@ function EditProfile(props) {
 
   return (
     <div>
-      <div className="back-header">
-        <button className="backbutton" onClick={handleBackClick}>
-          ←
-        </button>
-        {/* <a className='backbutton' onClick={handleBackClick}>←</a> */}
-        <span className="back-header-top">프로필 수정</span>
-      </div>
+      <UserMainHeader center={"프로필 수정"} />
 
       <div className="edit-profile">
         <form className="yewon-form" onSubmit={handleSubmit}>
           <div className="edit-profile-image">
-            <label htmlFor="file-input">
+            <label htmlFor="file-input" className="file-seunghee">
               <img
-                src={member.profileImage}
+                src={member.profileImage || profileImageFile}
                 alt="Profile"
                 className="profile-picture"
-                style={{ margin: "20px auto" }}
+                style={{ margin: "20px auto", width: "200px" }}
               />
             </label>
           </div>
           <input
             id="file-input"
-            className="file-input"
+            className="mx-auto yewon-form-label"
             type="file"
             accept="image/*"
             onChange={handleImageChange}
             style={{ display: "none" }}
           />
-          <label>성함</label>
-          <input type="text" value={name} readOnly /> <br />
-          <label>전화번호</label>
-          <input
-            type="text"
-            value={newPhone}
-            onChange={(e) => setNewPhone(e.target.value)}
-          />
-          <br />
-          <label>비밀번호 수정</label>
-          <input
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-          <br />
+          <div className="login-div flex items-center w-full mx-auto">
+            <label className="yewon-form-label">성함</label>
+            <input type="text" value={name} readOnly />
+          </div>
+          <div className="login-div flex items-center w-full mx-auto">
+            <label className="yewon-form-label">아이디</label>
+            <input
+              type="text"
+              value={member.memberid || member.memberId}
+              readOnly
+            />{" "}
+            <br />
+          </div>
+          <div className="login-div flex items-center w-full mx-auto">
+            <label className="yewon-form-label">전화번호</label>
+            <input
+              type="text"
+              value={newPhone}
+              onChange={(e) => setNewPhone(e.target.value)}
+            />
+          </div>
+          <div className="login-div flex items-center w-full mx-auto">
+            <label className="yewon-form-label">비밀번호 수정</label>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </div>
           <br />
           <div className="button-container">
             <button type="submit">완료</button>

@@ -12,13 +12,16 @@ const MainHeader = () => {
 
   const myPage = isLoggedIn ? "/mypage" : "/login";
   const favoriteStore = isLoggedIn ? "/favoriteStore" : "/login";
+  const name = localStorage.getItem("name");
 
   return (
     <>
       {isLoggedIn ? (
         <>
           <div className="flex justify-between items-center mx-5 p-2">
-            <div className=" text-xs">{member.name}님 환영합니다 🎊</div>
+            <div className=" text-xs">
+              {member.name || name}님 환영합니다 🎊
+            </div>
             <button
               onClick={() => {
                 setUserRegion({

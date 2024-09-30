@@ -26,7 +26,7 @@ export const LoginProvider = ({ children }) => {
     birth: "",
     gender: "",
     address: "",
-    regino: "",
+    region: "",
     role: "",
   });
 
@@ -89,14 +89,16 @@ export const LoginProvider = ({ children }) => {
         localStorage.setItem("phone", member.phone);
         localStorage.setItem("role", member.role);
         localStorage.setItem("regionId", member.region);
+        localStorage.setItem("profileImage", member.profileImage);
 
         setMember({
-          id: member.id,
-          memberId: member.memberid,
-          name: member.name,
-          phone: member.phone,
-          region: member.region,
-          role: member.role,
+          id: localStorage.getItem("id"),
+          memberId: localStorage.getItem("memberId"),
+          name: localStorage.getItem("name"),
+          phone: localStorage.getItem("phone"),
+          region: localStorage.getItem("regionId"),
+          role: localStorage.getItem("role"),
+          profileImage: localStorage.getItem("profileImage"),
         });
 
         setId("");
@@ -120,6 +122,15 @@ export const LoginProvider = ({ children }) => {
 
   useEffect(() => {
     setIsLoggedIn(Boolean(localStorage.getItem("name")));
+
+    setMember({
+      id: localStorage.getItem("id"),
+      memberId: localStorage.getItem("memberId"),
+      name: localStorage.getItem("name"),
+      phone: localStorage.getItem("phone"),
+      region: localStorage.getItem("regionId"),
+      role: localStorage.getItem("rold"),
+    });
   }, []);
 
   return (

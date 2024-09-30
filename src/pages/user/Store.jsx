@@ -4,10 +4,9 @@ import UserMainHeader from "../../components/UserMainHeader";
 import API from "../../utils/axios";
 import { images } from "../../utils/images";
 import { FaArrowRight } from "react-icons/fa6";
-import emptyHeart from "../../utils/heart.png";  
-import filledHeart from "../../utils/red heart.png"; 
+import emptyHeart from "../../utils/heart.png";
+import filledHeart from "../../utils/red heart.png";
 import { useLogin } from "../../context/LoginContext";
-
 
 const Store = () => {
   const location = useLocation();
@@ -19,7 +18,7 @@ const Store = () => {
   console.log(storeListId);
   const [store, setStore] = useState([]);
   const [closeDay, setCloseDay] = useState("");
-  const [isFavorite, setIsFavorite] = useState(false); 
+  const [isFavorite, setIsFavorite] = useState(false);
   const { member } = useLogin();
 
   const convertCloseDayToWeekdays = (closeDay) => {
@@ -62,24 +61,24 @@ const Store = () => {
   }, []);
 
   const toggleFavorite = () => {
-    const store_id = urlStoreId; 
-    const member_id = member.id; 
-  
+    const store_id = urlStoreId;
+    const member_id = member.id;
+
     if (isFavorite) {
       // 즐겨찾기 해제
       fetch(`http://localhost:8080/bookmark`, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ memberID: member_id, storeID: store_id }),
       })
         .then((response) => response.json())
         .then(() => {
-          alert('즐겨찾기가 해제되었습니다.');
+          alert("즐겨찾기가 해제되었습니다.");
           setIsFavorite(false); // 빈 하트로 변경
         })
-        .catch((error) => console.log('Error: ', error));
+        .catch((error) => console.log("Error: ", error));
     } else {
       // 즐겨찾기 등록
       const bookmarkData = {
@@ -87,19 +86,19 @@ const Store = () => {
         memberID: member_id,
       };
 
-      fetch('http://localhost:8080/bookmark', {
-        method: 'POST',
+      fetch("http://localhost:8080/bookmark", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(bookmarkData),
       })
         .then((response) => response.json())
         .then(() => {
-          alert('즐겨찾기에 등록되었습니다.');
+          alert("즐겨찾기에 등록되었습니다.");
           setIsFavorite(true); // 빨간 하트로 변경
         })
-        .catch((error) => console.log('Error: ', error));
+        .catch((error) => console.log("Error: ", error));
     }
   };
 
@@ -110,12 +109,14 @@ const Store = () => {
       <div className="w-10/12 mx-auto text-md">
         <div>
           <img src={images.nailStore} alt="" />
-          <div className="flex items-center justify-end mb-4">
+          <div className="flex items-center justify-end my-3 mr-1">
+            매장 찜하기
             <img
-              src={isFavorite ? filledHeart : emptyHeart} 
+              className="ml-2"
+              src={isFavorite ? filledHeart : emptyHeart}
               alt="favorite"
-              onClick={toggleFavorite} 
-              style={{ width: '30px', height: '30px', cursor: 'pointer' }} 
+              onClick={toggleFavorite}
+              style={{ width: "30px", height: "30px", cursor: "pointer" }}
             />
           </div>
         </div>

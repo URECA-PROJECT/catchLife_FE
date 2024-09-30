@@ -8,6 +8,13 @@
   border-bottom: 1px solid #eee;
 }
 
+.file-seunghee {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+}
+
 .profile-mypage h2 {
   font-size: 18px;
   font-weight: bold;
@@ -21,8 +28,6 @@
 }
 
 .profile-picture {
-  width: 80px;
-  height: 80px;
   margin-right: 15px;
 }
 
@@ -57,10 +62,13 @@
 }
 
 /* ReservationList */
-.mystores-list, .review-items, .reservation-items, .favorite-items {
+.mystores-list,
+.review-items,
+.reservation-items,
+.favorite-items {
   /* display: flex; */
-  padding: 15px;
-  margin: 10px 20px;
+  padding: 20px;
+  margin: 20px;
   border-radius: 10px;
   border: 1px solid #ddd;
   align-items: center;
@@ -87,7 +95,9 @@
   list-style: none;
 }
 
-.review-items, .reservation-items, .favorite-items {
+.review-items,
+.reservation-items,
+.favorite-items {
   list-style: none;
   text-align: center;
 }
@@ -139,13 +149,14 @@
 .yewon-form {
   display: flex;
   flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .profile-picture {
   margin: 20px;
   position: relative;
   cursor: pointer;
-
 }
 
 .file-input {
@@ -153,13 +164,15 @@
 }
 
 /* Form labels */
-.yewon-form label {
-  font-size: 14px;
-  display: block;
-  color: #0000009f;
-  margin-bottom: 5px;
-  text-align: left;
-  width: 100%;
+.yewon-form-label {
+  text-align: center;
+  width: 80px;
+  font-weight: bold;
+  color: #333;
+}
+
+.file-input {
+  width: 200px;
 }
 
 /* Form inputs */
@@ -167,12 +180,11 @@
 .yewon-form input[type="password"],
 .yewon-form select {
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
+  padding: 13px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  background-color: #0000001b;
+  border-radius: 25px;
+  font-size: 1.1rem; /* 폰트 크기를 키워서 입력 칸을 더 크고 명확하게 */
+  box-sizing: border-box;
 }
 
 .yewon-form select {
@@ -221,7 +233,8 @@
   grid-gap: 10px;
 }
 
-.date-slot, .empty-slot {
+.date-slot,
+.empty-slot {
   padding: 10px;
   border: 1px solid #00000034;
   text-align: center;
@@ -240,10 +253,9 @@
 
 .button-container {
   display: flex;
-  justify-content: center;  /* 수평 가운데 정렬 */
-  align-items: center;      /* 수직 가운데 정렬 */
-  width: 100%;              /* 부모 요소의 전체 너비를 차지 */
-  margin-top: 20px;         /* 상단 여백 */
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+  width: 100%; /* 부모 요소의 전체 너비를 차지 */
 }
 
 /* Yewon Styling*/

@@ -6,8 +6,8 @@ import { RiHome2Line } from "react-icons/ri";
 import { useLogin } from "../context/LoginContext";
 
 const Bottom = () => {
-  const { isloggedIn } = useLogin();
-  const myPage = isloggedIn ? "/mypage" : "/login";
+  const { isLoggedIn } = useLogin();
+  const myPage = isLoggedIn ? "/mypage" : "/login";
 
   return (
     <div className="grid grid-cols-4 text-center absolute z-10 w-[600px] bg-white bottom-0 p-3 border">

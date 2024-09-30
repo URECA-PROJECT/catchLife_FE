@@ -13,7 +13,7 @@ const Category = () => {
   return (
     <div>
       <UserMainHeader center={title} right={RegionName} />
-      <div className="max-h-screen grid grid-cols-2 gap-5 w-[90%] mx-auto overflow-y-scroll">
+      <div className="max-h-screen grid grid-cols-2 gap-5 w-[90%] mx-auto overflow-y-scroll max-h-[80vh]">
         {stores.map((s) => (
           <Link
             to={`/category/${s.storeId}`}
