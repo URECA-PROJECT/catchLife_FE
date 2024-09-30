@@ -7,7 +7,6 @@ import API from "../../utils/axios";
 const FavoriteStore = () => {
   const { isLoggedIn, member } = useLogin(); 
   const [favoriteStores, setFavoriteStores] = useState([]); 
-
   const [storeDetailsList, setStoreDetailsList] = useState([]);
 
   const fetchFavoriteStores = () => {
@@ -78,7 +77,6 @@ const FavoriteStore = () => {
               </Link>
             );
           })
-
         ) : (
           <div>즐겨찾기한 매장이 없습니다.</div>
         )}
