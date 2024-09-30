@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../css/yewon.css'
 import { Link, useNavigate } from 'react-router-dom';
-import userReservations from '../../../src/utils/mockData/UserReservations.json'
 import dayjs from 'dayjs'; // 날짜 관련 라이브러리 사용 (dayjs)
 import isBetween from 'dayjs/plugin/isBetween'; // 날짜 비교용 플러그인
 
@@ -11,14 +10,15 @@ function ReservationManagement(props) {
 
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(dayjs()); // 현재 월 (dayjs 사용)
+    const [reservations, setReservations] = useState([]);
+    const [blockedTimes, setBlockedTimes] = useState([]);
 
     // 요일 배열 생성 (월~일)
     const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
     
     // 예약 데이터 가져오기
-    const [reservations, setReservations] = useState([]);
     useEffect(() => {
-        setReservations(userReservations) // 예약 데이터 세팅
+        
     }, []);
 
     // 현재 월의 첫 번째 날짜와 마지막 날짜 가져오기

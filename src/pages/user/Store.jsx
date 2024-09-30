@@ -13,14 +13,20 @@ const Store = () => {
   const location = useLocation();
   const param = useParams();
   const urlStoreId = param.storeId;
+  console.log(location.state.storeListId);
 
-  const { storeListId, storeName } = location.state || {}; // state가 없으면 빈 객체로 대처
+  const {storeListId, storeName} = location.state || {};
+  console.log(storeListId);
   const [store, setStore] = useState([]);
   const [closeDay, setCloseDay] = useState("");
   const [isFavorite, setIsFavorite] = useState(false); 
   const { member } = useLogin();
 
   const convertCloseDayToWeekdays = (closeDay) => {
+    if (!closeDay) {
+      return "정보 없음"; 
+    }
+    
     const daysOfWeek = ["월", "화", "수", "목", "금", "토", "일"];
     const dayNumbers = closeDay.split(",").map((day) => day.trim());
     const closeDays = dayNumbers.map(
@@ -29,20 +35,30 @@ const Store = () => {
     return closeDays.join(", ");
   };
 
-  const handleStoreInfo = () => {
-    API.get(`/store/${storeListId}`)
-      .then((response) => {
-        const data = response.data;
-        setStore(data);
-        setCloseDay(convertCloseDayToWeekdays(data.closeDay));
-      })
-      .catch((error) => {
-        console.error("Error fetching stores:", error);
-      });
-  };
+  // const handleStoreInfo = () => {
+  //   API.get(`/store/${storeListId}`)
+  //     .then((response) => {
+  //       const data = response.data;
+  //       setStore(data);
+  //       setCloseDay(convertCloseDayToWeekdays(data.closeDay));
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching stores:", error);
+  //     });
+  // };
+  
+  // useEffect(() => {
+  //   handleStoreInfo();
+  // }, []);
 
   useEffect(() => {
-    handleStoreInfo();
+    fetch(`http://localhost:8080/store/${storeListId}`)
+    .then(response => response.json())
+    .then(data => {
+      setStore(data);
+      setCloseDay(convertCloseDayToWeekdays(data.closeDay));
+    })
+    .catch(error => console.error('Error: ', error))
   }, []);
 
   const toggleFavorite = () => {
@@ -110,7 +126,6 @@ const Store = () => {
             🕐 영업 시간 | {store.openTime} ~ {store.closeTime}
           </div>
           <div className="mb-4">💤 휴무일 | {closeDay}</div>
-
 
           <Link
             className="flex items-center justify-end"
