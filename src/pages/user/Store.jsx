@@ -64,9 +64,9 @@ const Store = () => {
 
           // Bookmark가 있으면 true, 없으면 false로 설정
           if (found) {
-            setIsFavorite(true);
+            setHeart(true);
           } else {
-            setIsFavorite(false);
+            setHeart(false);
           }
         })
         .catch((error) => {
@@ -74,6 +74,14 @@ const Store = () => {
         });
     }
   }, [urlStoreId, member, member.isLoggedIn]);
+
+  const checkStoreIdInLocalStorage = (id) => {
+    // 로컬 스토리지에서 'heart' 배열을 가져옴 (없으면 빈 배열로 처리)
+    const storedHeart = JSON.parse(localStorage.getItem("heart")) || [];
+
+    // store_id가 heart 배열에 있는지 확인
+    return storedHeart.includes(id);
+  };
 
   useEffect(() => {
     fetch(`http://localhost:8080/store/${storeListId}`)
@@ -84,48 +92,71 @@ const Store = () => {
         setCloseDay(data.closeDay);
       })
       .catch((error) => console.error("Error: ", error));
+
+    const isStoreInHeart = checkStoreIdInLocalStorage(urlStoreId);
+    setHeart(isStoreInHeart);
   }, []);
 
   const toggleFavorite = () => {
     const store_id = urlStoreId;
     const member_id = member.id;
 
-    if (isFavorite) {
-      // 즐겨찾기 해제
-      fetch(`http://localhost:8080/bookmark`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ memberID: member_id, storeID: store_id }),
-      })
-        .then((response) => response.json())
-        .then(() => {
-          alert("즐겨찾기가 해제되었습니다.");
-          setIsFavorite(false); // 빈 하트로 변경
-        })
-        .catch((error) => console.log("Error: ", error));
-    } else {
-      // 즐겨찾기 등록
-      const bookmarkData = {
-        storeID: store_id,
-        memberID: member_id,
-      };
+    // 로컬 스토리지에서 'heart' 배열을 가져옴 (없으면 빈 배열로 처리)
+    const storedHeart = JSON.parse(localStorage.getItem("heart")) || [];
 
-      fetch("http://localhost:8080/bookmark", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bookmarkData),
-      })
-        .then((response) => response.json())
-        .then(() => {
-          alert("즐겨찾기에 등록되었습니다.");
-          setIsFavorite(true); // 빨간 하트로 변경
-        })
-        .catch((error) => console.log("Error: ", error));
+    // 배열에 store_id가 있는지 확인
+    const index = storedHeart.indexOf(store_id);
+    console.log(index);
+
+    if (index === -1) {
+      // store_id가 배열에 없으면 추가
+      storedHeart.push(store_id);
+      setHeart(true);
+    } else {
+      // store_id가 배열에 있으면 제거
+      storedHeart.splice(index, 1);
+      setHeart(false);
     }
+
+    // 배열을 로컬 스토리지에 다시 저장
+    localStorage.setItem("heart", JSON.stringify(storedHeart));
+
+    // if (isFavorite) {
+    //   // 즐겨찾기 해제
+    //   fetch(`http://localhost:8080/bookmark`, {
+    //     method: "DELETE",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ memberID: member_id, storeID: store_id }),
+    //   })
+    //     .then((response) => response.json())
+    //     .then(() => {
+    //       alert("즐겨찾기가 해제되었습니다.");
+    //       setIsFavorite(false); // 빈 하트로 변경
+    //     })
+    //     .catch((error) => console.log("Error: ", error));
+    // } else {
+    //   // 즐겨찾기 등록
+    //   const bookmarkData = {
+    //     storeID: store_id,
+    //     memberID: member_id,
+    //   };
+
+    //   fetch("http://localhost:8080/bookmark", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(bookmarkData),
+    //   })
+    //     .then((response) => response.json())
+    //     .then(() => {
+    //       alert("즐겨찾기에 등록되었습니다.");
+    //       setIsFavorite(true); // 빨간 하트로 변경
+    //     })
+    //     .catch((error) => console.log("Error: ", error));
+    // }
   };
   return (
     <div>
@@ -138,7 +169,7 @@ const Store = () => {
             매장 찜하기
             <img
               className="ml-2"
-              src={isFavorite ? filledHeart : emptyHeart}
+              src={heart ? filledHeart : emptyHeart}
               alt="favorite"
               onClick={toggleFavorite}
               style={{ width: "30px", height: "30px", cursor: "pointer" }}

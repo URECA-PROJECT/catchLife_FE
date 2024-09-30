@@ -5,4 +5,6 @@ export const images = {
   cakeStore: `${PATH}/assets/img/cake.jpeg`,
   mainBanner: `${PATH}/assets/img/banner.jpg`,
   nailStore: `${PATH}/assets/img/nailStore.jpg`,
+  redHeart: "./red heart.png",
+  Heart: "./heart.png",
 };
