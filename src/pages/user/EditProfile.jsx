@@ -172,14 +172,14 @@ function EditProfile(props) {
               onChange={(e) => setNewPhone(e.target.value)}
             />
           </div>
-          {/* <div className="login-div flex items-center w-full mx-auto">
+          <div className="login-div flex items-center w-full mx-auto">
             <label className="yewon-form-label">비밀번호 수정</label>
             <input
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
-          </div> */}
+          </div>
           <br />
           <div className="button-container">
             <button type="submit">완료</button>

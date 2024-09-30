@@ -7,7 +7,6 @@ import { useLogin } from "../context/LoginContext";
 
 const Bottom = () => {
   const { isLoggedIn } = useLogin();
-  console.log(isLoggedIn);
   const myPage = isLoggedIn ? "/mypage" : "/login";
 
   return (

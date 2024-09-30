@@ -28,7 +28,6 @@ export const RegionProvider = ({ children }) => {
     API.get(`region/${regionId}`)
       .then((response) => {
         const data = response.data;
-        console.log(data, "userRegion");
         setUserRegion(data);
       })
       .catch((error) => {

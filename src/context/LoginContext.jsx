@@ -26,7 +26,7 @@ export const LoginProvider = ({ children }) => {
     birth: "",
     gender: "",
     address: "",
-    regino: "",
+    region: "",
     role: "",
   });
 
@@ -89,6 +89,7 @@ export const LoginProvider = ({ children }) => {
         localStorage.setItem("phone", member.phone);
         localStorage.setItem("role", member.role);
         localStorage.setItem("regionId", member.region);
+        localStorage.setItem("profileImage", member.profileImage);
 
         setMember({
           id: localStorage.getItem("id"),
@@ -96,7 +97,8 @@ export const LoginProvider = ({ children }) => {
           name: localStorage.getItem("name"),
           phone: localStorage.getItem("phone"),
           region: localStorage.getItem("regionId"),
-          role: localStorage.getItem("rold"),
+          role: localStorage.getItem("role"),
+          profileImage: localStorage.getItem("profileImage"),
         });
 
         setId("");
