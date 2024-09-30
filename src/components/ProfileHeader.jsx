@@ -61,19 +61,25 @@ function ProfileHeader(props) {
       <UserMainHeader center={"마이페이지"} />
       <div className="profile-header">
         <div className="profile-info">
-          {member.profileImage ? (
+            <img
+              src="./assets/img/profilepicture.png"
+              alt="Profile"
+              className="profile-picture w-2/12"
+            />
+          {/* {member.profileImage ? (
             <img
               src={member.profileImage}
               alt="Profile"
-              className="profile-picture w-3/12"
+              className="profile-picture w-2/12"
+              style={{borderRadius: "100%"}}
             />
           ) : (
             <img
-              src="/assets/img/profilepicture.png"
+              src="./assets/img/profilepicture.png"
               alt="Profile"
-              className="profile-picture w-3/12"
+              className="profile-picture w-2/12"
             />
-          )}
+          )} */}
           <div className="profile-details">
             <strong style={{ fontSize: "20px" }}>{name}</strong>
             {isAdmin ? <span> 사장님</span> : <span> 님</span>}

@@ -77,11 +77,11 @@ function EditStores(props) {
             setContent(selectedStore.content);
             setOpenTime(selectedStore.openTime);
             setCloseTime(selectedStore.closeTime);
-            setStoreImageFile(selectedStore.profileImage);
+            // setStoreImageFile(selectedStore.profileImage);
             setCloseDay(
                 selectedStore.closeDay ? selectedStore.closeDay.split(",") : []
             );
-            handleGetStoreImage(selectedStore.profileImage);
+            // handleGetStoreImage(selectedStore.profileImage);
             }
         })
         .catch((error) => console.error("Error: ", error));
@@ -130,73 +130,57 @@ function EditStores(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-
-        const formData = new FormData();
+    
         const storeData = {
-        id: id,
-        store: store.store.store, // 매장명
-        address: address, // 상세 주소
-        closeDay: closeDay.join(","),
-        openTime: openTime,
-        closeTime: closeTime,
-        content: content,
-        image: member.profileImage,
-        storeListId: store.store.id, // 매장 ID
+            store: store.store.store, // 매장명
+            address: address, // 상세 주소
+            closeDay: closeDay.join(','),
+            openTime: openTime,
+            closeTime: closeTime,
+            content: content,
+            // image: profileImage,
+            storeListId: store.store.id,  // 매장 ID
         };
 
-        // storeData 객체를 JSON으로 변환하여 FormData에 추가
-        // formData.append("store", JSON.stringify(storeData));
-        formData.append(
-        "store",
-        new Blob([JSON.stringify(storeData)], { type: "application/json" })
-        );
-
-        if (storeImageFile && storeImageFile.startsWith("data:image/")) {
-        formData.append("profileImage", storeImageFile); // 프로필 이미지 파일 추가
-        }
-
-        // fetch로 POST 요청 보내기
-        fetch("http://localhost:8080/store/saveOrUpdate", {
-        method: "POST",
-        body: formData, // FormData 사용
+        console.log(storeData)
+    
+        fetch(`http://localhost:8080/store/saveOrUpdate`, {
+            method: 'POST',  // 이제 saveOrUpdate로 항상 POST 요청 보냄
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(storeData),
         })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log("매장 정보 저장", data);
-            alert("매장 정보가 저장되었습니다.");
-            navigate("/mypage"); // 페이지 이동
-
-            // 이미지 파일 경로 처리
-            const imageFileName = data.updatedStore.profileImage.replace("./", ""); // './'를 제거
-            const imageUrl = `http://localhost:8080/${imageFileName}`; // 절대 경로로 설정
-            console.log("store", imageUrl);
-            handleGetStoreImage(imageUrl); // 이미지 처리
+        .then(response => response.json())
+        .then(data => {
+            alert("매장 정보가 수정되었습니다.");
+            navigate(-1);  // 뒤로 돌아가기
         })
-        .catch((error) => {
-            console.error("Error:", error);
+        .catch(error => {
+            console.error('Error:', error);
         });
     }
 
     // 프로필 이미지 임시 변경 함수
-    function handleImageChange(e) {
-        const file = e.target.files[0]; // 파일 가져오기
+    // function handleImageChange(e) {
+    //     const file = e.target.files[0]; // 파일 가져오기
 
-        if (file) {
-        const reader = new FileReader();
+    //     if (file) {
+    //     const reader = new FileReader();
 
-        reader.onload = (ev) => {
-            setStoreImageFile(ev.target.result); // 이미지 src 변경
-        };
+    //     reader.onload = (ev) => {
+    //         setStoreImageFile(ev.target.result); // 이미지 src 변경
+    //     };
 
-        reader.readAsDataURL(file); // 파일을 읽어서 data URL로 변환
-        } else {
-        setProfileImageFile("/assets/img/profilePicture.png"); // 기본 이미지로 변경
-        }
-    }
+    //     reader.readAsDataURL(file); // 파일을 읽어서 data URL로 변환
+    //     } else {
+    //     setProfileImageFile("/assets/img/profilePicture.png"); // 기본 이미지로 변경
+    //     }
+    // }
 
-    useEffect(() => {
-        handleGetStoreImage(storeImageFile);
-    }, []);
+    // useEffect(() => {
+    //     handleGetStoreImage(storeImageFile);
+    // }, []);
 
     return (
         <div>
@@ -209,19 +193,19 @@ function EditStores(props) {
                 <img
                     src={storeImageFile}
                     alt="Profile"
-                    className="profile-picture w-6/12"
+                    className="profile-picture w-10/12"
                     style={{ margin: "20px auto" }}
                 />
                 </label>
             </div>
-            <input
+            {/* <input
                 id="file-input"
                 className="file-input"
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
                 style={{ display: "none" }}
-            />
+            /> */}
             <div className="flex items-center mb-5">
                 <label className="w-3/12 text-black text-lg">매장명</label>
                 <input

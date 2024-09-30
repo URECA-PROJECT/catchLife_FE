@@ -55,31 +55,34 @@ const FavoriteStore = () => {
     fetchStoreDetails();
 }, [favoriteStores]);
 
-  console.log(storeDetailsList)
-
   return (
     <>
-      {isLoggedIn ? (
-        <div className="subTitle">❤️ 내가 즐겨찾는 매장</div>
-      ) : (
-        <div className="subTitle">❤️ 최근 인기 가게</div>
-      )}
-      <div className="grid grid-cols-3 w-[90%] mx-auto">
-        {storeDetailsList.length > 0 ? (
-          storeDetailsList.map((store) => {
-            console.log(store);
-            return (
-              <Link to={`/category/${store.id}`} state={{storeListId: store.id}} key={store.storeID} className="m-5 flex">
-                <div className="text-center">
-                  <img src={images.nailStore} alt="" className="rounded-xl" />
-                  <div className="text-sm mt-2">{store.store}</div> {/* 매장 이름 출력 */}
-                </div>
-              </Link>
-            );
-          })
+      <div>
+        {isLoggedIn ? (
+          <div className="subTitle" style={{fontSize: "20px"}}>❤️ 내가 즐겨찾는 매장</div>
         ) : (
-          <div>즐겨찾기한 매장이 없습니다.</div>
+          <div className="subTitle" style={{fontSize: "20px"}}>❤️ 최근 인기 가게</div>
         )}
+        <div className="grid grid-cols-3 w-[90%] mx-auto" style={{border: "1px solid #eee", marginTop: "10px", padding: "0 5px 10px 5px", borderRadius: "20px"}}>
+          {/* <div> */}
+            {storeDetailsList.length > 0 ? (
+              storeDetailsList.map((store) => {
+                console.log(store);
+                return (
+                  <Link to={`/category/${store.id}`} state={{storeListId: store.id}} key={store.storeID} className="m-5 flex">
+                    <div className="text-center">
+                      <img src={images.nailStore} alt="" className="rounded-xl" />
+                      <div className="text-sm mt-2">{store.store}</div> {/* 매장 이름 출력 */}
+                    </div>
+                  </Link>
+                );
+              })
+            ) : ( <div style={{width: "100%", margin: "10px 30px 5px", whiteSpace: "nowrap"}}>즐겨찾는 매장이 없습니다.</div>
+            )}
+          {/* </div> */}
+        
+        </div>
+
       </div>
     </>
   );

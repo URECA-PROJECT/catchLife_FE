@@ -25,7 +25,7 @@ const Main = () => {
   }, []);
 
   return (
-    <div>
+    <div className="content">
       <MainHeader />
       <Region />
       <div className="px-5">
