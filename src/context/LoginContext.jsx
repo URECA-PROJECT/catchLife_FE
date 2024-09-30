@@ -91,12 +91,12 @@ export const LoginProvider = ({ children }) => {
         localStorage.setItem("regionId", member.region);
 
         setMember({
-          id: member.id,
-          memberId: member.memberid,
-          name: member.name,
-          phone: member.phone,
-          region: member.region,
-          role: member.role,
+          id: localStorage.getItem("id"),
+          memberId: localStorage.getItem("memberId"),
+          name: localStorage.getItem("name"),
+          phone: localStorage.getItem("phone"),
+          region: localStorage.getItem("regionId"),
+          role: localStorage.getItem("rold"),
         });
 
         setId("");
@@ -120,6 +120,15 @@ export const LoginProvider = ({ children }) => {
 
   useEffect(() => {
     setIsLoggedIn(Boolean(localStorage.getItem("name")));
+
+    setMember({
+      id: localStorage.getItem("id"),
+      memberId: localStorage.getItem("memberId"),
+      name: localStorage.getItem("name"),
+      phone: localStorage.getItem("phone"),
+      region: localStorage.getItem("regionId"),
+      role: localStorage.getItem("rold"),
+    });
   }, []);
 
   return (

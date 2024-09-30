@@ -7,7 +7,7 @@ const UserMainHeader = ({ center, right }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="headerTitle">
+    <div className="headerTitle border">
       <FaArrowLeftLong
         size={18}
         className="backBtn"
@@ -16,7 +16,7 @@ const UserMainHeader = ({ center, right }) => {
         }}
       />
       <div className="flex flex-col text-center">
-        <div>{center}</div>
+        <div className="text-lg">{center}</div>
         <div className="text-xs">{right}</div>
       </div>
     </div>

@@ -31,7 +31,7 @@ const Order = () => {
         const data = response.data;
         setQuestions(data);
 
-        console.log(data);
+        console.log("question", data);
       })
       .catch((error) => {
         console.error("Error fetching stores:", error);
@@ -111,96 +111,102 @@ const Order = () => {
   return (
     <div>
       <UserMainHeader center={product.name} />
-      {/* <img src={product.image} alt=''className="w-11/12 mx-auto rounded-xl" /> */}
-      <img
-        src={images.nailStore}
-        alt=""
-        className="w-11/12 mx-auto rounded-xl"
-      />
+      <div>
+        {/* <img src={product.image} alt=''className="w-9/12 mx-auto rounded-xl" /> */}
+        <img
+          src={images.nailStore}
+          alt=""
+          className="w-9/12 mx-auto rounded-xl"
+        />
 
-      <form onSubmit={handleSubmit} className="py-5">
-        {/* default */}
-        <label className="orderLabel">
-          <div>이름</div>
-          <div>{member.name}</div>
-        </label>
+        <form onSubmit={handleSubmit} className="py-5  mx-auto ">
+          {/* default */}
+          <label className="orderLabel">
+            <div>이름</div>
+            <div>{member?.name}</div>
+          </label>
 
-        <label className="orderLabel">
-          <div>연락처</div>
-          <div>{member.phone}</div>
-        </label>
+          <label className="orderLabel">
+            <div>연락처</div>
+            <div>{member?.phone}</div>
+          </label>
 
-        <label className="orderLabel">
-          <div>날짜</div>
-          <input
-            type="date"
-            name="date"
-            className="orderInput"
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
-        </label>
+          <label className="orderLabel">
+            <div>날짜</div>
+            <input
+              type="date"
+              name="date"
+              className="orderInput"
+              value={formData?.date}
+              onChange={handleChange}
+              required
+            />
+          </label>
 
-        <label className="orderLabel">
-          <div>시간</div>
-          <input
-            type="time"
-            name="time"
-            className="orderInput"
-            value={formData.time}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        {/* default */}
+          <label className="orderLabel">
+            <div>시간</div>
+            <input
+              type="time"
+              name="time"
+              className="orderInput"
+              value={formData?.time}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          {/* default */}
 
-        {questions?.map((q) => (
-          <>
-            {/* 텍스트 */}
-            {q.questions_type === "text" ? (
-              <label className="orderLabel">
-                <div>{q.question_text}</div>
-                <input
-                  type={q.question_type}
-                  name={q.question_text}
-                  className="orderInput"
-                  value={formData.content[q.question_text] || ""} // 해당 질문에 대한 값을 content에서 가져옴
-                  onChange={handleContentChange}
-                  required
-                />
-              </label>
-            ) : (
-              <label className="orderLabel">
-                <div>{q.question_text}</div>
-                <select
-                  name={q.question_text}
-                  className="orderInput"
-                  value={formData.content[q.question_text] || ""} // 해당 질문에 대한 값을 content에서 가져옴
-                  onChange={handleContentChange}
-                  required
-                >
-                  <option value="default" disabled>
-                    옵션을 선택해주세요.
-                  </option>
-                  {JSON.parse(q.question_content)?.map((menu) => (
-                    <option value={menu}>{menu}</option>
-                  ))}
-                </select>
-              </label>
-            )}
-          </>
-        ))}
+          {questions?.map((q) => (
+            <>
+              {/* 텍스트 */}
+              {q.questions_Type === "text" ? (
+                <label className="orderLabel">
+                  <div>{q.questionText}</div>
+                  <input
+                    type={q.questionType}
+                    name={q.questionText}
+                    className="orderInput"
+                    value={formData.content[q.questionText] || ""} // 해당 질문에 대한 값을 content에서 가져옴
+                    onChange={handleContentChange}
+                    required
+                  />
+                </label>
+              ) : (
+                <label className="orderLabel">
+                  <div>{q.questionText}</div>
+                  <select
+                    name={q.questionText}
+                    className="orderInput"
+                    value={formData.content[q.questionText] || ""} // 해당 질문에 대한 값을 content에서 가져옴
+                    onChange={handleContentChange}
+                    required
+                  >
+                    <option value="default" disabled>
+                      옵션을 선택해주세요.
+                    </option>
+                    {q.questionContent
+                      ? JSON.parse(q.questionContent).map((menu) => (
+                          <option value={menu} key={menu}>
+                            {menu}
+                          </option>
+                        ))
+                      : null}
+                  </select>
+                </label>
+              )}
+            </>
+          ))}
 
-        <p className="orderLabel text-[red]">
-          <div>최종 가격</div>
-          {product.price}원
-        </p>
+          <p className="orderLabel text-[red]">
+            <div>최종 가격</div>
+            {product.price}원
+          </p>
 
-        <div className="orderBtn bg-[#ededed] w-10/12 mx-auto rounded-2xl p-2">
-          <button type="submit">예약하기</button>
-        </div>
-      </form>
+          <div className="orderBtn bg-[#ededed] w-10/12 mx-auto rounded-2xl p-2">
+            <button type="submit">예약하기</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

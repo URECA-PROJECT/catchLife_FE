@@ -92,12 +92,12 @@
 .headerTitle {
   display: flex;
   justify-content: center;
-  margin: 20px;
+  padding: 20px;
   position: relative;
 }
 .backBtn {
   position: absolute;
-  left: 5px;
+  left: 20px;
   height: 25px;
   line-height: 25px;
 }
