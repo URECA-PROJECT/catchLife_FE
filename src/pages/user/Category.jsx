@@ -18,7 +18,7 @@ const Category = () => {
     <div>
       <UserMainHeader center={title} right={RegionName} />
       <div
-        className="max-h-screen grid grid-cols-2 gap-5 w-[90%] mx-auto"
+        className="max-h-[80vh] overflow-y-scroll grid grid-cols-2 gap-5 w-[90%] mx-auto"
         style={{ marginTop: "20px" }}
       >
         {stores.map((s) => (

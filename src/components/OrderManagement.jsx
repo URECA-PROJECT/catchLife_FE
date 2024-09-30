@@ -113,7 +113,7 @@ function OrderManagement(props) {
   }
 
   return (
-    <div>
+    <div className="max-h-[80vh] overflow-y-scroll">
       {/* 항목(필드)의 이름과 유형 설정 */}
       <div className="order-field-add flex flex-wrap justify-center items-center p-4 bg-white shadow-md rounded-lg">
         <div className="flex flex-col mr-4">

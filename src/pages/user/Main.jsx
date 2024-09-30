@@ -28,7 +28,7 @@ const Main = () => {
     <>
       <MainHeader />
       <Region />
-      <div className="content max-h-[100vh-200px] overflow-y-scroll">
+      <div className="content max-h-[75vh] overflow-y-scroll">
         <div className="px-5">
           <img src={images.mainBanner} alt="banner" className="rounded-3xl" />
         </div>
