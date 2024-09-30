@@ -23,16 +23,19 @@ function MyPage(props) {
                 phone={member.phone}
                 password={member.password}
             />
-            {/* 일반 유저면 예약 매장 목록을, 관리자면 내 매장 목록을 표시 */}
-            {role === "admin" ? (
-                <StoreList memberNum={member.id} />
-            ) : (
-                <ReservationFavoriteList />
-            )}
+            <div className="max-h-[60vh] overflow-y-scroll">
 
-            {role === "user" ? (
-                <ReservationHistory />
-            ) : (<></>)}
+                {/* 일반 유저면 예약 매장 목록을, 관리자면 내 매장 목록을 표시 */}
+                {role === "admin" ? (
+                    <StoreList memberNum={member.id} />
+                ) : (
+                    <ReservationFavoriteList />
+                )}
+
+                {role === "user" ? (
+                    <ReservationHistory />
+                ) : (<></>)}
+            </div>
         </div>
     );
 }

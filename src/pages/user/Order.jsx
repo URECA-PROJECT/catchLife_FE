@@ -125,10 +125,12 @@ const Order = () => {
           src={images.nailStore}
           alt=""
           className="w-9/12 mx-auto rounded-xl"
+          style={{marginTop: "20px"}}
         />
 
         <form onSubmit={handleSubmit} className="py-5  mx-auto ">
           {/* default */}
+          
           <label className="orderLabel">
             <div>이름</div>
             <div>{member?.name}</div>

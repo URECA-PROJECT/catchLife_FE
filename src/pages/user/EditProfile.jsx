@@ -71,7 +71,7 @@ function EditProfile(props) {
 
       reader.readAsDataURL(file); // 파일을 읽어서 data URL로 변환
     } else {
-      setProfileImageFile("/assets/img/profilePicture.png"); // 기본 이미지로 변경
+      setProfileImageFile("./assets/img/profilePicture.png"); // 기본 이미지로 변경
     }
   }
 
@@ -137,10 +137,10 @@ function EditProfile(props) {
           <div className="edit-profile-image">
             <label htmlFor="file-input" className="file-seunghee">
               <img
-                src={member.profileImage || profileImageFile}
+                src="/assets/img/profilePicture.png"
                 alt="Profile"
                 className="profile-picture"
-                style={{ margin: "20px auto", width: "200px", borderRadius: "100%"}}
+                style={{ margin: "20px auto", width: "100px", borderRadius: "100%"}}
               />
             </label>
           </div>
