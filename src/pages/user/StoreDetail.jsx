@@ -34,7 +34,7 @@ const StoreDetail = () => {
     <div>
       <UserMainHeader center={storeName} />
 
-      <div className="grid grid-cols-2 gap-5 w-[90%] mx-auto" style={{marginTop: "20px"}}>
+      <div className="grid grid-cols-2 gap-5 w-[90%] mx-auto max-h-[80vh] overflow-y-scroll" style={{marginTop: "20px"}}>
         {products.map((product) => (
           <div key={product.id}>
             <Link

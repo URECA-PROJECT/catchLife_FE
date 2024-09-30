@@ -98,35 +98,35 @@ function EditStores(props) {
         );
     }
 
-    const handleGetStoreImage = (fullUrl) => {
-        console.log("스토어 fullUrl", fullUrl);
-        const fileName = fullUrl.split("/").pop(); // URL의 마지막 부분을 추출
-        const backendUrl = `/uploads/${fileName}`; // 백엔드 URL 조합
-        console.log("fileName", fileName);
-        console.log(backendUrl);
-        // Axios로 Blob 요청
-        API.get(backendUrl, { responseType: "blob" })
-        .then((response) => {
-            console.log("응답상태", response);
-            // 상태 코드가 200인 경우에만 Blob으로 변환
-            if (response.status === 200) {
-            console.log(
-                "스토어 응답 데이터 타입:",
-                response.data instanceof Blob
-            );
+    // const handleGetStoreImage = (fullUrl) => {
+    //     console.log("스토어 fullUrl", fullUrl);
+    //     const fileName = fullUrl.split("/").pop(); // URL의 마지막 부분을 추출
+    //     const backendUrl = `/uploads/${fileName}`; // 백엔드 URL 조합
+    //     console.log("fileName", fileName);
+    //     console.log(backendUrl);
+    //     // Axios로 Blob 요청
+    //     API.get(backendUrl, { responseType: "blob" })
+    //     .then((response) => {
+    //         console.log("응답상태", response);
+    //         // 상태 코드가 200인 경우에만 Blob으로 변환
+    //         if (response.status === 200) {
+    //         console.log(
+    //             "스토어 응답 데이터 타입:",
+    //             response.data instanceof Blob
+    //         );
 
-            const imgURL = URL.createObjectURL(response.data); // Blob을 URL로 변환
+    //         const imgURL = URL.createObjectURL(response.data); // Blob을 URL로 변환
 
-            setStoreImageFile(imgURL);
-            console.log(storeImageFile, "과연;");
-            } else {
-            throw new Error("Network response was not ok.");
-            }
-        })
-        .catch((error) => {
-            console.error("Error fetching stores:", error);
-        });
-    };
+    //         setStoreImageFile(imgURL);
+    //         console.log(storeImageFile, "과연;");
+    //         } else {
+    //         throw new Error("Network response was not ok.");
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         console.error("Error fetching stores:", error);
+    //     });
+    // };
 
     function handleSubmit(e) {
         e.preventDefault();
