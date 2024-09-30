@@ -25,15 +25,17 @@ const Main = () => {
   }, []);
 
   return (
-    <div className="content">
+    <>
       <MainHeader />
       <Region />
-      <div className="px-5">
-        <img src={images.mainBanner} alt="banner" className="rounded-3xl" />
+      <div className="content max-h-[100vh-200px] overflow-y-scroll">
+        <div className="px-5">
+          <img src={images.mainBanner} alt="banner" className="rounded-3xl" />
+        </div>
+        <CategoryComponent />
+        <FavoriteStore />
       </div>
-      <CategoryComponent />
-      <FavoriteStore />
-    </div>
+    </>
   );
 };
 

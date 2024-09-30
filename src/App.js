@@ -24,7 +24,6 @@ import BlockReservations from "./pages/user/BlockReservations";
 import Bottom from "./components/Bottom";
 import Reservation from "./components/Reservation";
 
-
 function App() {
   return (
     <LoginProvider>
@@ -68,7 +67,6 @@ function App() {
               <Route path="/mypage/editstores" element={<EditStores />} />
 
               <Route path="/favoriteStore" element={<FavoriteStore />} />
-
             </Routes>
 
             <Bottom />
