@@ -53,40 +53,157 @@ function EditStores(props) {
     if (store.store.categoryId == c.id) {
       category = c.name;
     }
-  }, []);
-
-  useEffect(() => {
-    fetch("http://localhost:8080/region")
-      .then((response) => response.json())
-      .then((data) => setRegionList(data))
-      .catch((error) => console.error("Error: ", error));
-  }, []);
-  let region = "";
-  regionList.map((r) => {
-    if (store.store.regionId == r.id) {
-      region = r.zone + " " + r.city;
-    }
-  }, []);
-
-  useEffect(() => {
-    fetch(`http://localhost:8080/store`)
-      .then((response) => response.json())
-      .then((data) => {
-        const selectedStore = data.find(
-          (sd) => sd.storeListId === store.store.id
-        );
-        if (selectedStore) {
-          setAddress(selectedStore.address);
-          setContent(selectedStore.content);
-          setOpenTime(selectedStore.openTime);
-          setCloseTime(selectedStore.closeTime);
-          setCloseDay(
-            selectedStore.closeDay ? selectedStore.closeDay.split(",") : []
-          );
+    console.log(store)
+    useEffect(() => {
+        fetch('http://localhost:8080/category')
+        .then(response => response.json())
+        .then(data => setCategoryList(data))
+        .catch(error => console.error('Error: ', error))
+    }, [])
+    let category = '';
+    categoryList.map((c) => {
+        if (store.store.categoryId == c.id) {
+            category = c.name;
         }
-      })
-      .catch((error) => console.error("Error: ", error));
-  }, [store.store.id]); // 의존성 배열에 store.store.id를 추가하여 첫 렌더링 시에만 실행되도록 설정
+    }, [])
+
+    useEffect(() => {
+        fetch('http://localhost:8080/region')
+        .then(response => response.json())
+        .then(data => setRegionList(data))
+        .catch(error => console.error('Error: ', error))
+    }, [])
+    let region = '';
+    regionList.map((r) => {
+        if (store.store.regionId == r.id) {
+            region = r.zone + " " + r.city;
+        }
+    }, []);
+
+    useEffect(() => {
+        fetch(`http://localhost:8080/store`)
+            .then(response => response.json())
+            .then(data => {
+                const selectedStore = data.find(sd => sd.storeListId === store.store.id);
+                if (selectedStore) {
+                    setAddress(selectedStore.address);
+                    setContent(selectedStore.content);
+                    setOpenTime(selectedStore.openTime);
+                    setCloseTime(selectedStore.closeTime);
+                    setCloseDay(selectedStore.closeDay? selectedStore.closeDay.split(',') : []);
+                }
+            })
+            .catch(error => console.error('Error: ', error));
+    }, [store.store.id]);  // 의존성 배열에 store.store.id를 추가하여 첫 렌더링 시에만 실행되도록 설정
+
+    // 00:00 ~ 23:00 1시간 단위로 선택지를 생성
+    const timeOptions = [];
+    for (let i = 0; i <= 23; i++) {
+        const time = i < 10 ? `0${i}:00` : `${i}:00`;
+        timeOptions.push(
+        <option key={time} value={time}>
+            {time}
+        </option>
+        );
+    }
+
+    // 예약 시간 범위를 생성하는 함수 (09:00 ~ 10:00 ,, )
+    // function generateReservationTimes(openTime, closeTime) {
+    //     const reservationTime = {};
+
+    //     let [openHour, openMin] = openTime.split(":").map(Number);
+    //     let [closeHour, closeMin] = closeTime.split(":").map(Number);
+
+    //     let currentTime = new Date();
+    //     currentTime.setHours(openHour, openMin, 0, 0); // openTime으로 시간 설정
+
+    //     // closeTime보다 큰 경우 자정이 넘는 경우임을 처리
+    //     if (closeHour < openHour) {
+    //         // Step 1: openTime에서 자정(24:00)까지 시간을 생성
+    //         let endOfDay = new Date();
+    //         endOfDay.setHours(24, 0, 0, 0); // 자정 시간 설정
+
+    //         while (currentTime < endOfDay) {
+    //             let nextTime = new Date(currentTime);
+    //             nextTime.setHours(currentTime.getHours() + 1);
+
+    //             const timeSlot = `${currentTime.getHours().toString().padStart(2, '0')}:${currentTime.getMinutes().toString().padStart(2, '0')} ~ ${nextTime.getHours().toString().padStart(2, '0')}:${nextTime.getMinutes().toString().padStart(2, '0')}`;
+    //             reservationTime[timeSlot] = true;
+
+    //             currentTime = nextTime;
+    //         }
+
+    //         // Step 2: 자정(00:00)에서 closeTime까지 시간을 생성
+    //         currentTime.setHours(0, 0, 0, 0); // 자정으로 다시 설정
+
+    //         let endTime = new Date();
+    //         endTime.setHours(closeHour, closeMin, 0, 0); // closeTime으로 시간 설정
+
+    //         while (currentTime < endTime) {
+    //             let nextTime = new Date(currentTime);
+    //             nextTime.setHours(currentTime.getHours() + 1);
+
+    //             const timeSlot = `${currentTime.getHours().toString().padStart(2, '0')}:${currentTime.getMinutes().toString().padStart(2, '0')} ~ ${nextTime.getHours().toString().padStart(2, '0')}:${nextTime.getMinutes().toString().padStart(2, '0')}`;
+    //             reservationTime[timeSlot] = true;
+
+    //             currentTime = nextTime;
+    //         }
+
+    //     } else {
+    //         // 일반적인 하루 안에서 끝나는 경우
+    //         let endTime = new Date();
+    //         endTime.setHours(closeHour, closeMin, 0, 0); // closeTime으로 시간 설정
+
+    //         while (currentTime < endTime) {
+    //             let nextTime = new Date(currentTime);
+    //             nextTime.setHours(currentTime.getHours() + 1);
+
+    //             const timeSlot = `${currentTime.getHours().toString().padStart(2, '0')}:${currentTime.getMinutes().toString().padStart(2, '0')} ~ ${nextTime.getHours().toString().padStart(2, '0')}:${nextTime.getMinutes().toString().padStart(2, '0')}`;
+    //             reservationTime[timeSlot] = true;
+
+    //             currentTime = nextTime;
+    //         }
+    //     }
+
+    //     return reservationTime;
+    // }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        // reservationTime 객체 생성
+        // const reservationTime = generateReservationTimes(openTime, closeTime);
+    
+        const storeData = {
+            store: store.store.store, // 매장명
+            address: address, // 상세 주소
+            closeDay: closeDay.join(','),
+            openTime: openTime,
+            closeTime: closeTime,
+            content: content,
+            image: profileImage,
+            storeListId: store.store.id,  // 매장 ID
+            // reservationTime: reservationTime
+        };
+
+        console.log(storeData)
+    
+        fetch(`http://localhost:8080/store/saveOrUpdate`, {
+            method: 'POST',  // 이제 saveOrUpdate로 항상 POST 요청 보냄
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(storeData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("매장 정보가 수정되었습니다.");
+            navigate(-1);  // 뒤로 돌아가기
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 
   function handleSubmit(e) {
     e.preventDefault();

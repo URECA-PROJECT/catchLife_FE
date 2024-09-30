@@ -20,7 +20,9 @@ import SignupPage from "./pages/user/SignupPage";
 import StoreRegister from "./pages/user/StoreRegister";
 import { LoginProvider } from "./context/LoginContext";
 import FavoriteStore from "./pages/user/FavoriteStore";
+import BlockReservations from "./pages/user/BlockReservations";
 import Bottom from "./components/Bottom";
+
 
 function App() {
   return (
@@ -52,9 +54,14 @@ function App() {
                 element={<ReservationManagement />}
               />
               <Route
+                path="/mypage/reservations/block"
+                element={<BlockReservations />}
+              />
+              <Route
                 path="/mypage/reservations/detail"
                 element={<ReservationDetail />}
               />
+
               <Route path="/mypage/register" element={<StoreRegister />} />
               <Route path="/mypage/storemanage" element={<StoreManagement />} />
               <Route path="/mypage/editstores" element={<EditStores />} />

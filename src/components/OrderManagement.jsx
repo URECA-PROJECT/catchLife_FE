@@ -179,7 +179,7 @@ function OrderManagement(props) {
                     <div key={index} className="field-item flex justify-between items-center p-4 bg-gray-100 rounded-lg">
                         <label className='text-black font-medium'>{field.questionText}</label>
 
-                        {field.question_type === 'dropdown' && (
+                        {field.questionType === 'dropdown' && (
                             <select className="border p-2">
                                 {JSON.parse(field.questionContent || '[]').map((option, i) => (
                                     <option key={i} value={option}>{option}</option>

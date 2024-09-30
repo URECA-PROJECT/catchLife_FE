@@ -124,12 +124,12 @@ function ReservationManagement(props) {
             <div className='back-header'>
                 <button className='backbutton' onClick={() => navigate('/mypage')}>←</button>
                 {/* <a className='backbutton' onClick={handleBackClick}>←</a> */}
-                <span className='back-header-top'>프로필 수정</span>
+                <span className='back-header-top'>예약 관리</span>
             </div>
 
             <div className='btn-block-reservations' style={{ display: "flex", justifyContent: "right" }}>
-                <button  class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded shadow"
-                    style={{margin: "0 20px 0 0", textAlign: "center", fontSize: "13px" }}>예약 막기</button>
+                <Link to="/mypage/reservations/block"><button  class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded shadow"
+                    style={{margin: "0 20px 0 0", textAlign: "center", fontSize: "13px" }}>예약 막기</button></Link>
             </div>
 
             <div className='reservations-calendar'>
